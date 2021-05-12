@@ -1,0 +1,70 @@
+name: SSH
+on:
+  push:
+    branches:
+      - master
+      - feature/cd-docker-images
+    paths-ignore:
+      - '**.md'
+jobs:
+
+  build:
+    name: Deploy on VPS
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: borales/actions-yarn@v2.0.0
+        with:
+          cmd: install
+
+      - uses: borales/actions-yarn@v2.0.0
+        with:
+          cmd: build
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          registry: registry.maxencemottard.com
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build latest Docker image
+        run: docker build . --tag registry.maxencemottard.com/maxmottard/quichewars-front:latest
+
+      - name: Push latest Docker image
+        run: docker push registry.maxencemottard.com/maxmottard/quichewars-front:latest
+
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.PORT }}
+          script: |
+            docker rm -f quichewars_front || true;
+            docker pull registry.maxencemottard.com/maxmottard/quichewars-front:latest;
+
+            docker run --detach \
+              --name quichewars_front \
+              --network reverse-proxy \
+              --restart unless-stopped \
+              -l traefik.enable=true \
+              -l traefik.http.routers.quichewars_front.rule=Host\(\`wars.quiches.ovh\`\) \
+              -l traefik.http.routers.quichewars_front.entrypoints=http \
+              -l traefik.http.routers.quichewars_front.middlewares=https-redirect@file \
+              -l traefik.http.routers.quichewars_front-Https.rule=Host\(\`wars.quiches.ovh\`\) \
+              -l traefik.http.routers.quichewars_front-Https.entrypoints=https \
+              -l traefik.http.routers.quichewars_front-Https.middlewares=security@file\,compression@file \
+              -l traefik.http.routers.quichewars_front-Https.tls=true \
+              -l traefik.http.routers.quichewars_front-Https.tls.certresolver=letsencrypt \
+              registry.maxencemottard.com/maxmottard/quichewars-front:latest;
+
+
