@@ -1,4 +1,4 @@
-# frontend
+# QUICHE-WARS frontend
 
 ## Project setup
 ```
