@@ -13,7 +13,7 @@ export default {
     }
   },
   mounted () {
-    this.buttonIsShow = !!navigator.platform.match(/iPhone|iPod|iPad/)
+    this.buttonIsEnabled = !!navigator.platform.match(/iPhone|iPod|iPad/)
   },
   methods: {
     back() {
