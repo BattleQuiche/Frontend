@@ -3,8 +3,6 @@ on:
   push:
     branches:
       - main
-      - feature/cd-docker-images
-      - feature/InitManifest
     paths-ignore:
       - '**.md'
 jobs:
