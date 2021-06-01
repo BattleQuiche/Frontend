@@ -5,7 +5,7 @@
   </main>
   <aside>
     <input type="text" placeholder="code partie">
-    <a @click="goToParty">Rejoindre la partie ></a>
+    <a @click="goToParty">Entrer dans la partie ></a>
   </aside>
 </div>
 </template>
