@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - main
-      - feature/cd-docker-images
+      - feature/landscape-detection
     paths-ignore:
       - '**.md'
 jobs:
