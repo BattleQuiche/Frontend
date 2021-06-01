@@ -20,7 +20,7 @@ export default {
   name: 'CreateParty',
   methods: {
     startParty() {
-      //  @TODO: function to navigate to map
+      //  @TODO: function to navigate to Party.vue
     }
   }
 }
