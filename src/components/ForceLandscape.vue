@@ -41,5 +41,6 @@ export default {
   p {
     color: white;
     font-size: 20px;
+    padding: 0 20px;
   }
 </style>
