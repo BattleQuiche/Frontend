@@ -4,6 +4,7 @@
     <h2>Rejoindre une partie</h2>
   </main>
   <aside>
+    <input type="text" placeholder="code partie">
     <a @click="goToParty">Rejoindre la partie ></a>
   </aside>
 </div>
