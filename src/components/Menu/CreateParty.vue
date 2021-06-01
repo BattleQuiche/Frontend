@@ -10,7 +10,7 @@
         <p class="vs">VS</p>
         <p>Joueur 2</p>
       </div>
-      <a @click="startParty">Lancer la partie ></a>
+      <a @click="goToParty">Lancer la partie ></a>
     </aside>
   </div>
 </template>
@@ -19,7 +19,7 @@
 export default {
   name: 'CreateParty',
   methods: {
-    startParty() {
+    goToParty() {
       //  @TODO: function to navigate to Party.vue
     }
   }
