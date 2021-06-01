@@ -6,9 +6,15 @@
     </main>
     <aside>
       <div class="players">
-        <p>Joueur 1</p>
+        <div class="players__list">
+          <p>Joueur 1</p>
+          <p>Joueur 2</p>
+        </div>
         <p class="vs">VS</p>
-        <p>Joueur 2</p>
+        <div class="players__list">
+          <p>Joueur 3</p>
+          <p>+</p>
+        </div>
       </div>
       <a @click="goToParty">Lancer la partie ></a>
     </aside>
@@ -33,9 +39,20 @@ export default {
     margin-bottom: 50px;
   }
 
+  .players__list {
+    display: flex;
+  }
+
+  .players__list p {
+    margin: 0 25px;
+    flex: 1;
+    text-align: center;
+  }
+
   .players .vs {
     font-size: 70px;
     margin: 10px 50px;
+    text-align: center;
   }
 
   .players p:nth-of-type(3) {
