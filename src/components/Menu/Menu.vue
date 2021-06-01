@@ -25,14 +25,14 @@ export default {
 </script>
 
 <style>
-  div.menu {
+  .menu {
     display: flex;
     height: 100vh;
     width: 100vw;
   }
 
-  div.menu main,
-  div.menu aside {
+  .menu main,
+  .menu aside {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -40,7 +40,7 @@ export default {
     flex: 1;
   }
 
-  div.menu a {
+  .menu a {
     margin: 20px 0;
     cursor: pointer;
   }
