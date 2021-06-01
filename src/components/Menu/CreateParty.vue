@@ -27,18 +27,18 @@ export default {
 </script>
 
 <style scoped>
-  div.players {
+  .players {
     display: flex;
     flex-direction: column;
     margin-bottom: 50px;
   }
 
-  div.players p.vs {
+  .players .vs {
     font-size: 70px;
     margin: 10px 50px;
   }
 
-  div.players p:nth-of-type(3) {
+  .players p:nth-of-type(3) {
     text-align: right;
   }
 </style>
