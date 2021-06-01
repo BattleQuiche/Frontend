@@ -1,13 +1,14 @@
-<template><div class="menu">
-  <main>
-    <h1>Battle Quiche</h1>
-    <h2>Rejoindre une partie</h2>
-  </main>
-  <aside>
-    <input type="text" placeholder="code partie">
-    <a @click="goToParty">Entrer dans la partie ></a>
-  </aside>
-</div>
+<template>
+  <div class="menu">
+    <main>
+      <h1>Battle Quiche</h1>
+      <h2>Rejoindre une partie</h2>
+    </main>
+    <aside>
+      <input type="text" placeholder="code partie">
+      <a @click="goToParty">Entrer dans la partie ></a>
+    </aside>
+  </div>
 </template>
 
 <script>
