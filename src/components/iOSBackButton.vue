@@ -1,6 +1,7 @@
 <template>
   <div v-if="buttonIsEnabled">
     <a @click="back">Back</a>
+    <p>{{ stringValue }}</p>
   </div>
 </template>
 
@@ -9,11 +10,14 @@ export default {
   name: 'iOSBackButton',
   data() {
     return {
-      buttonIsEnabled: false
+      buttonIsEnabled: false,
+      stringValue: ''
     }
   },
   mounted () {
-    this.buttonIsShow = !!navigator.platform.match(/iPhone|iPod|iPad/)
+    // this.buttonIsEnabled = !!navigator.platform.match(/iPhone|iPod|iPad/)
+    this.buttonIsEnabled = true
+    this.stringValue = navigator.platform
   },
   methods: {
     back() {

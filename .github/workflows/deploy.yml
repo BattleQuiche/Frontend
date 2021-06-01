@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+      - feature/ios-back-button
     paths-ignore:
       - '**.md'
 jobs:

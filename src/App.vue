@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <i-o-s-back-button/>
     <img alt="Vue logo" src="./assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/>
     <force-landscape />
@@ -9,12 +10,14 @@
 <script>
 import HelloWorld from './components/HelloWorld.vue'
 import ForceLandscape from './components/ForceLandscape'
+import iOSBackButton from './components/iOSBackButton'
 
 export default {
   name: 'App',
   components: {
     HelloWorld,
-    ForceLandscape
+    ForceLandscape,
+    iOSBackButton
   }
 }
 </script>
