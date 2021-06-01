@@ -19,8 +19,6 @@ export default {
   },
   methods: {
     landscapeVerification() {
-      console.log('window.innerHeight', window.innerHeight)
-      console.log('window.innerWidth', window.innerWidth)
       this.modalIsOpen = (window.innerHeight > window.innerWidth)
     }
   }
