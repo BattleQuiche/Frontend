@@ -19,10 +19,11 @@ export default {
   },
   mounted () {
     this.buttonIsEnabled = !!navigator.platform.match(/iPhone|iPod|iPad/)
+    this.buttonIsEnabled = true
   },
   methods: {
     back() {
-      //  call back navigation function with vue-router
+      this.$router.go(-1)
     }
   }
 }

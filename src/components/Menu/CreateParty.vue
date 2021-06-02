@@ -10,7 +10,7 @@
       </main>
       <aside>
         <players-list/>
-        <a @click="goToParty">Lancer la partie ></a>
+          <router-link :to="{ name: 'Party' }">Lancer la partie</router-link>
       </aside>
     </div>
   </div>

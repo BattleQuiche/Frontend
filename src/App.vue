@@ -7,7 +7,6 @@
 
 <script>
 import ForceLandscape from './components/ForceLandscape'
-import Menu from './components/Menu/Menu'
 
 export default {
   name: 'App',

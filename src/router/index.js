@@ -6,15 +6,33 @@ Vue.use(VueRouter);
 const routes = [
     {
         path: "/",
-        name: "Home",
+        name: "Menu",
         component: () =>
-            import("../components/Home.vue")
+            import("../components/Menu/Menu.vue")
     },
     {
-        path: "/startGame",
-        name: "StartGame",
+        path: "/join-party",
+        name: "JoinPartyStep1",
         component: () =>
-            import("../components/StartGame.vue")
+            import("../components/Menu/JoinPartyStep1.vue")
+    },
+    {
+        path: "/join-party/party/:partyId",
+        name: "JoinPartyStep2",
+        component: () =>
+            import("../components/Menu/JoinPartyStep2.vue")
+    },
+    {
+        path: "/create-party",
+        name: "CreateParty",
+        component: () =>
+            import("../components/Menu/CreateParty.vue")
+    },
+    {
+        path: "/party/:partyId",
+        name: "Party",
+        component: () =>
+            import("../components/Party/Party.vue")
     },
     {
         path: "*",
