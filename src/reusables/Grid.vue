@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: 'PartyGrid',
+  name: 'Grid',
   data() {
     return {
       horizontalCases: [...Array(this.numberOfHorizontalCases).keys()],
@@ -36,8 +36,7 @@ export default {
 
   .grid__case {
     display: block;
-    height: 50px;
-    width: 50px;
-    margin: 1px;
+    height: 32px;
+    width: 32px;
   }
 </style>
