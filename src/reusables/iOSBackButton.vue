@@ -22,7 +22,7 @@ export default {
   },
   methods: {
     back() {
-      //  call back navigation function with vue-router
+      this.$router.go(-1)
     }
   }
 }

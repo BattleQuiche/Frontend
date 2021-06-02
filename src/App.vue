@@ -1,18 +1,16 @@
 <template>
   <div id="app">
-    <Menu/>
-    <force-landscape/>
+      <router-view/>
+    <force-landscape />
   </div>
 </template>
 
 <script>
 import ForceLandscape from './components/ForceLandscape'
-import Menu from './components/Menu/Menu'
 
 export default {
   name: 'App',
   components: {
-    Menu,
     ForceLandscape
   }
 }

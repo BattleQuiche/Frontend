@@ -5,8 +5,8 @@
        <h1>Battle Quiche</h1>
      </main>
      <aside>
-       <a @click="goToCreateParty">Créer une partie</a>
-       <a @click="goToJoinParty">Rejoindre une partie</a>
+      <router-link :to="{ name: 'CreateParty' }">Créer une partie</router-link>
+      <router-link :to="{ name: 'JoinPartyStep1' }">Rejoindre une partie</router-link>
      </aside>
    </div>
   </div>
@@ -15,14 +15,6 @@
 <script>
 export default {
   name: 'Menu',
-  methods: {
-    goToJoinParty() {
-      //  @TODO: function to navigate to JoinPartyStep2.vue
-    },
-    goToCreateParty() {
-      //  @TODO: function to navigate to CreateParty.vue
-    }
-  }
 }
 </script>
 

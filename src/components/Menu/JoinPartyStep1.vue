@@ -9,7 +9,7 @@
       </main>
       <aside>
         <input type="text" placeholder="code partie">
-        <a @click="goToStep2">Entrer dans la partie ></a>
+        <router-link :to="{ name: 'JoinPartyStep2', params: { partyId } }">Entrer dans la partie</router-link>
       </aside>
     </div>
   </div>
@@ -23,9 +23,9 @@ export default {
   components: {
     iOSBackButton,
   },
-  methods: {
-    goToStep2() {
-      //  @TODO: function to navigate to JoinPartyStep2.vue
+  data() {
+    return {
+      partyId : 'helloworld1'
     }
   }
 }
