@@ -9,6 +9,8 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
+
 export default {
   name: 'Grid',
   data() {
@@ -22,6 +24,9 @@ export default {
     numberOfVerticalCases: { type: Number, require: true },
     zIndex: { type: Number, default: 1 },
   },
+  computed: {
+    ...mapGetters(['debug']),
+  }
 }
 </script>
 

@@ -1,20 +1,22 @@
 <template>
   <div class="grid__case_content" :class="classes">
-    <simple-grass v-if="caseData.type === 'grass'" />
-    <simple-water v-if="caseData.type === 'water'" />
+    <water v-if="caseData.type === 'water'" />
+    <water v-else-if="caseData.type === 'water-grass-top'" type="grass-top" />
+    <water v-else-if="caseData.type === 'water-grass-bottom'" type="grass-bottom" />
+    <simple-grass v-else />
     <p v-if="debug === true">[{{caseData.x}},{{caseData.y}}]</p>
   </div>
 </template>
 
 <script>
 import SimpleGrass from './backgrounds/SimpleGrass'
-import SimpleWater from './backgrounds/SimpleWater'
+import Water from './backgrounds/Water'
 
 export default {
   name: 'MapCase',
   components: {
     SimpleGrass,
-    SimpleWater,
+    Water,
   },
   props: {
     caseData: {
@@ -27,7 +29,7 @@ export default {
       classes: {
         wood: (!!this.caseData && this.caseData.type === 'wood'),
       },
-      debug: true
+      debug: false
     }
   },
 }
