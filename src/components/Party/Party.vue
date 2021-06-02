@@ -6,7 +6,7 @@
 
 <script>
 import CardGrid from '../../components/Party/CardGrid'
-import testMap from '../../assets/map.test.json'
+import testMap from '@/assets/map.test.json'
 
 export default {
   name: 'Party',

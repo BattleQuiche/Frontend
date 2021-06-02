@@ -8,7 +8,7 @@
 
 <script>
 import PartyGrid from '../../reusables/PartyGrid'
-import MapCase from './MapCase'
+import MapCase from '../Card/MapCase'
 
 export default {
   name: 'CardGrid',
