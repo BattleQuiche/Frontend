@@ -1,31 +1,36 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-    <force-landscape />
+    <Menu/>
+    <force-landscape/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 import ForceLandscape from './components/ForceLandscape'
+import Menu from './components/Menu/Menu'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld,
+    Menu,
     ForceLandscape
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  body {
+    padding: 0;
+    margin: 0;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  .wrapper {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+  }
 </style>
