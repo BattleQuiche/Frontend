@@ -8,7 +8,7 @@
 
 <script>
 import Grid from '../../reusables/Grid'
-import MapCase from '../Card/MapCase'
+import MapCase from './MapCase'
 
 export default {
   name: 'CardGrid',
