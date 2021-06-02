@@ -36,7 +36,7 @@ export default {
 
   .grid__case {
     display: block;
-    height: 32px;
-    width: 32px;
+    height: 60px;
+    width: 60px;
   }
 </style>
