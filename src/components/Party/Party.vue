@@ -1,12 +1,15 @@
 <template>
   <div class="party">
     <card-grid :cases="mapObjects"/>
+
+    <button id="debug-button" @click="setDebugModeTo(!debug)">Debug Mode</button>
   </div>
 </template>
 
 <script>
 import CardGrid from '../../components/Party/CardGrid'
 import testMap from '@/assets/map.test.json'
+import {mapActions, mapGetters} from 'vuex'
 
 export default {
   name: 'Party',
@@ -17,6 +20,12 @@ export default {
     return {
       mapObjects: testMap
     }
+  },
+  methods: {
+    ...mapActions(['setDebugModeTo'])
+  },
+  computed: {
+    ...mapGetters(['debug']),
   }
 }
 </script>
@@ -32,5 +41,13 @@ export default {
 
   .party::-webkit-scrollbar {
     display: none;
+  }
+
+  #debug-button {
+    position: fixed;
+    z-index: 998;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
   }
 </style>

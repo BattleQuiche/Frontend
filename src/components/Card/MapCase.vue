@@ -11,6 +11,7 @@
 <script>
 import SimpleGrass from './backgrounds/SimpleGrass'
 import Water from './backgrounds/Water'
+import {mapGetters} from 'vuex'
 
 export default {
   name: 'MapCase',
@@ -29,9 +30,11 @@ export default {
       classes: {
         wood: (!!this.caseData && this.caseData.type === 'wood'),
       },
-      debug: false
     }
   },
+  computed: {
+    ...mapGetters(['debug']),
+  }
 }
 </script>
 
