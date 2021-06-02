@@ -7,10 +7,10 @@
     <p class="players__vs">VS</p>
     <div class="players__list">
       <p>Joueur 3</p>
-      <p v-if="this.players.length === 4">Joueur 4</p>
-      <button v-else @click="showModal" id="addPlayerButton" @keydown.esc="hideModal">+</button>
+      <p v-if="players.length === 4">Joueur 4</p>
+      <button v-else @click="showModal"  @keydown.esc="hideModal">+</button>
     </div>
-    <div id="addPlayerModal" v-bind:class="{shown : modalIsOpen}" class="modal" >
+    <div id="addPlayerModal" v-bind:class="{'modal--shown' : modalIsOpen}" class="modal" >
       <div class="modal-content">
         <span @click="hideModal" class="close">&times;</span>
         <p class="modal__title">Inviter un nouveau joueur</p>
@@ -90,39 +90,42 @@ export default {
   text-align: right;
 }
 
-
-/* The Modal (background) */
 .modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  display: none;
+  position: fixed;
+  z-index: 1;
   left: 0;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+  pointer-events: none;
+  cursor: none;
+  opacity: 0;
+  transition: 1s
 }
 
-.shown {
+.modal--shown {
   display: block;
+  pointer-events: auto;
+  cursor: pointer;
+  opacity: 1
 }
 
-/* Modal Content/Box */
 .modal-content {
   background-color: #fefefe;
-  margin: 15% auto; /* 15% from the top and centered */
+  margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
   border-radius: 30px;
-  width: 40%; /* Could be more or less, depending on screen size */
+  width: 40vw;
 }
 
 .modal-content .modal__title {
   font-size: 40px;
   margin: 0 10px;
-  color: #616161;
   padding: 20px 0;
 }
 
@@ -139,7 +142,6 @@ export default {
   margin: 20px 180px;
 }
 
-/* The Close Button */
 .close {
   color: #aaa;
   float: right;
