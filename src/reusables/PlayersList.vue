@@ -91,7 +91,7 @@ export default {
 }
 
 .modal {
-  display: none;
+  display: block;
   position: fixed;
   z-index: 1;
   left: 0;
@@ -108,7 +108,6 @@ export default {
 }
 
 .modal--shown {
-  display: block;
   pointer-events: auto;
   cursor: pointer;
   opacity: 1
