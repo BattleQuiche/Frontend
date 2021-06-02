@@ -19,7 +19,6 @@ export default {
   },
   mounted () {
     this.buttonIsEnabled = !!navigator.platform.match(/iPhone|iPod|iPad/)
-    this.buttonIsEnabled = true
   },
   methods: {
     back() {
