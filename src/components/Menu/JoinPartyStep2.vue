@@ -5,12 +5,11 @@
     <div class="menu__container">
       <main>
         <h1>Battle Quiche</h1>
-        <h2>Création d'une partie</h2>
-        <p>ID Partie: #A3BC9H</p>
+        <h2>Rejoindre une partie</h2>
       </main>
       <aside>
         <players-list/>
-        <a @click="goToParty">Lancer la partie ></a>
+        <a @click="goToParty">Entrer dans la partie ></a>
       </aside>
     </div>
   </div>
@@ -21,7 +20,7 @@ import iOSBackButton from '../../reusables/iOSBackButton'
 import PlayersList from '../../reusables/PlayersList'
 
 export default {
-  name: 'CreateParty',
+  name: 'JoinPartyStep2',
   components: {
     iOSBackButton,
     PlayersList
@@ -33,3 +32,7 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+
+</style>

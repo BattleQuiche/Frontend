@@ -17,7 +17,7 @@ export default {
   name: 'Menu',
   methods: {
     goToJoinParty() {
-      //  @TODO: function to navigate to JoinParty.vue
+      //  @TODO: function to navigate to JoinPartyStep2.vue
     },
     goToCreateParty() {
       //  @TODO: function to navigate to CreateParty.vue

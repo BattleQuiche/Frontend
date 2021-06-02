@@ -9,23 +9,23 @@
       </main>
       <aside>
         <input type="text" placeholder="code partie">
-        <a @click="goToParty">Entrer dans la partie ></a>
+        <a @click="goToStep2">Entrer dans la partie ></a>
       </aside>
     </div>
   </div>
 </template>
 
 <script>
-import iOSBackButton from '../iOSBackButton'
+import iOSBackButton from '../../reusables/iOSBackButton'
 
 export default {
-  name: 'JoinParty',
+  name: 'JoinPartyStep1',
   components: {
     iOSBackButton,
   },
   methods: {
-    goToParty() {
-      //  @TODO: function to navigate to Party.vue
+    goToStep2() {
+      //  @TODO: function to navigate to JoinPartyStep2.vue
     }
   }
 }
