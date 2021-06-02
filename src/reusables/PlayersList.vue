@@ -7,7 +7,8 @@
     <p class="players__vs">VS</p>
     <div class="players__list">
       <p>Joueur 3</p>
-      <button @click="showModal" id="addPlayerButton" @keydown.esc="hideModal">+</button>
+      <p v-if="this.players.length === 4">Joueur 4</p>
+      <button v-else @click="showModal" id="addPlayerButton" @keydown.esc="hideModal">+</button>
     </div>
     <div id="addPlayerModal" v-bind:class="{shown : modalIsOpen}" class="modal" >
       <div class="modal-content">
@@ -31,7 +32,8 @@ export default {
   name: 'PlayersList',
   data() {
     return {
-      modalIsOpen: false
+      modalIsOpen: false,
+      players: [],
     }
   },
   methods: {
