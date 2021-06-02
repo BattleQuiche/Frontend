@@ -752,22 +752,22 @@
  {
    "x": 0,
    "y": 5,
-   "type": "water-grass-top"
+   "type": "water"
  },
  {
    "x": 1,
    "y": 5,
-   "type": "water-grass-top"
+   "type": "water"
  },
  {
    "x": 2,
    "y": 5,
-   "type": "water-grass-top"
+   "type": "water"
  },
  {
    "x": 3,
    "y": 5,
-   "type": "water-grass-top"
+   "type": "water"
  },
  {
    "x": 4,
@@ -922,72 +922,72 @@
  {
    "x": 4,
    "y": 6,
-   "type": "water-grass-top"
+   "type": "water"
  },
  {
    "x": 5,
    "y": 6,
-   "type": "water-grass-top"
+   "type": "water"
  },
  {
    "x": 6,
    "y": 6,
-   "type": "water-grass-top"
+   "type": "water"
  },
  {
    "x": 7,
    "y": 6,
-   "type": "water-grass-top"
+   "type": "water"
  },
  {
    "x": 8,
    "y": 6,
-   "type": "water-grass-top"
+   "type": "water"
  },
  {
    "x": 9,
    "y": 6,
-   "type": "water-grass-top"
+   "type": "water"
  },
  {
    "x": 10,
    "y": 6,
-   "type": "water-grass-top"
+   "type": "water"
  },
  {
    "x": 11,
    "y": 6,
-   "type": "water-grass-top"
+   "type": "water"
  },
  {
    "x": 12,
    "y": 6,
-   "type": "water-grass-top"
+   "type": "water"
  },
  {
    "x": 13,
    "y": 6,
-   "type": "water-grass-top"
+   "type": "water"
  },
  {
    "x": 14,
    "y": 6,
-   "type": "water-grass-top"
+   "type": "water"
  },
  {
    "x": 15,
    "y": 6,
-   "type": "water-grass-top"
+   "type": "water"
  },
  {
    "x": 16,
    "y": 6,
-   "type": "water-grass-top"
+   "type": "water"
  },
  {
    "x": 17,
    "y": 6,
-   "type": "water-grass-top"
+   "type": "water"
  },
  {
    "x": 18,
@@ -1012,42 +1012,42 @@
  {
    "x": 22,
    "y": 6,
-   "type": "water-grass-top"
+   "type": "water"
  },
  {
    "x": 23,
    "y": 6,
-   "type": "water-grass-top"
+   "type": "water"
  },
  {
    "x": 24,
    "y": 6,
-   "type": "water-grass-top"
+   "type": "water"
  },
  {
    "x": 25,
    "y": 6,
-   "type": "water-grass-top"
+   "type": "water"
  },
  {
    "x": 26,
    "y": 6,
-   "type": "water-grass-top"
+   "type": "water"
  },
  {
    "x": 27,
    "y": 6,
-   "type": "water-grass-top"
+   "type": "water"
  },
  {
    "x": 28,
    "y": 6,
-   "type": "water-grass-top"
+   "type": "water"
  },
  {
    "x": 29,
    "y": 6,
-   "type": "water-grass-top"
+   "type": "water"
  },
  {
    "x": 0,
@@ -1202,22 +1202,22 @@
  {
    "x": 0,
    "y": 8,
-   "type": "water"
+   "type": "grass"
  },
  {
    "x": 1,
    "y": 8,
-   "type": "water"
+   "type": "grass"
  },
  {
    "x": 2,
    "y": 8,
-   "type": "water"
+   "type": "grass"
  },
  {
    "x": 3,
    "y": 8,
-   "type": "water"
+   "type": "grass"
  },
  {
    "x": 4,
@@ -1352,42 +1352,42 @@
  {
    "x": 0,
    "y": 9,
-   "type": "water-grass-bottom"
+   "type": "grass"
  },
  {
    "x": 1,
    "y": 9,
-   "type": "water-grass-bottom"
+   "type": "grass"
  },
  {
    "x": 2,
    "y": 9,
-   "type": "water-grass-bottom"
+   "type": "grass"
  },
  {
    "x": 3,
    "y": 9,
-   "type": "water-grass-bottom"
+   "type": "grass"
  },
  {
    "x": 4,
    "y": 9,
-   "type": "water-grass-bottom"
+   "type": "water"
  },
  {
    "x": 5,
    "y": 9,
-   "type": "water-grass-bottom"
+   "type": "water"
  },
  {
    "x": 6,
    "y": 9,
-   "type": "water-grass-bottom"
+   "type": "water"
  },
  {
    "x": 7,
    "y": 9,
-   "type": "water-grass-bottom"
+   "type": "water"
  },
  {
    "x": 8,
@@ -1542,52 +1542,52 @@
  {
    "x": 8,
    "y": 10,
-   "type": "water-grass-bottom"
+   "type": "water"
  },
  {
    "x": 9,
    "y": 10,
-   "type": "water-grass-bottom"
+   "type": "water"
  },
  {
    "x": 10,
    "y": 10,
-   "type": "water-grass-bottom"
+   "type": "water"
  },
  {
    "x": 11,
    "y": 10,
-   "type": "water-grass-bottom"
+   "type": "water"
  },
  {
    "x": 12,
    "y": 10,
-   "type": "water-grass-bottom"
+   "type": "water"
  },
  {
    "x": 13,
    "y": 10,
-   "type": "water-grass-bottom"
+   "type": "water"
  },
  {
    "x": 14,
    "y": 10,
-   "type": "water-grass-bottom"
+   "type": "water"
  },
  {
    "x": 15,
    "y": 10,
-   "type": "water-grass-bottom"
+   "type": "water"
  },
  {
    "x": 16,
    "y": 10,
-   "type": "water-grass-bottom"
+   "type": "water"
  },
  {
    "x": 17,
    "y": 10,
-   "type": "water-grass-bottom"
+   "type": "water"
  },
  {
    "x": 18,
@@ -1612,42 +1612,42 @@
  {
    "x": 22,
    "y": 10,
-   "type": "water-grass-bottom"
+   "type": "water"
  },
  {
    "x": 23,
    "y": 10,
-   "type": "water-grass-bottom"
+   "type": "water"
  },
  {
    "x": 24,
    "y": 10,
-   "type": "water-grass-bottom"
+   "type": "water"
  },
  {
    "x": 25,
    "y": 10,
-   "type": "water-grass-bottom"
+   "type": "water"
  },
  {
    "x": 26,
    "y": 10,
-   "type": "water-grass-bottom"
+   "type": "water"
  },
  {
    "x": 27,
    "y": 10,
-   "type": "water-grass-bottom"
+   "type": "water"
  },
  {
    "x": 28,
    "y": 10,
-   "type": "water-grass-bottom"
+   "type": "water"
  },
  {
    "x": 29,
    "y": 10,
-   "type": "water-grass-bottom"
+   "type": "water"
  },
  {
    "x": 0,
@@ -1692,112 +1692,112 @@
  {
    "x": 8,
    "y": 11,
-   "type": "grass"
+   "type": "water"
  },
  {
    "x": 9,
    "y": 11,
-   "type": "grass"
+   "type": "water"
  },
  {
    "x": 10,
    "y": 11,
-   "type": "grass"
+   "type": "water"
  },
  {
    "x": 11,
    "y": 11,
-   "type": "grass"
+   "type": "water"
  },
  {
    "x": 12,
    "y": 11,
-   "type": "grass"
+   "type": "water"
  },
  {
    "x": 13,
    "y": 11,
-   "type": "grass"
+   "type": "water"
  },
  {
    "x": 14,
    "y": 11,
-   "type": "grass"
+   "type": "water"
  },
  {
    "x": 15,
    "y": 11,
-   "type": "grass"
+   "type": "water"
  },
  {
    "x": 16,
    "y": 11,
-   "type": "grass"
+   "type": "water"
  },
  {
    "x": 17,
    "y": 11,
-   "type": "grass"
+   "type": "water"
  },
  {
    "x": 18,
    "y": 11,
-   "type": "grass"
+   "type": "wood"
  },
  {
    "x": 19,
    "y": 11,
-   "type": "grass"
+   "type": "wood"
  },
  {
    "x": 20,
    "y": 11,
-   "type": "grass"
+   "type": "wood"
  },
  {
    "x": 21,
    "y": 11,
-   "type": "grass"
+   "type": "wood"
  },
  {
    "x": 22,
    "y": 11,
-   "type": "grass"
+   "type": "water"
  },
  {
    "x": 23,
    "y": 11,
-   "type": "grass"
+   "type": "water"
  },
  {
    "x": 24,
    "y": 11,
-   "type": "grass"
+   "type": "water"
  },
  {
    "x": 25,
    "y": 11,
-   "type": "grass"
+   "type": "water"
  },
  {
    "x": 26,
    "y": 11,
-   "type": "grass"
+   "type": "water"
  },
  {
    "x": 27,
    "y": 11,
-   "type": "grass"
+   "type": "water"
  },
  {
    "x": 28,
    "y": 11,
-   "type": "grass"
+   "type": "water"
  },
  {
    "x": 29,
    "y": 11,
-   "type": "grass"
+   "type": "water"
  },
  {
    "x": 0,

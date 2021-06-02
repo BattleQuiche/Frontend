@@ -1,10 +1,5 @@
 <template>
-  <div class="case-background resized-img">
-    <img src="@/assets/map/generic-rpg-tile70.png">
-    <img src="@/assets/map/generic-rpg-tile70.png">
-    <img src="@/assets/map/generic-rpg-tile70.png">
-    <img src="@/assets/map/generic-rpg-tile70.png">
-  </div>
+  <img class="case-background" src="@/assets/map/generic-rpg-tile70.png">
 </template>
 
 <script>
@@ -13,14 +8,6 @@ export default {
 }
 </script>
 
-<style>
-  .resized-img {
-    display: flex;
-    flex-wrap: wrap;
-  }
+<style scoped>
 
-  .resized-img img {
-    flex: 1;
-    max-width: 50%;
-  }
 </style>
