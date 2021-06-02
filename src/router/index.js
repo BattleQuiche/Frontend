@@ -1,5 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import Menu from "../components/Menu/Menu";
 
 Vue.use(VueRouter);
 
@@ -7,8 +8,7 @@ const routes = [
     {
         path: "/",
         name: "Menu",
-        component: () =>
-            import("../components/Menu/Menu.vue")
+        component: Menu
     },
     {
         path: "/join-party",
