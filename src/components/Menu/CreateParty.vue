@@ -10,7 +10,7 @@
       </main>
       <aside>
         <players-list/>
-          <router-link :to="{ name: 'Party' }">Lancer la partie</router-link>
+          <router-link :to="{ name: 'Party', params: { partyId } }">Lancer la partie</router-link>
       </aside>
     </div>
   </div>
@@ -26,9 +26,9 @@ export default {
     iOSBackButton,
     PlayersList
   },
-  methods: {
-    goToParty() {
-      //  @TODO: function to navigate to Party.vue
+  data() {
+    return {
+      partyId : 'helloworld'
     }
   }
 }
