@@ -13,7 +13,7 @@
             <p>Joueur 1</p>
             <p>Joueur 2</p>
           </div>
-          <p class="vs">VS</p>
+          <p class="players__vs">VS</p>
           <div class="players__list">
             <p>Joueur 3</p>
             <p>+</p>
@@ -58,7 +58,7 @@ export default {
     text-align: center;
   }
 
-  .players .vs {
+  .players .players__vs {
     font-size: 70px;
     margin: 10px 50px;
     text-align: center;
