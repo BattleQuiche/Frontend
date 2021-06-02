@@ -1,12 +1,14 @@
 <template>
-  <div class="menu">
-    <main>
-      <h1>Battle Quiche</h1>
-    </main>
-    <aside>
-      <a @click="goToCreateParty">Créer une partie</a>
-      <a @click="goToJoinParty">Rejoindre une partie</a>
-    </aside>
+  <div class="menu wrapper">
+   <div class="menu__container">
+     <main>
+       <h1>Battle Quiche</h1>
+     </main>
+     <aside>
+       <a @click="goToCreateParty">Créer une partie</a>
+       <a @click="goToJoinParty">Rejoindre une partie</a>
+     </aside>
+   </div>
   </div>
 </template>
 
@@ -27,20 +29,29 @@ export default {
 <style>
   .menu {
     display: flex;
-    height: 100vh;
+    flex-direction: column;
+  }
+
+  .menu__container {
+    display: flex;
+    flex: 1;
+  }
+
+  .menu__container #ios-back-button {
     width: 100vw;
   }
 
-  .menu main,
-  .menu aside {
+  .menu__container main,
+  .menu__container aside {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     flex: 1;
+    padding: 30px;
   }
 
-  .menu a {
+  .menu__container a {
     margin: 20px 0;
     cursor: pointer;
   }

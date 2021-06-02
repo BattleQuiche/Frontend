@@ -19,9 +19,18 @@ export default {
 </script>
 
 <style>
-body {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
+  body {
+    padding: 0;
+    margin: 0;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  .wrapper {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+  }
 </style>
