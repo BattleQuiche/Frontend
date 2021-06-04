@@ -9,7 +9,7 @@ class Type {
 }
 
 export default {
-  name: 'MoveCase',
+  name: 'ActionCase',
   props: {
     caseData: {
       type: String,

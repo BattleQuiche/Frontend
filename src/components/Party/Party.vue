@@ -1,10 +1,10 @@
 <template>
   <div class="party">
     <card-grid :cases="mapObjects"/>
-    <move-grid :cases="mapObjects"
-               :current-player="currentPlayer"
-               :players="players"
-               @move-player="handleMovePlayer"/>
+    <action-grid :cases="mapObjects"
+                 :current-player="currentPlayer"
+                 :players="players"
+                 @move-player="handleMovePlayer"/>
 
     <button id="debug-button" @click="setDebugModeTo(!debug)">Debug Mode</button>
   </div>
@@ -14,13 +14,13 @@
 import CardGrid from './Card/CardGrid'
 import testMap from '@/assets/map.test.json'
 import {mapActions, mapGetters} from 'vuex'
-import MoveGrid from './MoveGrid/MoveGrid'
+import ActionGrid from './ActionGrid/ActionGrid'
 
 export default {
   name: 'Party',
   components: {
     CardGrid,
-    MoveGrid,
+    ActionGrid,
   },
   data() {
     return {

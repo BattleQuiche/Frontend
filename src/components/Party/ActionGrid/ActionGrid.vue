@@ -1,20 +1,20 @@
 <template>
   <grid class="move-grid" :number-of-horizontal-cases="30" :number-of-vertical-cases="18" :z-index="4">
     <template v-slot:default="{ x, y }">
-      <move-case :key="'move_' + x + y" :caseData="getCaseType(x, y)" :x="x" :y="y" @move-player="handleMovePlayer"/>
+      <action-case :key="'move_' + x + y" :caseData="getCaseType(x, y)" :x="x" :y="y" @move-player="handleMovePlayer"/>
     </template>
   </grid>
 </template>
 
 <script>
 import Grid from '../../../reusables/Grid'
-import MoveCase from './MoveCase'
+import ActionCase from './ActionCase'
 
 export default {
-  name: 'MoveGrid',
+  name: 'ActionGrid',
   components: {
     Grid,
-    MoveCase,
+    ActionCase,
   },
   props: {
     cases: {
@@ -38,12 +38,12 @@ export default {
       if (!['grass', 'wood'].includes(mapCase.type) ||
           !!playerWithSameCoords ||
           this.currentPlayer.x === x && this.currentPlayer.y === y) {
-        return MoveCase.Type.EMPTY
+        return ActionCase.Type.EMPTY
       }
 
       const distance = this.getCasesDistance({ xA: x, yA: y }, { xB: this.currentPlayer.x, yB: this.currentPlayer.y })
 
-      return (distance <= this.currentPlayer.movementPoint) ? MoveCase.Type.MOVE : MoveCase.Type.EMPTY
+      return (distance <= this.currentPlayer.movementPoint) ? ActionCase.Type.MOVE : ActionCase.Type.EMPTY
     },
     getCasesDistance({ xA, yA }, { xB, yB }) {
       const xDistance = Math.abs(xA - xB);
