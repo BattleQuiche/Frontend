@@ -1,10 +1,17 @@
 <template>
   <div class="party">
-    <card-grid :cases="mapObjects"/>
+    <card-grid :cases="mapObjects"
+               :number-of-horizontal-cases="numberOfHorizontalCases"
+               :number-of-vertical-cases="numberOfVerticalCases"/>
+    <player-grid :players="players"
+                 :number-of-horizontal-cases="numberOfHorizontalCases"
+                 :number-of-vertical-cases="numberOfVerticalCases"/>
     <action-grid :cases="mapObjects"
                  :current-player="currentPlayer"
                  :players="players"
                  :action-type="actionType"
+                 :number-of-horizontal-cases="numberOfHorizontalCases"
+                 :number-of-vertical-cases="numberOfVerticalCases"
                  @player-action="handlePlayerAction"/>
 
     <button id="debug-button" @click="setDebugModeTo(!debug)">Debug Mode</button>
@@ -16,12 +23,14 @@ import CardGrid from './Card/CardGrid'
 import testMap from '@/assets/map.test.json'
 import {mapActions, mapGetters} from 'vuex'
 import ActionGrid from './ActionGrid/ActionGrid'
+import PlayerGrid from './PlayerGrid/PlayerGrid'
 
 export default {
   name: 'Party',
   components: {
     CardGrid,
     ActionGrid,
+    PlayerGrid,
   },
   data() {
     return {

@@ -1,5 +1,5 @@
 <template>
-  <grid v-if="gridIsShown" class="move-grid" :z-index="4"
+  <grid v-if="gridIsShown" class="action-grid" :z-index="10"
         :number-of-horizontal-cases="numberOfHorizontalCases"
         :number-of-vertical-cases="numberOfVerticalCases">
     <template v-slot:default="{ x, y }">
