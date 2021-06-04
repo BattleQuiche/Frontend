@@ -99,18 +99,16 @@ export default {
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgb(0,0,0);
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgba(0,0,0,0);
   pointer-events: none;
   cursor: none;
-  opacity: 0;
-  transition: 1s
+  transition: background-color 1s;
 }
 
 .modal--shown {
   pointer-events: auto;
   cursor: pointer;
-  opacity: 1
+  background-color: rgba(0,0,0,0.4);
 }
 
 .modal-content {
@@ -120,6 +118,12 @@ export default {
   border: 1px solid #888;
   border-radius: 30px;
   width: 40vw;
+  transform: translateY(100vh);
+  transition: transform 1s;
+}
+
+.modal--shown .modal-content {
+  transform: translateX(0);
 }
 
 .modal-content .modal__title {
