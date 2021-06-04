@@ -1,11 +1,11 @@
 <template>
-  <span class="grid__case_content" :class="classes" @click="handleMoveGrid"/>
+  <span class="grid__case_content" :class="{ [this.caseData]: true }" @click="handleMoveGrid"/>
 </template>
 
 <script>
 class Type {
-  static MOVE = 'MOVE';
-  static EMPTY = 'EMPTY';
+  static MOVE = 'movable';
+  static EMPTY = 'empty';
 }
 
 export default {
@@ -22,13 +22,6 @@ export default {
     y: {
       type: Number,
       required: true,
-    },
-  },
-  computed: {
-    classes() {
-      return {
-        movable: (this.caseData === Type.MOVE),
-      }
     },
   },
   methods: {

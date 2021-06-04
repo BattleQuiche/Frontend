@@ -1,11 +1,17 @@
 <template>
-  <div class="grid__case_content" :class="classes">
+  <div class="grid__case_content" :class="{ [caseData.type]: true }">
     <p v-if="debug === true">[{{caseData.x}} , {{caseData.y}}]</p>
   </div>
 </template>
 
 <script>
 import {mapGetters} from 'vuex'
+
+class Type {
+  static WOOD = 'wood';
+  static WATER = 'water';
+  static GRASS = 'grass';
+}
 
 export default {
   name: 'CardCase',
@@ -15,18 +21,10 @@ export default {
       required: true,
     },
   },
-  data() {
-    return {
-      classes: {
-        grass: (!!this.caseData && this.caseData.type === 'grass'),
-        water: (!!this.caseData && this.caseData.type === 'water'),
-        wood: (!!this.caseData && this.caseData.type === 'wood'),
-      },
-    }
-  },
   computed: {
     ...mapGetters(['debug']),
-  }
+  },
+  Type,
 }
 </script>
 
