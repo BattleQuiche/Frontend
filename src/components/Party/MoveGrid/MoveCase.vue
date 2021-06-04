@@ -1,0 +1,64 @@
+<template>
+  <span class="grid__case_content" :class="classes" @click="handleMoveGrid"/>
+</template>
+
+<script>
+class Type {
+  static MOVE = 'MOVE';
+  static EMPTY = 'EMPTY';
+}
+
+export default {
+  name: 'MoveCase',
+  props: {
+    caseData: {
+      type: String,
+      required: true,
+    },
+    x: {
+      type: Number,
+      required: true,
+    },
+    y: {
+      type: Number,
+      required: true,
+    },
+  },
+  computed: {
+    classes() {
+      return {
+        movable: (this.caseData === Type.MOVE),
+      }
+    },
+  },
+  methods: {
+    handleMoveGrid() {
+      if (this.caseData !== Type.MOVE) {
+        return
+      }
+
+      this.$emit('move-player', { x: this.x, y: this.y })
+    }
+  },
+  Type,
+}
+</script>
+
+<style scoped>
+  .grid__case_content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+  }
+
+  .movable {
+    background-color: rgba(0, 0, 0, .3);
+  }
+
+  .movable:hover {
+    background-color: rgba(0, 0, 0, .5);
+    cursor: pointer;
+  }
+</style>

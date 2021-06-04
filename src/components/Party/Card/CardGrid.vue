@@ -1,19 +1,19 @@
 <template>
   <grid :number-of-horizontal-cases="30" :number-of-vertical-cases="18" :z-index="3">
     <template v-slot:default="{ x, y }">
-      <map-case :key="x + y" :caseData="findObjectForCase(x, y)"/>
+      <card-case :key="'card_case_' + x + y" :caseData="findObjectForCase(x, y)"/>
     </template>
   </grid>
 </template>
 
 <script>
-import Grid from '../../reusables/Grid'
-import MapCase from './MapCase'
+import Grid from '../../../reusables/Grid'
+import CardCase from './CardCase'
 
 export default {
   name: 'CardGrid',
   components: {
-    MapCase,
+    CardCase,
     Grid,
   },
   methods: {

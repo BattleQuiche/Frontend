@@ -8,7 +8,7 @@
 import {mapGetters} from 'vuex'
 
 export default {
-  name: 'MapCase',
+  name: 'CardCase',
   props: {
     caseData: {
       type: Object,
@@ -46,14 +46,14 @@ export default {
   }
 
   .grass {
-    background-color: green;
+    background-color: #6dd46d;
   }
 
   .water {
-    background-color: blue;
+    background-color: #267488;
   }
 
   .wood {
-    background-color: #673f23;
+    background-color: #774f3a;
   }
 </style>
