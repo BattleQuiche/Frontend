@@ -118,7 +118,7 @@ export default {
   border: 1px solid #888;
   border-radius: 30px;
   width: 40vw;
-  transform: translateY(100vw);
+  transform: translateY(100vh);
   transition: transform 1s;
 }
 
