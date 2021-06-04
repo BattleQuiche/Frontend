@@ -11,18 +11,9 @@ class Type {
 export default {
   name: 'ActionCase',
   props: {
-    caseData: {
-      type: String,
-      required: true,
-    },
-    x: {
-      type: Number,
-      required: true,
-    },
-    y: {
-      type: Number,
-      required: true,
-    },
+    caseData: { type: String,  required: true },
+    x: { type: Number,  required: true },
+    y: { type: Number,  required: true },
   },
   methods: {
     handleMoveGrid() {
@@ -38,14 +29,6 @@ export default {
 </script>
 
 <style scoped>
-  .grid__case_content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    width: 100%;
-  }
-
   .movable {
     background-color: rgba(0, 0, 0, .3);
   }

@@ -29,20 +29,6 @@ export default {
 </script>
 
 <style scoped>
-  .grid__case_content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    width: 100%;
-  }
-
-  .grid__case_content span {
-    display: block;
-    height: 100%;
-    width: 100%;
-  }
-
   .grass {
     background-color: #6dd46d;
   }

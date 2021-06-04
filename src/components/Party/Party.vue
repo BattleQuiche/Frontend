@@ -36,10 +36,10 @@ export default {
     return {
       mapObjects: testMap,
       players: [
-        { username: 'Waen', x: 17, y: 12, movementPoint: 5, isCurrentPlayer: true },
-        { username: 'MrZyro', x: 14, y: 12, movementPoint: 5, isCurrentPlayer: false },
-        { username: 'Supmil', x: 24, y: 1, movementPoint: 5, isCurrentPlayer: false },
-        { username: 'MrLol', x: 4, y: 1, movementPoint: 5, isCurrentPlayer: false },
+        { username: 'Waen', x: 17, y: 12, movementPoint: 5, isCurrentPlayer: true, playerIcon: 'player_icon_1' },
+        { username: 'MrZyro', x: 14, y: 12, movementPoint: 5, isCurrentPlayer: false, playerIcon: 'player_icon_2' },
+        { username: 'Supmil', x: 24, y: 1, movementPoint: 5, isCurrentPlayer: false, playerIcon: 'player_icon_3' },
+        { username: 'MrLol', x: 4, y: 1, movementPoint: 5, isCurrentPlayer: false, playerIcon: 'player_icon_4' },
       ],
       actionType: ActionGrid.ActionType.MOVE,
       numberOfHorizontalCases: Math.max(...testMap.map(cell => cell.x)) + 1,

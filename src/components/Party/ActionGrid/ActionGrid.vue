@@ -35,8 +35,8 @@ export default {
   },
   methods: {
     getCaseType(x, y) {
-      const mapCase = this.cases.find(gridCase => (gridCase.x === x && gridCase.y === y))
-      const playerWithSameCoords = this.players.find(player => player.x === x && player.y === y)
+      const mapCase = this.cases.find((gridCase) => (gridCase.x === x && gridCase.y === y))
+      const playerWithSameCoords = this.players.find((player) => (player.x === x && player.y === y))
 
       if (!['grass', 'wood'].includes(mapCase.type) ||
           !!playerWithSameCoords ||
@@ -65,7 +65,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-</style>
