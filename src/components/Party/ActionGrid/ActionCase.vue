@@ -1,5 +1,5 @@
 <template>
-  <span class="grid__case_content" :class="{ [this.caseData]: true }" @click="handleMoveGrid"/>
+  <span class="grid__case_content" :class="{ [this.caseData]: true }" @click="handleAction"/>
 </template>
 
 <script>
@@ -16,7 +16,7 @@ export default {
     y: { type: Number,  required: true },
   },
   methods: {
-    handleMoveGrid() {
+    handleAction() {
       if (this.caseData !== Type.MOVE) {
         return
       }
