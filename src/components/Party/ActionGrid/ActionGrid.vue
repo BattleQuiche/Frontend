@@ -1,7 +1,9 @@
 <template>
-  <grid class="move-grid" :number-of-horizontal-cases="30" :number-of-vertical-cases="18" :z-index="4">
+  <grid v-if="gridIsShown" class="move-grid" :z-index="4"
+        :number-of-horizontal-cases="numberOfHorizontalCases"
+        :number-of-vertical-cases="numberOfVerticalCases">
     <template v-slot:default="{ x, y }">
-      <action-case :key="'move_' + x + y" :caseData="getCaseType(x, y)" :x="x" :y="y" @move-player="handleMovePlayer"/>
+      <action-case :key="'move_' + x + y" :caseData="getCaseType(x, y)" :x="x" :y="y" @player-action="handlePlayerAction"/>
     </template>
   </grid>
 </template>
@@ -10,25 +12,26 @@
 import Grid from '../../../reusables/Grid'
 import ActionCase from './ActionCase'
 
+class ActionType {
+  static MOVE = 'MOVE';
+  static ATTACK = 'ATTACK';
+  static NO_ACTION = 'NO_ACTION'
+}
+
 export default {
   name: 'ActionGrid',
+  ActionType,
   components: {
     Grid,
     ActionCase,
   },
   props: {
-    cases: {
-      type: Array,
-      required: true
-    },
-    players: {
-      type: Array,
-      required: true
-    },
-    currentPlayer: {
-      type: Object,
-      required: true
-    },
+    cases: {type: Array, required: true },
+    players: {type: Array, required: true },
+    currentPlayer: {type: Object, required: true },
+    actionType: {type: String, required: true },
+    numberOfHorizontalCases: { type: Number, require: true },
+    numberOfVerticalCases: { type: Number, require: true },
   },
   methods: {
     getCaseType(x, y) {
@@ -51,10 +54,15 @@ export default {
 
       return (xDistance + yDistance)
     },
-    handleMovePlayer({ x, y }) {
-      this.$emit('move-player', { newPosition: { x, y }, player: this.currentPlayer })
+    handlePlayerAction({ x, y }) {
+      this.$emit('player-action', { newPosition: { x, y }, player: this.currentPlayer, actionType: this.actionType })
     }
   },
+  computed: {
+    gridIsShown() {
+      return this.actionType !== ActionType.NO_ACTION
+    }
+  }
 }
 </script>
 

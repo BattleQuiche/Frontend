@@ -4,7 +4,8 @@
     <action-grid :cases="mapObjects"
                  :current-player="currentPlayer"
                  :players="players"
-                 @move-player="handleMovePlayer"/>
+                 :action-type="actionType"
+                 @player-action="handlePlayerAction"/>
 
     <button id="debug-button" @click="setDebugModeTo(!debug)">Debug Mode</button>
   </div>
@@ -30,15 +31,28 @@ export default {
         { username: 'MrZyro', x: 14, y: 12, movementPoint: 5, isCurrentPlayer: false },
         { username: 'Supmil', x: 24, y: 1, movementPoint: 5, isCurrentPlayer: false },
         { username: 'MrLol', x: 4, y: 1, movementPoint: 5, isCurrentPlayer: false },
-      ]
+      ],
+      actionType: ActionGrid.ActionType.MOVE,
+      numberOfHorizontalCases: Math.max(...testMap.map(cell => cell.x)) + 1,
+      numberOfVerticalCases: Math.max(...testMap.map(cell => cell.y)) + 1,
     }
   },
   methods: {
     ...mapActions(['setDebugModeTo']),
-    handleMovePlayer({ newPosition, player }) {
+    handlePlayerAction({ newPosition, player, actionType }) {
+      switch (actionType) {
+        case ActionGrid.ActionType.MOVE:
+          this.movePlayer(player, newPosition);
+          break;
+        case ActionGrid.ActionType.ATTACK:
+          console.log('ATTACK !!!')
+          break;
+      }
+    },
+    movePlayer(player, position) {
       const players = this.players.map(pl => pl)
       const playerIndex = players.indexOf(player)
-      players[playerIndex] = { ...player, x: newPosition.x, y: newPosition.y }
+      players[playerIndex] = { ...player, x: position.x, y: position.y }
 
       this.$set(this.$data, 'players', players)
     }

@@ -30,7 +30,7 @@ export default {
         return
       }
 
-      this.$emit('move-player', { x: this.x, y: this.y })
+      this.$emit('player-action', { x: this.x, y: this.y })
     }
   },
   Type,

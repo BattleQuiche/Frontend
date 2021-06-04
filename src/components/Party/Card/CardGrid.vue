@@ -1,5 +1,7 @@
 <template>
-  <grid :number-of-horizontal-cases="30" :number-of-vertical-cases="18" :z-index="3">
+  <grid :number-of-horizontal-cases="numberOfHorizontalCases"
+        :number-of-vertical-cases="numberOfVerticalCases"
+        :z-index="3">
     <template v-slot:default="{ x, y }">
       <card-case :key="'card_case_' + x + y" :caseData="findObjectForCase(x, y)"/>
     </template>
@@ -22,10 +24,9 @@ export default {
     }
   },
   props: {
-    cases: {
-      type: Array,
-      required: true
-    },
+    cases: { type: Array, required: true },
+    numberOfHorizontalCases: { type: Number, require: true },
+    numberOfVerticalCases: { type: Number, require: true },
   }
 }
 </script>
