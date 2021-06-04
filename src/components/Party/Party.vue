@@ -1,7 +1,10 @@
 <template>
   <div class="party">
     <card-grid :cases="mapObjects"/>
-    <move-grid :cases="mapObjects" :current-player="currentPlayer" @move-player="handleMovePlayer"/>
+    <move-grid :cases="mapObjects"
+               :current-player="currentPlayer"
+               :players="players"
+               @move-player="handleMovePlayer"/>
 
     <button id="debug-button" @click="setDebugModeTo(!debug)">Debug Mode</button>
   </div>
@@ -24,7 +27,7 @@ export default {
       mapObjects: testMap,
       players: [
         { username: 'Waen', x: 17, y: 12, movementPoint: 5, isCurrentPlayer: true },
-        { username: 'MrZyro', x: 0, y: 11, movementPoint: 5, isCurrentPlayer: false },
+        { username: 'MrZyro', x: 14, y: 12, movementPoint: 5, isCurrentPlayer: false },
         { username: 'Supmil', x: 24, y: 1, movementPoint: 5, isCurrentPlayer: false },
         { username: 'MrLol', x: 4, y: 1, movementPoint: 5, isCurrentPlayer: false },
       ]
