@@ -36,7 +36,22 @@ export default {
 
   .grid__case {
     display: block;
-    height: 60px;
-    width: 60px;
+    height: 45px;
+    width: 45px;
+    /*margin: 1px;*/
+  }
+
+  .grid__case_content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+  }
+
+  .grid__case_content span {
+    display: block;
+    height: 100%;
+    width: 100%;
   }
 </style>
