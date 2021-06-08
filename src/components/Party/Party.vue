@@ -14,6 +14,7 @@
                  :number-of-vertical-cases="numberOfVerticalCases"
                  @player-action="handlePlayerAction"/>
 
+    <inventory-bar-widget :inventory="inventory" :selected-item="selectedItem" @select-item="handleSelectPlayerItem"/>
     <button id="debug-button" @click="setDebugModeTo(!debug)">Debug Mode</button>
   </div>
 </template>
@@ -24,6 +25,7 @@ import testMap from '@/assets/map.test.json'
 import {mapActions, mapGetters} from 'vuex'
 import ActionGrid from './ActionGrid/ActionGrid'
 import PlayerGrid from './PlayerGrid/PlayerGrid'
+import InventoryBarWidget from "./InventoryBar/InventoryBarWidget";
 
 export default {
   name: 'Party',
@@ -31,6 +33,7 @@ export default {
     CardGrid,
     ActionGrid,
     PlayerGrid,
+    InventoryBarWidget,
   },
   data() {
     return {
@@ -41,6 +44,12 @@ export default {
         { username: 'Supmil', x: 24, y: 1, movementPoint: 5, isCurrentPlayer: false, playerIcon: 'player_icon_3' },
         { username: 'MrLol', x: 4, y: 1, movementPoint: 5, isCurrentPlayer: false, playerIcon: 'player_icon_4' },
       ],
+      inventory: [
+        { id:"1234", title: "Objet 1", imageURL: "https://i.pinimg.com/236x/8b/99/48/8b9948f230b107327413d56e3d83b744--battle-axe-traffic-light.jpg"},
+        { id:"12323", title: "Objet 2", imageURL: "https://i.pinimg.com/236x/8b/99/48/8b9948f230b107327413d56e3d83b744--battle-axe-traffic-light.jpg"},
+        { id:"123456cc2", title: "Objet 3", imageURL: "https://i.pinimg.com/236x/8b/99/48/8b9948f230b107327413d56e3d83b744--battle-axe-traffic-light.jpg"}
+      ],
+      selectedItem: null,
       actionType: ActionGrid.ActionType.MOVE,
       numberOfHorizontalCases: Math.max(...testMap.map(cell => cell.x)) + 1,
       numberOfVerticalCases: Math.max(...testMap.map(cell => cell.y)) + 1,
@@ -64,6 +73,9 @@ export default {
       players[playerIndex] = { ...player, x: position.x, y: position.y }
 
       this.$set(this.$data, 'players', players)
+    },
+    handleSelectPlayerItem(item) {
+      this.selectedItem = item;
     }
   },
   computed: {
