@@ -11,7 +11,7 @@
 export default {
   name: 'PlayerCase',
   props: {
-    caseData: { type: String, required: true },
+    caseData: { type: String },
   }
 }
 </script>
