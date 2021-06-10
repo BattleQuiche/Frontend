@@ -12,14 +12,12 @@
                  @player-action="handlePlayerAction"/>
 
     <inventory-bar-widget :inventory="inventory" :selected-item="selectedItem" @select-item="handleSelectPlayerItem"/>
-    <button id="debug-button" @click="setDebugModeTo(!debug)">Debug Mode</button>
   </div>
 </template>
 
 <script>
 import CardGrid from './Card/CardGrid'
 import map from '@/assets/map-battle-quiches.json'
-import {mapActions, mapGetters} from 'vuex'
 import ActionGrid from './ActionGrid/ActionGrid'
 import PlayerGrid from './PlayerGrid/PlayerGrid'
 import InventoryBarWidget from "./InventoryBar/InventoryBarWidget"
@@ -54,7 +52,6 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['setDebugModeTo']),
     handlePlayerAction({ newPosition, player, actionType }) {
       switch (actionType) {
         case ActionGrid.ActionType.MOVE:
@@ -77,7 +74,6 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['debug']),
     currentPlayer() {
       return this.players.find(player => player.isCurrentPlayer)
     }
@@ -97,13 +93,5 @@ export default {
 
   .party::-webkit-scrollbar {
     display: none;
-  }
-
-  #debug-button {
-    position: fixed;
-    z-index: 998;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
   }
 </style>
