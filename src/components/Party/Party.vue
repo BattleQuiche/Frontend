@@ -1,12 +1,12 @@
 <template>
   <div class="party">
-    <card-grid :cases="mapObjects"
+    <card-grid :layers="layers"
                :number-of-horizontal-cases="numberOfHorizontalCases"
                :number-of-vertical-cases="numberOfVerticalCases"/>
     <player-grid :players="players"
                  :number-of-horizontal-cases="numberOfHorizontalCases"
                  :number-of-vertical-cases="numberOfVerticalCases"/>
-    <action-grid :cases="mapObjects"
+    <action-grid :cases="layers"
                  :current-player="currentPlayer"
                  :players="players"
                  :action-type="actionType"
@@ -21,7 +21,7 @@
 
 <script>
 import CardGrid from './Card/CardGrid'
-import testMap from '@/assets/map.test.json'
+import map from '@/assets/map-battle-quiches.json'
 import {mapActions, mapGetters} from 'vuex'
 import ActionGrid from './ActionGrid/ActionGrid'
 import PlayerGrid from './PlayerGrid/PlayerGrid'
@@ -37,7 +37,7 @@ export default {
   },
   data() {
     return {
-      mapObjects: testMap,
+      layers: map.layers,
       players: [
         { username: 'Waen', x: 17, y: 12, movementPoint: 5, isCurrentPlayer: true, playerIcon: 'player_icon_1' },
         { username: 'MrZyro', x: 14, y: 12, movementPoint: 5, isCurrentPlayer: false, playerIcon: 'player_icon_2' },
@@ -51,8 +51,8 @@ export default {
       ],
       selectedItem: null,
       actionType: ActionGrid.ActionType.MOVE,
-      numberOfHorizontalCases: Math.max(...testMap.map(cell => cell.x)) + 1,
-      numberOfVerticalCases: Math.max(...testMap.map(cell => cell.y)) + 1,
+      numberOfHorizontalCases: map.width,
+      numberOfVerticalCases: map.height,
     }
   },
   methods: {

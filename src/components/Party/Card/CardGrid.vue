@@ -3,7 +3,7 @@
         :number-of-vertical-cases="numberOfVerticalCases"
         :z-index="3" class="card-grid" >
     <template v-slot:default="{ x, y }">
-      <card-case :key="'card_case_' + x + y" :caseData="findObjectForCase(x, y)"/>
+      <card-case :key="`card_case_${findObjectForCase(x, y).join()}`" :caseData="findObjectForCase(x, y)"/>
     </template>
   </grid>
 </template>
@@ -20,11 +20,20 @@ export default {
   },
   methods: {
     findObjectForCase(x, y) {
-      return this.cases.find(gridCase => (gridCase.x === x && gridCase.y === y))
+      const caseNumber = (x + y * this.numberOfHorizontalCases)
+
+      return [
+        this.findLayerInMap('Map')[caseNumber],
+        this.findLayerInMap('MapDecorations')[caseNumber],
+        this.findLayerInMap('Objects')[caseNumber],
+      ].filter((item) => (item !== 0))
+    },
+    findLayerInMap(layerName) {
+      return this.layers.find((layer) => (layer.name === layerName))?.data
     }
   },
   props: {
-    cases: { type: Array, required: true },
+    layers: { type: Array, required: true },
     numberOfHorizontalCases: { type: Number, require: true },
     numberOfVerticalCases: { type: Number, require: true },
   }
