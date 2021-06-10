@@ -1,9 +1,9 @@
 <template>
   <grid v-if="gridIsShown" class="action-grid" :z-index="10"
-        :number-of-horizontal-cases="numberOfHorizontalCases"
-        :number-of-vertical-cases="numberOfVerticalCases">
+        :number-of-horizontal-cases="layersManager.numberOfHorizontalCases"
+        :number-of-vertical-cases="layersManager.numberOfVerticalCases">
     <template v-slot:default="{ x, y }">
-      <action-case :key="'move_' + x + y" :caseData="getCaseType(x, y)" :x="x" :y="y" @player-action="handlePlayerAction"/>
+      <action-case :key="`mode_${x}_${y}`" :caseData="getCaseType(x, y)" :x="x" :y="y" @player-action="handlePlayerAction"/>
     </template>
   </grid>
 </template>
@@ -11,6 +11,7 @@
 <script>
 import Grid from '../../../reusables/Grid'
 import ActionCase from './ActionCase'
+import LayersManager from '../Card/LayersManager'
 
 class ActionType {
   static MOVE = 'MOVE';
@@ -21,32 +22,31 @@ class ActionType {
 export default {
   name: 'ActionGrid',
   ActionType,
+  data() {
+    return {
+      movableCase: [1, 2, 3, 4, 7, 8, 9, 36, 48, 201, 202, 203, 204, 205, 206, 207, 230, 266, 290, 291, 292, 293, 300, 301, 302, 303]
+    }
+  },
   components: {
     Grid,
     ActionCase,
   },
   props: {
-    cases: {type: Array, required: true },
     players: {type: Array, required: true },
     currentPlayer: {type: Object, required: true },
     actionType: {type: String, required: true },
-    numberOfHorizontalCases: { type: Number, require: true },
-    numberOfVerticalCases: { type: Number, require: true },
+    layersManager: { type: LayersManager, required: true },
   },
   methods: {
+    // eslint-disable-next-line no-unused-vars
     getCaseType(x, y) {
-      const mapCase = this.cases.find((gridCase) => (gridCase.x === x && gridCase.y === y))
-      const playerWithSameCoords = this.players.find((player) => (player.x === x && player.y === y))
+      const currentCase = this.layersManager.findObjectForCase(x, y)
 
-      if (!['grass', 'wood'].includes(mapCase.type) ||
-          !!playerWithSameCoords ||
-          this.currentPlayer.x === x && this.currentPlayer.y === y) {
-        return ActionCase.Type.EMPTY
+      if (currentCase.every((item) => this.movableCase.includes(item))) {
+        return ActionCase.Type.MOVE
       }
 
-      const distance = this.getCasesDistance({ xA: x, yA: y }, { xB: this.currentPlayer.x, yB: this.currentPlayer.y })
-
-      return (distance <= this.currentPlayer.movementPoint) ? ActionCase.Type.MOVE : ActionCase.Type.EMPTY
+      return ActionCase.Type.EMPTY
     },
     getCasesDistance({ xA, yA }, { xB, yB }) {
       const xDistance = Math.abs(xA - xB);

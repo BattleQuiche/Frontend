@@ -3,12 +3,10 @@
     <card-grid :layers-manager="layersManager"/>
     <player-grid :players="players"
                  :layers-manager="layersManager"/>
-    <action-grid :cases="layers"
-                 :current-player="currentPlayer"
+    <action-grid :current-player="currentPlayer"
                  :players="players"
                  :action-type="actionType"
-                 :number-of-horizontal-cases="numberOfHorizontalCases"
-                 :number-of-vertical-cases="numberOfVerticalCases"
+                 :layers-manager="layersManager"
                  @player-action="handlePlayerAction"/>
 
     <inventory-bar-widget :inventory="inventory" :selected-item="selectedItem" @select-item="handleSelectPlayerItem"/>
@@ -47,8 +45,6 @@ export default {
       ],
       selectedItem: null,
       actionType: ActionGrid.ActionType.MOVE,
-      numberOfHorizontalCases: map.width,
-      numberOfVerticalCases: map.height,
     }
   },
   methods: {
