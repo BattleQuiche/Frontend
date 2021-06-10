@@ -56,3 +56,7 @@ const setTileSets = () => {
 }
 
 setTileSets()
+
+export default {
+  setTileSets,
+}
