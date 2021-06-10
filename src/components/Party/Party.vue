@@ -1,5 +1,6 @@
 <template>
   <div class="party">
+    <drawer-widget :players="players"/>
     <card-grid :cases="mapObjects"
                :number-of-horizontal-cases="numberOfHorizontalCases"
                :number-of-vertical-cases="numberOfVerticalCases"/>
@@ -15,6 +16,7 @@
                  @player-action="handlePlayerAction"/>
 
     <inventory-bar-widget :inventory="inventory" :selected-item="selectedItem" @select-item="handleSelectPlayerItem"/>
+
     <button id="debug-button" @click="setDebugModeTo(!debug)">Debug Mode</button>
   </div>
 </template>
@@ -26,6 +28,7 @@ import {mapActions, mapGetters} from 'vuex'
 import ActionGrid from './ActionGrid/ActionGrid'
 import PlayerGrid from './PlayerGrid/PlayerGrid'
 import InventoryBarWidget from "./InventoryBar/InventoryBarWidget";
+import DrawerWidget from "./Drawer/DrawerWidget";
 
 export default {
   name: 'Party',
@@ -34,6 +37,7 @@ export default {
     ActionGrid,
     PlayerGrid,
     InventoryBarWidget,
+    DrawerWidget
   },
   data() {
     return {
