@@ -3,7 +3,7 @@
         :number-of-vertical-cases="numberOfVerticalCases"
         :z-index="4" class="player-grid" >
     <template v-slot:default="{ x, y }">
-      <player-case :case-data="getPlayerIcon(x, y)"/>
+      <player-case :key="`player_case_${x}_${y}`" :case-data="getPlayerIcon(x, y)"/>
     </template>
   </grid>
 </template>
