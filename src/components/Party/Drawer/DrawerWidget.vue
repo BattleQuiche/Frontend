@@ -2,7 +2,15 @@
     <div id="drawersContainer">
         <div id="leftDrawer" class="drawer">
             <input id="leftDrawerCheck" type="checkbox"/>
-            <div id="leftDrawerContents" class="drawerContents"></div><label id="leftDrawerPull" class="drawerPull" for="leftDrawerCheck"></label>
+            <div id="leftDrawerContents" class="drawerContents">
+                    <div v-for="key in players" :key="'player_'+key.playerIcon" class="drawer_item">
+                        <div class="playerLine">
+                            <img :src="'@/assets/players/' + key.playerIcon + '.png'" alt="">
+                            <div class="playerName">{{ key.username }}</div><br/><label v-if="key.isCurrentPlayer">(You)</label>
+                        </div>
+
+                    </div>    
+            </div><label id="leftDrawerPull" class="drawerPull" for="leftDrawerCheck"></label>
         </div>
     </div>
 </template>
@@ -20,6 +28,7 @@ export default {
 </script>
 
 <style scoped>
+
 
 #drawersContainer {
 	width: 50%;
@@ -69,6 +78,27 @@ export default {
 	content: "";
 }
 
+.drawer_item {
+  position: relative;
+  text-align: center;
+border-radius: 8%;
+  width: 10vw;
+  height: 10vw;
+  max-width: 110px;
+  max-height: 30px;
+  margin: 10px 50px;
+  background-color: gray;
+  box-shadow: inset 5px 5px 12px 6px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+
+.playerLine {
+    display: flex;
+    flex-direction: row;
+    margin-left: 5px;
+}
+
+
 #leftDrawer {
 	left: -200px;
 }
@@ -89,6 +119,7 @@ export default {
 }
 #leftDrawerPull:after {
 	content: "\203a";
+    color: white;
 }
 #leftDrawerCheck:checked + #leftDrawerContents {
 	left: 150px;
