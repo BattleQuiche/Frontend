@@ -7,12 +7,13 @@
 
 <script>
 import ForceLandscape from './components/ForceLandscape'
+import './components/Party/Card/TileSets'
 
 export default {
   name: 'App',
   components: {
     ForceLandscape
-  }
+  },
 }
 </script>
 
