@@ -1,6 +1,8 @@
 <template>
   <div class="party">
+    <drawer-widget :players="players"/>
     <card-grid :layers-manager="layersManager"/>
+
     <player-grid :players="players"
                  :layers-manager="layersManager"/>
     <action-grid :current-player="currentPlayer"
@@ -20,6 +22,7 @@ import ActionGrid from './ActionGrid/ActionGrid'
 import PlayerGrid from './PlayerGrid/PlayerGrid'
 import InventoryBarWidget from "./InventoryBar/InventoryBarWidget"
 import LayersManager from './Card/LayersManager'
+import DrawerWidget from "./Drawer/DrawerWidget";
 
 export default {
   name: 'Party',
@@ -28,6 +31,7 @@ export default {
     ActionGrid,
     PlayerGrid,
     InventoryBarWidget,
+    DrawerWidget
   },
   data() {
     return {
