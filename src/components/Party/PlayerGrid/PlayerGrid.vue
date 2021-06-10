@@ -1,6 +1,6 @@
 <template>
-  <grid :number-of-horizontal-cases="numberOfHorizontalCases"
-        :number-of-vertical-cases="numberOfVerticalCases"
+  <grid :number-of-horizontal-cases="layersManager.numberOfHorizontalCases"
+        :number-of-vertical-cases="layersManager.numberOfVerticalCases"
         :z-index="4" class="player-grid" >
     <template v-slot:default="{ x, y }">
       <player-case :key="`player_case_${x}_${y}`" :case-data="getPlayerIcon(x, y)"/>
@@ -11,6 +11,7 @@
 <script>
 import Grid from '../../../reusables/Grid'
 import PlayerCase from './PlayerCase'
+import LayersManager from '../Card/LayersManager'
 
 export default {
   name: 'PlayerGrid',
@@ -20,8 +21,7 @@ export default {
   },
   props: {
     players: { type: Array, required: true },
-    numberOfHorizontalCases: { type: Number, require: true },
-    numberOfVerticalCases: { type: Number, require: true },
+    layersManager: { type: LayersManager, required: true },
   },
   methods: {
     getPlayerIcon(x, y) {

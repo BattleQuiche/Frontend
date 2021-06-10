@@ -1,11 +1,8 @@
 <template>
   <div class="party">
-    <card-grid :layers="layers"
-               :number-of-horizontal-cases="numberOfHorizontalCases"
-               :number-of-vertical-cases="numberOfVerticalCases"/>
+    <card-grid :layers-manager="layersManager"/>
     <player-grid :players="players"
-                 :number-of-horizontal-cases="numberOfHorizontalCases"
-                 :number-of-vertical-cases="numberOfVerticalCases"/>
+                 :layers-manager="layersManager"/>
     <action-grid :cases="layers"
                  :current-player="currentPlayer"
                  :players="players"
@@ -25,7 +22,8 @@ import map from '@/assets/map-battle-quiches.json'
 import {mapActions, mapGetters} from 'vuex'
 import ActionGrid from './ActionGrid/ActionGrid'
 import PlayerGrid from './PlayerGrid/PlayerGrid'
-import InventoryBarWidget from "./InventoryBar/InventoryBarWidget";
+import InventoryBarWidget from "./InventoryBar/InventoryBarWidget"
+import LayersManager from './Card/LayersManager'
 
 export default {
   name: 'Party',
@@ -37,7 +35,7 @@ export default {
   },
   data() {
     return {
-      layers: map.layers,
+      layersManager: new LayersManager(map),
       players: [
         { username: 'Waen', x: 17, y: 12, movementPoint: 5, isCurrentPlayer: true, playerIcon: 'player_icon_1' },
         { username: 'MrZyro', x: 14, y: 12, movementPoint: 5, isCurrentPlayer: false, playerIcon: 'player_icon_2' },
