@@ -40,18 +40,20 @@ export default {
     width: 16px;
     /*margin: 1px;*/
   }
+</style>
 
-  .grid__case_content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    width: 100%;
-  }
+<style>
+.grid__case_content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
 
-  .grid__case_content span {
-    display: block;
-    height: 100%;
-    width: 100%;
-  }
+.grid__case_content span {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
 </style>
