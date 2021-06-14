@@ -6,7 +6,10 @@
                     <div v-for="key in players" :key="'player_'+key.playerIcon" class="drawer_item">
                         <div class="stack">
                         <div class="playerLine">
-                            <img class="playerAvatar" :src="'@/assets/players/' + key.playerIcon + '.png'" alt="">
+                            <player-case
+                                class="playerAvatar"
+                                :caseData='key.playerIcon'
+                            />
                             <div class="playerName"><strong>{{ key.username }}</strong><label v-if="key.isCurrentPlayer"><small>(You)</small></label></div>
                         </div>
                         <div class="statisticBar">
@@ -22,6 +25,8 @@
 </template>
 
 <script>
+import PlayerCase from '../PlayerGrid/PlayerCase.vue';
+
 export default {
   name: "DrawerWidget",
   props: {
@@ -30,6 +35,9 @@ export default {
       required: true,
     }
   },
+  components: {
+    PlayerCase,
+  }
 }
 </script>
 
