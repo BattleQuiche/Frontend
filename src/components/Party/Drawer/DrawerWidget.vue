@@ -13,10 +13,11 @@
                             <div class="playerName"><strong>{{ key.username }}</strong><label v-if="key.isCurrentPlayer"><small>(You)</small></label></div>
                         </div>
                         <div class="statisticBar">
-                        <div v-for="key in key.movementPoint" :key="'item_'+key" class="statisticElement">
-                            <div class="statDot"></div>
-                        </div>
-                        </div>
+                            <!-- @TODO: Utiliser cette partie pour le composant des points de vie/déplacement -->
+                            <div v-for="key in key.movementPoint" :key="'item_'+key" class="statisticElement">
+                                <div class="statDot"></div>
+                            </div>
+                            </div>
                         </div>
                     </div>    
             </div><label id="leftDrawerPull" class="drawerPull" for="leftDrawerCheck"></label>
@@ -49,7 +50,7 @@ export default {
 	height: 50%;
 	position: absolute;
 	top: 20%;
-    z-index: 1000;
+    z-index: 997;
 	left: 0;
 	overflow: hidden; 
     pointer-events: none;
