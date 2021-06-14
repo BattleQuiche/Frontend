@@ -34,10 +34,6 @@ const routes = [
         component: () =>
             import("../components/Party/Party.vue")
     },
-    {
-        path: "*",
-        redirect: "/"
-    }
 ];
 
 const router = new VueRouter({
