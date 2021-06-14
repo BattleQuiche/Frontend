@@ -5,8 +5,9 @@
             <div id="leftDrawerContents" class="drawerContents">
                     <div v-for="key in players" :key="'player_'+key.playerIcon" class="drawer_item">
                         <div class="playerLine">
-                            <img :src="'@/assets/players/' + key.playerIcon + '.png'" alt="">
-                            <div class="playerName">{{ key.username }}</div><br/><label v-if="key.isCurrentPlayer">(You)</label>
+                            <img class="playerAvatar" :src="'@/assets/players/' + key.playerIcon + '.png'" alt="">
+                            <div class="playerName"><strong>{{ key.username }}</strong><label v-if="key.isCurrentPlayer"><small>(You)</small></label></div><br/>
+                            {{ key.movementPoint }}
                         </div>
 
                     </div>    
@@ -56,22 +57,29 @@ export default {
 }
 .drawerPull {
 	display: inline-block;
-	width: 25px;
+    position: fixed;
+	width: 40px;
+    height: 60px;
 	background: DarkGray;
 	text-align: center;
 	font-weight: bold;
 	font-size: 1.2em;
 	vertical-align: top;
-    padding: 70px 0;
+    margin-top: 100px;
+    box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.25);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .drawerContents {
-	position: absolute;
+	position: fixed;
 	top: 0;
 	height: 100%;
 }
 .drawerPull {
-	position: absolute;
+	position: fixed;
 	top: 50%;
+    left: 0;
 
 }
 .drawerPull:after {
@@ -79,23 +87,40 @@ export default {
 }
 
 .drawer_item {
-  position: relative;
-  text-align: center;
-border-radius: 8%;
-  width: 10vw;
-  height: 10vw;
-  max-width: 110px;
-  max-height: 30px;
-  margin: 10px 50px;
-  background-color: gray;
-  box-shadow: inset 5px 5px 12px 6px rgba(0, 0, 0, 0.25);
-  cursor: pointer;
+    position: relative;
+    text-align: center;
+    border-radius: 8%;
+    width: 14vw;
+    height: 10vw;
+    max-width: 130px;
+    max-height: 30px;
+    margin-left: 60px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    background-color: gray;
+    box-shadow: 5px 5px 12px 6px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    box-shadow: 2px 3px 6px 3px darkgray;
+    padding: 2px;
 }
 
 .playerLine {
     display: flex;
     flex-direction: row;
     margin-left: 5px;
+
+}
+
+.playerName {
+    color: white;
+    margin-top:4px;
+    margin-left: 10px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.playerAvatar {
+    width: 26px;
+    height: 26px;
 }
 
 
@@ -103,7 +128,7 @@ border-radius: 8%;
 	left: -200px;
 }
 #leftDrawerContents {
-	left: 0;
+	left: -200px;
 	width: 200px;
 	background-color: lightGray;
     border-radius: 5%;
@@ -112,7 +137,7 @@ border-radius: 8%;
     transition-timing-function: linear;   
 }
 #leftDrawerPull {
-	left: 200px;
+	left: 0px;
 	transition-property: left;
 	transition-duration: 0.5s;
     transition-timing-function: linear;
@@ -122,10 +147,10 @@ border-radius: 8%;
     color: white;
 }
 #leftDrawerCheck:checked + #leftDrawerContents {
-	left: 150px;
+	left: 0px;
 }
 #leftDrawerCheck:checked + #leftDrawerContents + #leftDrawerPull {
-	left: 350px;
+	left: 200px;
 }
 #leftDrawerCheck:checked + #leftDrawerContents + #leftDrawerPull:after {
 	content: "\2039";
