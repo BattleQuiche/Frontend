@@ -6,7 +6,7 @@
       <main>
         <h1>Battle Quiche</h1>
         <h2>Création d'une partie</h2>
-        <p>ID Partie: #A3BC9H</p>
+        <p>ID Partie: #{{$route.params.partyId}}</p>
       </main>
       <aside>
         <players-list/>
