@@ -33,10 +33,6 @@ const routes = [
         name: "Party",
         component: () =>
             import("../components/Party/Party.vue")
-    },
-    {
-        path: "*",
-        redirect: "/"
     }
 ];
 
