@@ -38,7 +38,6 @@ export default {
     layersManager: { type: LayersManager, required: true },
   },
   methods: {
-    // eslint-disable-next-line no-unused-vars
     getCaseType(x, y) {
       const playerWithSameCoords = this.players.find((player) => (player.x === x && player.y === y))
       const currentCase = this.layersManager.findObjectForCase(x, y)
