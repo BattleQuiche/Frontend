@@ -4,12 +4,17 @@
             <input id="leftDrawerCheck" type="checkbox"/>
             <div id="leftDrawerContents" class="drawerContents">
                     <div v-for="key in players" :key="'player_'+key.playerIcon" class="drawer_item">
+                        <div class="stack">
                         <div class="playerLine">
                             <img class="playerAvatar" :src="'@/assets/players/' + key.playerIcon + '.png'" alt="">
-                            <div class="playerName"><strong>{{ key.username }}</strong><label v-if="key.isCurrentPlayer"><small>(You)</small></label></div><br/>
-                            {{ key.movementPoint }}
+                            <div class="playerName"><strong>{{ key.username }}</strong><label v-if="key.isCurrentPlayer"><small>(You)</small></label></div>
                         </div>
-
+                        <div class="statisticBar">
+                        <div v-for="key in key.movementPoint" :key="'item_'+key" class="statisticElement">
+                            <div class="statDot"></div>
+                        </div>
+                        </div>
+                        </div>
                     </div>    
             </div><label id="leftDrawerPull" class="drawerPull" for="leftDrawerCheck"></label>
         </div>
@@ -95,13 +100,13 @@ export default {
     max-width: 130px;
     max-height: 30px;
     margin-left: 60px;
-    margin-bottom: 15px;
-    margin-top: 15px;
+    margin-bottom: 30px;
+    margin-top: 23px;
     background-color: gray;
     box-shadow: 5px 5px 12px 6px rgba(0, 0, 0, 0.25);
     cursor: pointer;
     box-shadow: 2px 3px 6px 3px darkgray;
-    padding: 2px;
+    padding: 1px;
 }
 
 .playerLine {
@@ -109,6 +114,12 @@ export default {
     flex-direction: row;
     margin-left: 5px;
 
+}
+
+.statisticBar {
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
 }
 
 .playerName {
@@ -121,6 +132,24 @@ export default {
 .playerAvatar {
     width: 26px;
     height: 26px;
+}
+
+.statDot {
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    border-radius: 100%;
+}
+
+.statisticElement {
+     display: flex;
+    flex-direction: row;
+    margin: 1px;
+}
+
+.stack { display: flex;
+    flex-direction: column;
+    
 }
 
 
