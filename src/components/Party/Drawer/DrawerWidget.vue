@@ -132,6 +132,8 @@ export default {
 .playerAvatar {
     width: 26px;
     height: 26px;
+    margin-top: 1px;
+    border-radius: 5px;
 }
 
 .statDot {
