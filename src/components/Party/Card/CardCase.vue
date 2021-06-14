@@ -1,43 +1,36 @@
 <template>
-  <div class="grid__case_content" :class="{ [caseData.type]: true }">
-    <p v-if="debug === true">[{{caseData.x}} , {{caseData.y}}]</p>
+  <div class="grid__case_content">
+    <img v-for="data in caseData" :src="tileSets[data]" :key="`map_tile_${data}`" alt="">
   </div>
 </template>
 
 <script>
 import {mapGetters} from 'vuex'
 
-class Type {
-  static WOOD = 'wood';
-  static WATER = 'water';
-  static GRASS = 'grass';
-}
-
 export default {
   name: 'CardCase',
   props: {
     caseData: {
-      type: Object,
+      type: Array,
       required: true,
     },
   },
   computed: {
-    ...mapGetters(['debug']),
+    ...mapGetters(['tileSets']),
   },
-  Type,
 }
 </script>
 
 <style scoped>
-  .grass {
-    background-color: #6dd46d;
+  .grid__case_content {
+    position: relative;
   }
 
-  .water {
-    background-color: #267488;
-  }
-
-  .wood {
-    background-color: #774f3a;
+  .grid__case_content img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
   }
 </style>

@@ -1,31 +1,25 @@
 <template>
   <div class="party">
-    <card-grid :cases="mapObjects"
-               :number-of-horizontal-cases="numberOfHorizontalCases"
-               :number-of-vertical-cases="numberOfVerticalCases"/>
+    <card-grid :layers-manager="layersManager"/>
     <player-grid :players="players"
-                 :number-of-horizontal-cases="numberOfHorizontalCases"
-                 :number-of-vertical-cases="numberOfVerticalCases"/>
-    <action-grid :cases="mapObjects"
-                 :current-player="currentPlayer"
+                 :layers-manager="layersManager"/>
+    <action-grid :current-player="currentPlayer"
                  :players="players"
                  :action-type="actionType"
-                 :number-of-horizontal-cases="numberOfHorizontalCases"
-                 :number-of-vertical-cases="numberOfVerticalCases"
+                 :layers-manager="layersManager"
                  @player-action="handlePlayerAction"/>
 
     <inventory-bar-widget :inventory="inventory" :selected-item="selectedItem" @select-item="handleSelectPlayerItem"/>
-    <button id="debug-button" @click="setDebugModeTo(!debug)">Debug Mode</button>
   </div>
 </template>
 
 <script>
 import CardGrid from './Card/CardGrid'
-import testMap from '@/assets/map.test.json'
-import {mapActions, mapGetters} from 'vuex'
+import map from '@/assets/map-battle-quiches.json'
 import ActionGrid from './ActionGrid/ActionGrid'
 import PlayerGrid from './PlayerGrid/PlayerGrid'
-import InventoryBarWidget from "./InventoryBar/InventoryBarWidget";
+import InventoryBarWidget from "./InventoryBar/InventoryBarWidget"
+import LayersManager from './Card/LayersManager'
 
 export default {
   name: 'Party',
@@ -37,7 +31,7 @@ export default {
   },
   data() {
     return {
-      mapObjects: testMap,
+      layersManager: new LayersManager(map),
       players: [
         { username: 'Waen', x: 17, y: 12, movementPoint: 5, isCurrentPlayer: true, playerIcon: 'player_icon_1' },
         { username: 'MrZyro', x: 14, y: 12, movementPoint: 5, isCurrentPlayer: false, playerIcon: 'player_icon_2' },
@@ -51,12 +45,9 @@ export default {
       ],
       selectedItem: null,
       actionType: ActionGrid.ActionType.MOVE,
-      numberOfHorizontalCases: Math.max(...testMap.map(cell => cell.x)) + 1,
-      numberOfVerticalCases: Math.max(...testMap.map(cell => cell.y)) + 1,
     }
   },
   methods: {
-    ...mapActions(['setDebugModeTo']),
     handlePlayerAction({ newPosition, player, actionType }) {
       switch (actionType) {
         case ActionGrid.ActionType.MOVE:
@@ -79,7 +70,6 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['debug']),
     currentPlayer() {
       return this.players.find(player => player.isCurrentPlayer)
     }
@@ -99,13 +89,5 @@ export default {
 
   .party::-webkit-scrollbar {
     display: none;
-  }
-
-  #debug-button {
-    position: fixed;
-    z-index: 998;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
   }
 </style>
