@@ -13,6 +13,7 @@ export default new Vuex.Store({
   state: {
     tileSets: null,
     user: null,
+    party: null,
   },
   mutations: {
     setTileSets(state, tileSets) {
@@ -21,6 +22,9 @@ export default new Vuex.Store({
     setUser(state, user) {
       state.user = user
     },
+    setParty(state, party) {
+      state.party = party
+    },
   },
   actions: {
     setTileSets({ commit }, tileSets) {
@@ -28,12 +32,16 @@ export default new Vuex.Store({
     },
     setUser({commit}, user) {
       commit('setUser', user)
+    },
+    setParty({commit}, party) {
+      commit('setParty', party)
     }
   },
   modules: {},
   getters: {
     tileSets: (state) => state.tileSets,
-    user : (state) => state.user
+    user : (state) => state.user,
+    party : (state) => state.party
   },
   plugins: [vuexLocalStorage.plugin],
 });

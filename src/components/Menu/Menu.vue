@@ -26,6 +26,7 @@
 
 <script>
 import {mapActions, mapGetters} from 'vuex'
+let URL = 'https://wars.quiches.ovh/api'
 export default {
   name: 'Menu',
   data() {
@@ -43,8 +44,8 @@ export default {
       e.preventDefault();
 
       try {
-        const URL = 'https://wars.quiches.ovh/api/user'
-        const result = await this.$http.put(URL, {username : this.username})
+        const URL_USR = `${URL}/user`
+        const result = await this.$http.put(URL_USR, {username : this.username})
         this.setUser(result.data)
 
       } catch (err) {
@@ -55,9 +56,9 @@ export default {
       e.preventDefault();
 
       try {
-        const URL = 'https://wars.quiches.ovh/api/party'
-        const result = await this.$http.put(URL)
-        await this.$router.push(`/create-party/${result.data.partyId}`)
+        const URL_PARTY = `${URL}/party`
+        const result = await this.$http.put(URL_PARTY)
+        await this.$router.push({name: 'CreateParty', params: {partyId: result.data.partyId}})
       } catch (err) {
         console.log(err)
       }
