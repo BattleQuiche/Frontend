@@ -8,7 +8,14 @@
         <h2>Rejoindre une partie</h2>
       </main>
       <aside>
-        <input type="text" placeholder="code partie">
+        <!-- <input type="text" placeholder="code partie"> -->
+          <text-input
+            placeholder="Code de la partie"
+            required=true
+            type=code
+            name="code"
+            title="code"
+          />
         <router-link :to="{ name: 'JoinPartyStep2', params: { partyId } }">Entrer dans la partie</router-link>
       </aside>
     </div>
@@ -17,11 +24,13 @@
 
 <script>
 import iOSBackButton from '../../reusables/iOSBackButton'
+import TextInput from '../../reusables/TextInput'
 
 export default {
   name: 'JoinPartyStep1',
   components: {
     iOSBackButton,
+    TextInput,
   },
   data() {
     return {
@@ -30,7 +39,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-</style>
