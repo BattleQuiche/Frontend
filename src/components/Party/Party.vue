@@ -1,25 +1,26 @@
 <template>
   <div class="party">
-    <card-grid :layers-manager="layersManager"/>
+<!--    <card-grid :layers-manager="layersManager"/>
     <player-grid :players="players"
                  :layers-manager="layersManager"/>
     <action-grid :current-player="currentPlayer"
                  :players="players"
                  :action-type="actionType"
                  :layers-manager="layersManager"
-                 @player-action="handlePlayerAction"/>
+                 @player-action="handlePlayerAction"/>-->
 
     <inventory-bar-widget :inventory="inventory" :selected-item="selectedItem" @select-item="handleSelectPlayerItem"/>
   </div>
 </template>
 
 <script>
+/* eslint-disable vue/no-unused-components */
 import CardGrid from './Card/CardGrid'
-import map from '@/assets/map-battle-quiches.json'
 import ActionGrid from './ActionGrid/ActionGrid'
 import PlayerGrid from './PlayerGrid/PlayerGrid'
 import InventoryBarWidget from "./InventoryBar/InventoryBarWidget"
 import LayersManager from './Card/LayersManager'
+import {mapGetters} from "vuex";
 
 export default {
   name: 'Party',
@@ -31,13 +32,9 @@ export default {
   },
   data() {
     return {
-      layersManager: new LayersManager(map),
-      players: [
-        { username: 'Waen', x: 17, y: 12, movementPoint: 5, isCurrentPlayer: true, playerIcon: 'player_icon_1' },
-        { username: 'MrZyro', x: 14, y: 12, movementPoint: 5, isCurrentPlayer: false, playerIcon: 'player_icon_2' },
-        { username: 'Supmil', x: 24, y: 1, movementPoint: 5, isCurrentPlayer: false, playerIcon: 'player_icon_3' },
-        { username: 'MrLol', x: 4, y: 1, movementPoint: 5, isCurrentPlayer: false, playerIcon: 'player_icon_4' },
-      ],
+      layersManager: null,
+      players: [],
+      partyId : String(this.$route.params.partyId),
       inventory: [
         { id:"1234", title: "Objet 1", imageURL: "https://i.pinimg.com/236x/8b/99/48/8b9948f230b107327413d56e3d83b744--battle-axe-traffic-light.jpg"},
         { id:"12323", title: "Objet 2", imageURL: "https://i.pinimg.com/236x/8b/99/48/8b9948f230b107327413d56e3d83b744--battle-axe-traffic-light.jpg"},
@@ -67,12 +64,32 @@ export default {
     },
     handleSelectPlayerItem(item) {
       this.selectedItem = item;
+    },
+    async getMap() {
+      const URL = 'https://wars.quiches.ovh/api/party/map'
+      try {
+        const {data: map} = await this.$http.get(URL)
+        this.layersManager = new LayersManager(map)
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async getPlayers() {
+      const URL = `https://wars.quiches.ovh/api/party/${this.partyId}/players`
+      try {
+        this.players = (await this.$http.get(URL)).data
+          .map(player => ({...player, isCurrentPlayer: (player._id === this.user._id) }))
+      } catch (err) {
+        console.log(err);
+      }
     }
   },
   computed: {
-    currentPlayer() {
-      return this.players.find(player => player.isCurrentPlayer)
-    }
+    ...mapGetters(['party', 'user']),
+  },
+  mounted() {
+    this.getMap()
+    this.getPlayers()
   }
 }
 </script>
