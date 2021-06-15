@@ -19,7 +19,7 @@
 <script>
 import iOSBackButton from '../../reusables/iOSBackButton'
 import PlayersList from '../../reusables/PlayersList'
-import {mapGetters} from "vuex";
+import {mapActions, mapGetters} from "vuex";
 
 export default {
   name: 'CreateParty',
@@ -29,21 +29,28 @@ export default {
   },
   data() {
     return {
-      partyId : this.$route.params.partyId,
+      partyId : String(this.$route.params.partyId),
     }
   },
   computed: {
-    ...mapGetters(['user'])
+    ...mapGetters(['user']),
+    ...mapActions(['setParty']),
   },
   async mounted() {
-    const URL = `https://wars.quiches.ovh/api/party/${this.partyId}/add-player`
+    const URL_PLAYER = `https://wars.quiches.ovh/api/party/${this.partyId}/add-player`
     try {
-      await this.$http.post(URL, {userId: this.user._id})
+      await this.$http.post(URL_PLAYER, {userId: this.user._id})
     } catch (err) {
       console.log(err)
     }
-
-
+    const URL_PARTY = `https://wars.quiches.ovh/api/party/${this.partyId}/details`
+    try {
+      const party = await this.$http.get(URL_PARTY)
+      this.setParty(party.data)
+      await this.$router.push({ name: 'Party', params: { partyId: this.partyId}})
+    } catch (err) {
+      console.log(err);
+    }
   }
 }
 </script>
