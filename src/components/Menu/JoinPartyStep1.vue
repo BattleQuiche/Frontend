@@ -8,8 +8,8 @@
         <h2>Rejoindre une partie</h2>
       </main>
       <aside>
-        <input type="text" placeholder="code partie">
-        <router-link :to="{ name: 'JoinPartyStep2', params: { partyId } }">Entrer dans la partie</router-link>
+        <input v-model="partyId" type="text" placeholder="code partie">
+        <button @click="joinParty">Entrer dans la partie</button>
       </aside>
     </div>
   </div>
@@ -17,6 +17,7 @@
 
 <script>
 import iOSBackButton from '../../reusables/iOSBackButton'
+import {mapGetters} from "vuex";
 
 export default {
   name: 'JoinPartyStep1',
@@ -25,9 +26,25 @@ export default {
   },
   data() {
     return {
-      partyId : 'helloworld1'
+      partyId : ''
     }
-  }
+  },
+  methods: {
+    async joinParty() {
+      const URL = `https://wars.quiches.ovh/api/party/${this.partyId}/add-player`
+      try {
+        await this.$http.post(URL, {userId: this.user._id})
+        await this.$router.push({ name: 'JoinPartyStep2', params: { partyId: this.partyId}})
+
+      } catch (err) {
+        console.log(err)
+        this.partyId = ''
+      }
+    }
+  },
+  computed: {
+    ...mapGetters(['user'])
+  },
 }
 </script>
 
