@@ -58,7 +58,7 @@ export default {
       try {
         const URL_PARTY = `${URL}/party`
         const result = await this.$http.put(URL_PARTY)
-        await this.$router.push(`/create-party/${result.data.partyId}`)
+        await this.$router.push({name: 'CreateParty', params: {partyId: result.data.partyId}})
       } catch (err) {
         console.log(err)
       }
