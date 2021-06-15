@@ -168,10 +168,11 @@ export default {
 	left: -200px;
 }
 #leftDrawerContents {
+    margin-top: 10%;
 	left: -200px;
 	width: 200px;
 	background-color: lightGray;
-    border-radius: 5%;
+    border-radius: 0% 8% 8% 0%;
 	transition-property: left;
 	transition-duration: 0.5s;
     transition-timing-function: linear;   
