@@ -32,24 +32,23 @@ export default {
       partyId : String(this.$route.params.partyId),
     }
   },
+  methods: {
+    ...mapActions(['setParty']),
+  },
   computed: {
     ...mapGetters(['user']),
-    ...mapActions(['setParty']),
   },
   async mounted() {
     const URL_PLAYER = `https://wars.quiches.ovh/api/party/${this.partyId}/add-player`
-    try {
-      await this.$http.post(URL_PLAYER, {userId: this.user._id})
-    } catch (err) {
-      console.log(err)
-    }
     const URL_PARTY = `https://wars.quiches.ovh/api/party/${this.partyId}/details`
     try {
+      await this.$http.post(URL_PLAYER, {userId: this.user._id})
+
       const party = await this.$http.get(URL_PARTY)
       this.setParty(party.data)
-      await this.$router.push({ name: 'Party', params: { partyId: this.partyId}})
+      await this.$router.push({name: 'Party', params: {partyId: this.partyId}})
     } catch (err) {
-      console.log(err);
+      console.log(err)
     }
   }
 }
