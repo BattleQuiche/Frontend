@@ -19,6 +19,7 @@
 <script>
 import iOSBackButton from '../../reusables/iOSBackButton'
 import PlayersList from '../../reusables/PlayersList'
+import {mapGetters} from "vuex";
 
 export default {
   name: 'CreateParty',
@@ -28,8 +29,22 @@ export default {
   },
   data() {
     return {
-      partyId : 'helloworld'
+      partyId : 'helloworld',
     }
+  },
+  computed: {
+    ...mapGetters(['user'])
+  },
+  async mounted() {
+    this.partyId = this.$route.params.partyId;
+    const URL = `https://wars.quiches.ovh/api/party/${this.partyId}/add-player`
+    try {
+      await this.$http.post(URL, {userId: this.user._id})
+    } catch (err) {
+      console.log(err)
+    }
+
+
   }
 }
 </script>
