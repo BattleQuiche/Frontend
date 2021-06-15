@@ -29,14 +29,13 @@ export default {
   },
   data() {
     return {
-      partyId : 'helloworld',
+      partyId : this.$route.params.partyId,
     }
   },
   computed: {
     ...mapGetters(['user'])
   },
   async mounted() {
-    this.partyId = this.$route.params.partyId;
     const URL = `https://wars.quiches.ovh/api/party/${this.partyId}/add-player`
     try {
       await this.$http.post(URL, {userId: this.user._id})
