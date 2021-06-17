@@ -10,6 +10,10 @@
         </form>
       </div>
     </div>
+<!--    <div v-if="permissionNotification === null" id="pushPermission">   -->
+      <div id="pushPermission">
+      <button v-on:click="askPermission">Recevoir les notifications</button>
+    </div>
    <div class="menu__container">
      <main>
        <h1>Battle Quiche</h1>
@@ -39,7 +43,7 @@ export default {
     this.modalIsOpen = !this.user
   },
   methods: {
-    ...mapActions(['setUser']),
+    ...mapActions(['setUser', 'setPermissionNotification']),
     async setupUsername(e) {
       e.preventDefault();
 
@@ -51,6 +55,19 @@ export default {
       } catch (err) {
         console.log(err)
       }
+    },
+     async askPermission (){
+       await Notification.requestPermission()
+       this.setPermissionNotification(Notification.permission)
+
+       if (Notification.permission === 'granted') {
+         await this.registerServiceWorker();
+       }
+    },
+    async registerServiceWorker() {
+      const registration = await navigator.serviceWorker.register('http://localhost:8080/dev/sw.js')
+      const subs = registration.pushManager.getSubscription()
+      console.log(subs);
     },
     async createParty (e) {
       e.preventDefault();
@@ -65,8 +82,9 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['user'])
+    ...mapGetters(['user','permissionNotification'])
   },
+
   watch: {
     user(newUser) {
       this.modalIsOpen = (newUser === null)

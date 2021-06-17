@@ -14,6 +14,7 @@ export default new Vuex.Store({
     tileSets: null,
     user: null,
     party: null,
+    permissionNotification: null,
   },
   mutations: {
     setTileSets(state, tileSets) {
@@ -25,6 +26,9 @@ export default new Vuex.Store({
     setParty(state, party) {
       state.party = party
     },
+    setPermissionNotification(state, permissionNotification) {
+      state.permissionNotification = permissionNotification
+    },
   },
   actions: {
     setTileSets({ commit }, tileSets) {
@@ -35,13 +39,17 @@ export default new Vuex.Store({
     },
     setParty({commit}, party) {
       commit('setParty', party)
-    }
+    },
+    setPermissionNotification({commit}, permissionNotification) {
+      commit('setPermissionNotification', permissionNotification)
+    },
   },
   modules: {},
   getters: {
     tileSets: (state) => state.tileSets,
     user : (state) => state.user,
-    party : (state) => state.party
+    party : (state) => state.party,
+    permissionNotification : (state) => state.permissionNotification,
   },
   plugins: [vuexLocalStorage.plugin],
 });
