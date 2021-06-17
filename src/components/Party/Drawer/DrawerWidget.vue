@@ -12,12 +12,17 @@
                             />
                             <div class="playerName"><strong>{{ key.username }}</strong><label v-if="key.isCurrentPlayer"><small>(You)</small></label></div>
                         </div>
-                        <div class="statisticBar">
-                            <!-- @TODO: Utiliser cette partie pour le composant des points de vie/déplacement -->
-                            <div v-for="key in key.movementPoint" :key="'item_'+key" class="statisticElement">
-                                <div class="statDot"></div>
-                            </div>
-                            </div>
+     
+                   
+                            <statistic-bar
+                            :movementPoints='key.movementPoint'
+                            :type="'health'"
+                            />
+                            <statistic-bar
+                            :movementPoints='key.movementPoint'
+                            :type="'movement'"
+                            />
+
                         </div>
                     </div>    
             </div><label id="leftDrawerPull" class="drawerPull" for="leftDrawerCheck"></label>
@@ -27,6 +32,7 @@
 
 <script>
 import PlayerCase from '../PlayerGrid/PlayerCase.vue';
+import StatisticBar from './StatisticBar.vue';
 
 export default {
   name: "DrawerWidget",
@@ -38,6 +44,7 @@ export default {
   },
   components: {
     PlayerCase,
+    StatisticBar,
   }
 }
 </script>
@@ -109,7 +116,7 @@ export default {
     max-width: 130px;
     max-height: 30px;
     margin-left: 60px;
-    margin-bottom: 30px;
+    margin-bottom: 55px;
     margin-top: 23px;
     background-color: gray;
     box-shadow: 5px 5px 12px 6px rgba(0, 0, 0, 0.25);
@@ -125,11 +132,7 @@ export default {
 
 }
 
-.statisticBar {
-    display: flex;
-    flex-direction: row;
-    margin-top: 10px;
-}
+
 
 .playerName {
     color: white;
@@ -145,22 +148,9 @@ export default {
     border-radius: 5px;
 }
 
-.statDot {
-    width: 10px;
-    height: 10px;
-    background-color: white;
-    border-radius: 100%;
-}
-
-.statisticElement {
-     display: flex;
-    flex-direction: row;
-    margin: 1px;
-}
-
-.stack { display: flex;
+.stack { 
+    display: flex;
     flex-direction: column;
-    
 }
 
 
