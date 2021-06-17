@@ -41,12 +41,13 @@ export default {
   },
   data() {
     return {
+      // TODO: Add health to the players data
       mapObjects: testMap,
       players: [
-        { username: 'Waen', x: 17, y: 12, movementPoint: 5, isCurrentPlayer: true, playerIcon: 'player_icon_1' },
-        { username: 'MrZyro', x: 14, y: 12, movementPoint: 5, isCurrentPlayer: false, playerIcon: 'player_icon_2' },
+        { username: 'Waen', x: 17, y: 12, movementPoint: 0, isCurrentPlayer: true, playerIcon: 'player_icon_1' },
+        { username: 'MrZyro', x: 14, y: 12, movementPoint: 3, isCurrentPlayer: false, playerIcon: 'player_icon_2' },
         { username: 'Supmil', x: 24, y: 1, movementPoint: 5, isCurrentPlayer: false, playerIcon: 'player_icon_3' },
-        { username: 'MrLol', x: 4, y: 1, movementPoint: 5, isCurrentPlayer: false, playerIcon: 'player_icon_4' },
+        { username: 'MrLol', x: 4, y: 1, movementPoint: 2, isCurrentPlayer: false, playerIcon: 'player_icon_4' },
       ],
       inventory: [
         { id:"1234", title: "Objet 1", imageURL: "https://i.pinimg.com/236x/8b/99/48/8b9948f230b107327413d56e3d83b744--battle-axe-traffic-light.jpg"},
