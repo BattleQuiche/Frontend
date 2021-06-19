@@ -10,7 +10,7 @@
         </form>
       </div>
     </div>
-<!--    <div v-if="permissionNotification === null" id="pushPermission">   -->
+<!--    <div v-if="!permissionNotification" id="pushPermission">   -->
       <div id="pushPermission">
       <button v-on:click="askPermission">Recevoir les notifications</button>
     </div>
@@ -65,10 +65,59 @@ export default {
        }
     },
     async registerServiceWorker() {
-      const registration = await navigator.serviceWorker.register('http://localhost:8080/dev/sw.js')
-      const subs = registration.pushManager.getSubscription()
-      console.log(subs);
+      const registration = await navigator.serviceWorker.register(`${process.env.BASE_URL}sw.js`)
+      let subscription = await registration.pushManager.getSubscription();
+      // L'utilisateur n'est pas déjà abonné, on l'abonne au notification push
+      if (!subscription) {
+        subscription = await registration.pushManager.subscribe({
+          userVisibleOnly: true,
+          applicationServerKey: await this.getPublicKey(),
+        });
+      }
+      await this.saveSubscription(subscription);
     },
+    async getPublicKey() {
+      const URL_PUBLIC_KEY = `http://localhost:3000/api/application/public-key`
+      try {
+        const {data: key} = await this.$http.get(URL_PUBLIC_KEY);
+        return this.urlBase64ToUint8Array(key);
+
+      } catch (e) {
+        console.log(e);
+      }
+    },
+
+    async saveSubscription(subs) {
+      console.log(subs.toJSON() + this.user._id)
+
+      let body = {
+        ...subs.toJSON(),
+        userId: this.user._id
+      }
+      console.log(body)
+      const URL_SAVE_SUBS = `http://localhost:3000/api/application/save`
+      try {
+        await this.$http.post(URL_SAVE_SUBS, body)
+      } catch (e) {
+        console.log(e);
+      }
+    },
+
+    urlBase64ToUint8Array(base64String) {
+      const padding = '='.repeat((4 - base64String.length % 4) % 4);
+      const base64 = (base64String + padding)
+          .replace(/-/g, '+')
+          .replace(/_/g, '/');
+
+      const rawData = window.atob(base64);
+      const outputArray = new Uint8Array(rawData.length);
+
+      for (let i = 0; i < rawData.length; ++i) {
+        outputArray[i] = rawData.charCodeAt(i);
+      }
+      return outputArray;
+    },
+
     async createParty (e) {
       e.preventDefault();
 
