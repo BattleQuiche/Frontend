@@ -50,8 +50,6 @@ export default {
 </script>
 
 <style scoped>
-
-
 #drawersContainer {
 	width: 50%;
 	height: 50%;
@@ -70,12 +68,15 @@ export default {
 	top: 0;
     pointer-events: none;
 }
+
 .drawer * {
   pointer-events: auto;
 }
+
 .drawer > input[type=checkbox] {
 	display: none;
 }
+
 .drawerPull {
 	display: inline-block;
     position: fixed;
@@ -91,18 +92,23 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 0% 20px 20px 0%;
 }
+
 .drawerContents {
 	position: fixed;
 	top: 0;
 	height: 100%;
+    border-radius: 0% 20px 20px 0%;
 }
+
 .drawerPull {
 	position: fixed;
 	top: 50%;
     left: 0;
 
 }
+
 .drawerPull:after {
 	content: "";
 }
@@ -110,7 +116,7 @@ export default {
 .drawer_item {
     position: relative;
     text-align: center;
-    border-radius: 8%;
+    border-radius: 7px;
     width: 14vw;
     height: 10vw;
     max-width: 130px;
@@ -119,9 +125,8 @@ export default {
     margin-bottom: 55px;
     margin-top: 23px;
     background-color: gray;
-    box-shadow: 5px 5px 12px 6px rgba(0, 0, 0, 0.25);
     cursor: pointer;
-    box-shadow: 2px 3px 6px 3px darkgray;
+    box-shadow: 2px 0px 4px 2px darkgray;
     padding: 1px;
 }
 
@@ -129,10 +134,7 @@ export default {
     display: flex;
     flex-direction: row;
     margin-left: 5px;
-
 }
-
-
 
 .playerName {
     color: white;
@@ -145,14 +147,12 @@ export default {
     width: 26px;
     height: 26px;
     margin-top: 1px;
-    border-radius: 5px;
 }
 
 .stack { 
     display: flex;
     flex-direction: column;
 }
-
 
 #leftDrawer {
 	left: -200px;
@@ -162,7 +162,6 @@ export default {
 	left: -200px;
 	width: 200px;
 	background-color: lightGray;
-    border-radius: 0% 8% 8% 0%;
 	transition-property: left;
 	transition-duration: 0.5s;
     transition-timing-function: linear;   
