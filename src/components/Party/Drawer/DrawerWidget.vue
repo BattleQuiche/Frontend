@@ -5,25 +5,24 @@
             <div id="leftDrawerContents" class="drawerContents">
                     <div v-for="key in players" :key="'player_'+key.playerIcon" class="drawer_item">
                         <div class="stack">
-                        <div class="playerLine">
-                            <player-case
-                                class="playerAvatar"
-                                :caseData='key.playerIcon'
-                            />
-                            <div class="playerName"><strong>{{ key.username }}</strong><label v-if="key.isCurrentPlayer"><small>(You)</small></label></div>
-                        </div>
-     
-                   
+                            <div class="playerLine">
+                                <player-case
+                                    class="playerAvatar"
+                                    :caseData='key.playerIcon'
+                                />
+                                <div class="playerName"><strong>{{ key.username }}</strong><label v-if="key.isCurrentPlayer"><small>(You)</small></label></div>
+                            </div>
                             <statistic-bar
                             :movementPoints='key.movementPoint'
                             :type="'health'"
+                            :maxPoints="5"
                             />
                             <statistic-bar
                             :movementPoints='key.movementPoint'
                             :type="'movement'"
+                            :maxPoints="5"
                             />
-
-                        </div>
+                            </div>
                     </div>    
             </div><label id="leftDrawerPull" class="drawerPull" for="leftDrawerCheck"></label>
         </div>

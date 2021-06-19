@@ -1,7 +1,7 @@
 <template>
  <div class="statisticBar">
     <div class="statisticBarBg">
-      <div v-for="key in Array(5).keys()" :key="'item2_'+key" class="statisticElement">
+      <div v-for="key in Array(maxPoints).keys()" :key="'item2_'+key" class="statisticElement">
         <div class="heartEmpty" v-if="type == 'health'">&#9829;</div>
         <div class="statDotEmpty" v-else/>
       </div>
@@ -24,6 +24,7 @@ export default {
       required: true,
     },
     type: { type: String },
+    maxPoints: { type: Number },
   },
 }
 </script>
