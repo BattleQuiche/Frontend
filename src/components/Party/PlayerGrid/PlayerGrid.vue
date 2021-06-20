@@ -1,33 +1,45 @@
 <template>
-  <grid :number-of-horizontal-cases="layersManager.numberOfHorizontalCases"
-        :number-of-vertical-cases="layersManager.numberOfVerticalCases"
-        :z-index="4" class="player-grid" >
-    <template v-slot:default="{ x, y }">
-      <player-case :key="`player_case_${x}_${y}`" :case-data="getPlayerIcon(x, y)"/>
-    </template>
-  </grid>
+  <Grid
+      id="player-grid"
+      :number-of-horizontal-cases="numberOfHorizontalCases"
+      :number-of-vertical-cases="numberOfVerticalCases"
+      :init-grid-func="initGrid"/>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import Grid from '../../../reusables/Grid'
-import PlayerCase from './PlayerCase'
-import LayersManager from '../Map/LayersManager'
 
 export default {
-  name: 'PlayerGrid',
+  name: 'Player-Grid',
   components: {
     Grid,
-    PlayerCase,
+  },
+  computed: {
+    ...mapGetters([ 'tileSets' ]),
   },
   props: {
+    numberOfHorizontalCases: { type: Number, required: true },
+    numberOfVerticalCases: { type: Number, required: true },
     players: { type: Array, required: true },
-    layersManager: { type: LayersManager, required: true },
   },
   methods: {
-    getPlayerIcon(x, y) {
-      const player = this.players.find((player) => (player.x === x && player.y === y))
+    async initGrid(canvasContext) {
+      this.players.forEach(player => {
+        const casePositionX = player.x * 16;
+        const casePositionY = player.y * 16;
 
-      if (!player) {
+        let image = new Image();
+        image.onload = () => {
+          canvasContext.drawImage(image, casePositionX, casePositionY);
+        };
+        image.src = player.playerImg;
+      });
+    },
+    getPlayerIcon( x, y ) {
+      const player = this.players.find(( player ) => ( player.x === x && player.y === y ))
+
+      if ( !player ) {
         return null
       }
 
