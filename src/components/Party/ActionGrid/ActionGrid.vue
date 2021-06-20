@@ -11,7 +11,7 @@
 <script>
 import Grid from '../../../reusables/Grid'
 import ActionCase from './ActionCase'
-import LayersManager from '../Card/LayersManager'
+import LayersManager from '../Map/LayersManager'
 
 class ActionType {
   static MOVE = 'MOVE';

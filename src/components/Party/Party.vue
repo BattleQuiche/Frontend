@@ -1,36 +1,34 @@
 <template>
   <div class="party">
     <drawer-widget :players="players"/>
-    <card-grid :layers-manager="layersManager"/>
-
-    <player-grid :players="players"
-                 :layers-manager="layersManager"/>
-    <action-grid :current-player="currentPlayer"
-                 :players="players"
-                 :action-type="actionType"
-                 :layers-manager="layersManager"
-                 @player-action="handlePlayerAction"/>
-
+    <map-grid :layers-manager="layersManager"/>
+<!--    <player-grid :players="players"-->
+<!--                 :layers-manager="layersManager"/>-->
+<!--    <action-grid :current-player="currentPlayer"-->
+<!--                 :players="players"-->
+<!--                 :action-type="actionType"-->
+<!--                 :layers-manager="layersManager"-->
+<!--                 @player-action="handlePlayerAction"/>-->
     <inventory-bar-widget :inventory="inventory" :selected-item="selectedItem" @select-item="handleSelectPlayerItem"/>
   </div>
 </template>
 
 <script>
-import CardGrid from './Card/CardGrid'
 import map from '@/assets/map-battle-quiches.json'
 import ActionGrid from './ActionGrid/ActionGrid'
-import PlayerGrid from './PlayerGrid/PlayerGrid'
+// import PlayerGrid from './PlayerGrid/PlayerGrid'
 import InventoryBarWidget from "./InventoryBar/InventoryBarWidget"
-import LayersManager from './Card/LayersManager'
+import LayersManager from './Map/LayersManager'
 import DrawerWidget from "./Drawer/DrawerWidget";
 import {mapGetters} from "vuex";
+import MapGrid from "@/components/Party/Map/MapGrid";
 
 export default {
   name: 'Party',
   components: {
-    CardGrid,
-    ActionGrid,
-    PlayerGrid,
+    MapGrid,
+    // ActionGrid,
+    // PlayerGrid,
     InventoryBarWidget,
     DrawerWidget
   },
@@ -91,7 +89,7 @@ export default {
     currentPlayer() {
       return this.players.find(player => player.isCurrentPlayer)
     }
-  }
+  },
 }
 </script>
 
@@ -102,7 +100,7 @@ export default {
     width: 100vw;
     overflow: scroll;
     scrollbar-width: none;
-    background-color: black;
+    /*background-color: black;*/
   }
 
   .party::-webkit-scrollbar {

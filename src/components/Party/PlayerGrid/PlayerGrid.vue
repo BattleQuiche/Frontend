@@ -11,7 +11,7 @@
 <script>
 import Grid from '../../../reusables/Grid'
 import PlayerCase from './PlayerCase'
-import LayersManager from '../Card/LayersManager'
+import LayersManager from '../Map/LayersManager'
 
 export default {
   name: 'PlayerGrid',
