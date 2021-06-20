@@ -1,16 +1,22 @@
 <template>
-  <canvas :width="numberOfHorizontalCases * 16" :height="numberOfVerticalCases * 16"></canvas>
+  <Grid
+      :number-of-horizontal-cases="numberOfHorizontalCases"
+      :number-of-vertical-cases="numberOfVerticalCases"
+      :init-grid-func="initMap"/>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
 import LayersManager from './LayersManager'
+import Grid from '../../../reusables/Grid';
 
 export default {
   name: 'Map-Grid',
+  components: {
+    Grid,
+  },
   data() {
     return {
-      canvasContext: null,
       horizontalCases: [ ...Array(this.layersManager.numberOfHorizontalCases).keys() ],
       verticalCases: [ ...Array(this.layersManager.numberOfVerticalCases).keys() ],
       numberOfHorizontalCases: this.layersManager.numberOfHorizontalCases,
@@ -43,7 +49,6 @@ export default {
               this.canvasContext.drawImage(image, casePositionX, casePositionY);
             };
             image.src = this.tileSets[caseLayerId];
-            console.log('draw new case');
           })
         });
       });
