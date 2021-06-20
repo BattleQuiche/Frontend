@@ -25,7 +25,7 @@ export default {
     // noinspection JSUnresolvedFunction
     this.canvasContext = cardGrid.getContext('2d');
 
-    this.initGridFunc();
+    this.initGridFunc(this.canvasContext);
   },
 }
 </script>

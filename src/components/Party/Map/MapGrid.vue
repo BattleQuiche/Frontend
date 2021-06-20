@@ -29,16 +29,8 @@ export default {
   props: {
     layersManager: { type: LayersManager, required: true },
   },
-  mounted () {
-    let canvas = this.$el;
-
-    // noinspection JSUnresolvedFunction
-    this.canvasContext = canvas.getContext('2d');
-
-    this.initMap();
-  },
   methods: {
-    async initMap() {
+    async initMap(canvasContext) {
       this.verticalCases.forEach(verticalCaseId => {
         this.horizontalCases.forEach(horizontalCasesId => {
           this.layersManager.findObjectForCase(verticalCaseId, horizontalCasesId).forEach(caseLayerId => {
@@ -46,7 +38,7 @@ export default {
             const casePositionY = horizontalCasesId * 16;
             let image = new Image();
             image.onload = () => {
-              this.canvasContext.drawImage(image, casePositionX, casePositionY);
+              canvasContext.drawImage(image, casePositionX, casePositionY);
             };
             image.src = this.tileSets[caseLayerId];
           })
