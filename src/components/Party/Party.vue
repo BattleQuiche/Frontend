@@ -73,8 +73,8 @@ export default {
           "userId": this.user._id,
           "actionType": "MOVE",
           "date": Date.now(),
-          "fromX": 0,
-          "fromY": 0,
+          "fromX": player.x,
+          "fromY": player.y,
           "toX": position.x,
           "toY": position.y
         })
