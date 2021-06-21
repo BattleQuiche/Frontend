@@ -23,6 +23,7 @@ import PlayerGrid from './PlayerGrid/PlayerGrid'
 import InventoryBarWidget from "./InventoryBar/InventoryBarWidget"
 import LayersManager from './Card/LayersManager'
 import DrawerWidget from "./Drawer/DrawerWidget";
+import {mapGetters} from "vuex";
 
 export default {
   name: 'Party',
@@ -35,6 +36,7 @@ export default {
   },
   data() {
     return {
+      partyId : String(this.$route.params.partyId),
       layersManager: new LayersManager(map),
       // TODO: Add health to the players data
       players: [
@@ -63,18 +65,39 @@ export default {
           break;
       }
     },
-    movePlayer(player, position) {
-      const players = this.players.map(pl => pl)
-      const playerIndex = players.indexOf(player)
-      players[playerIndex] = { ...player, x: position.x, y: position.y }
+    async movePlayer(player, position) {
+      try {
+        const URL = 'https://wars.quiches.ovh/api/party/action'
+        // const players = this.players.map(pl => pl)
+        // const playerIndex = players.indexOf(player)
+        const result = await this.$http.put(URL, 
+        {
+          "partyId": this.partyId,
+          "userId": this.user._id,
+          "actionType": "MOVE",
+          "date": Date.now(),
+          "fromX": 0,
+          "fromY": 0,
+          "toX": position.x,
+          "toY": position.y
+        }
+        )
+        this.setUser(result.data)
+       } catch (err) {
+         console.log(err)
+       }
+      // const players = this.players.map(pl => pl)
+      // const playerIndex = players.indexOf(player)
+      // players[playerIndex] = { ...player, x: position.x, y: position.y }
 
-      this.$set(this.$data, 'players', players)
+      // this.$set(this.$data, 'players', players)
     },
     handleSelectPlayerItem(item) {
       this.selectedItem = item;
     }
   },
   computed: {
+    ...mapGetters(['user']),
     currentPlayer() {
       return this.players.find(player => player.isCurrentPlayer)
     }
