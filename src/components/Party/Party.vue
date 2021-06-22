@@ -1,38 +1,34 @@
 <template>
   <div class="party">
     <drawer-widget :players="players"/>
-    <map-grid id="mapGrid" :layers-manager="layersManager"/>
-<!--    <player-grid id="playerGrid"-->
-<!--                :number-of-vertical-cases="layersManager.numberOfVerticalCases"-->
-<!--                :number-of-horizontal-cases="layersManager.numberOfHorizontalCases"-->
-<!--                :players="players"-->
-<!--                :is-player-can-walk="isCurrentPlayerTurn"/>-->
-    <!--    <player-grid :players="players"-->
-    <!--                 :layers-manager="layersManager"/>-->
-    <!--    <action-grid :current-player="currentPlayer"-->
-    <!--                 :players="players"-->
-    <!--                 :action-type="actionType"-->
-    <!--                 :layers-manager="layersManager"-->
-    <!--                 @player-action="handlePlayerAction"/>-->
+    <map-grid :layers-manager="layersManager"/>
+<!--    <player-grid :players="players"-->
+<!--                 :layers-manager="layersManager"/>-->
+<!--    <action-grid :current-player="currentPlayer"-->
+<!--                 :players="players"-->
+<!--                 :action-type="actionType"-->
+<!--                 :layers-manager="layersManager"-->
+<!--                 @player-action="handlePlayerAction"/>-->
     <inventory-bar-widget :inventory="inventory" :selected-item="selectedItem" @select-item="handleSelectPlayerItem"/>
   </div>
 </template>
 
 <script>
-import map from '../../assets/map-battle-quiches.json'
+import map from '@/assets/map-battle-quiches.json'
 import ActionGrid from './ActionGrid/ActionGrid'
+// import PlayerGrid from './PlayerGrid/PlayerGrid'
 import InventoryBarWidget from "./InventoryBar/InventoryBarWidget"
 import LayersManager from './Map/LayersManager'
 import DrawerWidget from "./Drawer/DrawerWidget";
 import {mapGetters} from "vuex";
-import MapGrid from "./Map/MapGrid";
-// import PlayerGrid from "./PlayerGrid/PlayerGrid";
+import MapGrid from "@/components/Party/Map/MapGrid";
 
 export default {
   name: 'Party',
   components: {
-    // PlayerGrid,
     MapGrid,
+    // ActionGrid,
+    // PlayerGrid,
     InventoryBarWidget,
     DrawerWidget
   },
@@ -48,30 +44,17 @@ export default {
         { username: 'MrLol', x: 4, y: 1, movementPoint: 2, isCurrentPlayer: false, playerIcon: 'player_icon_4' },
       ],
       inventory: [
-        {
-          id: "1234",
-          title: "Objet 1",
-          imageURL: "https://i.pinimg.com/236x/8b/99/48/8b9948f230b107327413d56e3d83b744--battle-axe-traffic-light.jpg"
-        },
-        {
-          id: "12323",
-          title: "Objet 2",
-          imageURL: "https://i.pinimg.com/236x/8b/99/48/8b9948f230b107327413d56e3d83b744--battle-axe-traffic-light.jpg"
-        },
-        {
-          id: "123456cc2",
-          title: "Objet 3",
-          imageURL: "https://i.pinimg.com/236x/8b/99/48/8b9948f230b107327413d56e3d83b744--battle-axe-traffic-light.jpg"
-        }
+        { id:"1234", title: "Objet 1", imageURL: "https://i.pinimg.com/236x/8b/99/48/8b9948f230b107327413d56e3d83b744--battle-axe-traffic-light.jpg"},
+        { id:"12323", title: "Objet 2", imageURL: "https://i.pinimg.com/236x/8b/99/48/8b9948f230b107327413d56e3d83b744--battle-axe-traffic-light.jpg"},
+        { id:"123456cc2", title: "Objet 3", imageURL: "https://i.pinimg.com/236x/8b/99/48/8b9948f230b107327413d56e3d83b744--battle-axe-traffic-light.jpg"}
       ],
       selectedItem: null,
       actionType: ActionGrid.ActionType.MOVE,
-      isCurrentPlayerTurn: false,
     }
   },
   methods: {
-    handlePlayerAction( { newPosition, player, actionType } ) {
-      switch ( actionType ) {
+    handlePlayerAction({ newPosition, player, actionType }) {
+      switch (actionType) {
         case ActionGrid.ActionType.MOVE:
           this.movePlayer(player, newPosition);
           break;
@@ -97,7 +80,7 @@ export default {
          console.log(err)
        }
     },
-    handleSelectPlayerItem( item ) {
+    handleSelectPlayerItem(item) {
       this.selectedItem = item;
     }
   },
@@ -111,25 +94,16 @@ export default {
 </script>
 
 <style scoped>
-.party {
-  position: relative;
-  height: 100vh;
-  width: 100vw;
-  overflow: scroll;
-  scrollbar-width: none;
-  background-color: black;
-}
+  .party {
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    overflow: scroll;
+    scrollbar-width: none;
+    /*background-color: black;*/
+  }
 
-.party::-webkit-scrollbar {
-  display: none;
-}
-
-#mapGrid {
-  position: absolute;
-}
-#playerGrid {
-  position: absolute;
-  z-index: 10;
-  border: 1px solid red;
-}
+  .party::-webkit-scrollbar {
+    display: none;
+  }
 </style>
