@@ -24,7 +24,6 @@ import InventoryBarWidget from "./InventoryBar/InventoryBarWidget"
 import LayersManager from './Card/LayersManager'
 import DrawerWidget from "./Drawer/DrawerWidget";
 import {mapGetters} from "vuex";
-import { register } from 'register-service-worker'
 
 export default {
   name: 'Party',
@@ -68,8 +67,8 @@ export default {
     },
     async movePlayer(player, position) {
       try {
-        const URL = `${process.env.API_BASE_URL}/party/action`
-        const result = await this.$http.put(URL, {
+        const URL = `${process.env.VUE_APP_API_BASE_URL}/party/action`
+        await this.$http.put(URL, {
           partyId: this.partyId,
           userId: this.user._id,
           actionType: "MOVE",
