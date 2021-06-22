@@ -14,6 +14,8 @@
     <!--    <div id="pushPermission">-->
     <!--      <button v-on:click="askPermission">Recevoir les notifications</button>-->
     <!--    </div>-->
+
+    <button @click="sendTestNotif">Send notif test</button>
     <div class="menu__container">
       <main>
         <span v-if="notificationAlertMsg">{{ notificationAlertMsg }}</span>
@@ -105,7 +107,9 @@ export default {
     async saveSubscription(subs) {
       let body = {
         ...subs.toJSON(),
-        userId: this.user._id
+        userId: this.user._id,
+        title: 'Backend notification subscribe',
+        body: 'Ceci est un test de notification retournée pour signaler que l\'utilisateur est bien enregistré au stream des notifs'
       }
       const URL_SAVE_SUBS = `${this.$env.VUE_APP_API_BASE_URL}/application/save`
       try {
@@ -113,6 +117,17 @@ export default {
       } catch (e) {
         console.log(e);
       }
+    },
+    async sendTestNotif( e ) {
+      e.preventDefault();
+
+      const { data: result } = await this.$http.post(`${ this.$env.VUE_APP_API_BASE_URL }/application/test-notif`, {
+        userId: this.user._id,
+        title: 'Backend notification test',
+        body: "Ceci est un test de notification retournée pour signaler que l'utilisateur est bien enregistré au stream des notifs",
+      });
+
+      console.log(`Test notif route for userId ${ this.user._id } return: ${ result }`);
     },
     urlBase64ToUint8Array(base64String) {
       const padding = '='.repeat((4 - base64String.length % 4) % 4);
