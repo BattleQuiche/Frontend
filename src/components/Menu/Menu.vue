@@ -24,8 +24,6 @@
       </main>
       <aside>
         <button @click="createParty">Créer une partie</button>
-        <!--       TODO: Fix CreateParty route parms to fix this router-link-->
-        <router-link :to="{ name: 'CreateParty' }">Créer une partie</router-link>
         <router-link :to="{ name: 'JoinPartyStep1' }">Rejoindre une partie</router-link>
       </aside>
     </div>
@@ -147,9 +145,9 @@ export default {
       e.preventDefault();
 
       try {
-        // const URL_PARTY = `${this.$env.VUE_APP_API_BASE_URL}/party`;
-        // const result = await this.$http.put(URL_PARTY);
-        // await this.$router.push({name: 'CreateParty', params: {partyId: result.data.partyId}});
+        const URL_PARTY = `${this.$env.VUE_APP_API_BASE_URL}/party`;
+        const result = await this.$http.put(URL_PARTY);
+        await this.$router.push({name: 'CreateParty', params: {partyId: result.data.partyId}});
       } catch (err) {
         console.log(err);
       }
