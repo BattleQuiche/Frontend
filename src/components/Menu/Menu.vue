@@ -94,7 +94,7 @@ export default {
       await this.saveSubscription(subscription);
     },
     async getPublicKey() {
-      const URL_PUBLIC_KEY = `${this.$env.VUE_APP_API_BASE_URL}/application/public-key`
+      const URL_PUBLIC_KEY = `${this.$env.VUE_APP_API_BASE_URL}/notification/public-key`
       try {
         const {data: key} = await this.$http.get(URL_PUBLIC_KEY);
         return this.urlBase64ToUint8Array(key);
@@ -109,7 +109,7 @@ export default {
         title: 'Backend notification subscribe',
         body: 'Ceci est un test de notification retournée pour signaler que l\'utilisateur est bien enregistré au stream des notifs'
       }
-      const URL_SAVE_SUBS = `${this.$env.VUE_APP_API_BASE_URL}/application/save`
+      const URL_SAVE_SUBS = `${this.$env.VUE_APP_API_BASE_URL}/notification/save`
       try {
         await this.$http.post(URL_SAVE_SUBS, body)
       } catch (e) {
@@ -119,7 +119,7 @@ export default {
     async sendTestNotif( e ) {
       e.preventDefault();
 
-      const { data: result } = await this.$http.post(`${ this.$env.VUE_APP_API_BASE_URL }/application/test-notif`, {
+      const { data: result } = await this.$http.post(`${ this.$env.VUE_APP_API_BASE_URL }/notification/test-notif`, {
         userId: this.user._id,
         title: 'Backend notification test',
         body: "Ceci est un test de notification retournée pour signaler que l'utilisateur est bien enregistré au stream des notifs",
