@@ -36,7 +36,7 @@ export default {
   },
   data() {
     return {
-      partyId : String(this.$route.params.partyId),
+      partyId : this.$route.params.partyId,
       layersManager: new LayersManager(map),
       // TODO: Add health to the players data
       players: [
@@ -69,14 +69,14 @@ export default {
       try {
         const URL = 'https://wars.quiches.ovh/api/party/action'
         const result = await this.$http.put(URL, {
-          "partyId": this.partyId,
-          "userId": this.user._id,
-          "actionType": "MOVE",
-          "date": Date.now(),
-          "fromX": player.x,
-          "fromY": player.y,
-          "toX": position.x,
-          "toY": position.y
+          partyId: this.partyId,
+          userId: this.user._id,
+          actionType: "MOVE",
+          date: Date.now(),
+          fromX: player.x,
+          fromY: player.y,
+          toX: position.x,
+          toY: position.y
         })
        } catch (err) {
          console.log(err)
