@@ -54,7 +54,7 @@ export default {
       e.preventDefault();
 
       try {
-        const URL_USR = `${process.env.VUE_APP_API_BASE_URL}/user`
+        const URL_USR = `${this.$env.VUE_APP_API_BASE_URL}/user`
         const result = await this.$http.put(URL_USR, {username: this.username})
         this.setUser(result.data)
         await this.askPermission();
