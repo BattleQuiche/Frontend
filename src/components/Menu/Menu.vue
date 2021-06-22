@@ -25,7 +25,7 @@
       <aside>
         <button @click="createParty">Créer une partie</button>
         <!--       TODO: Fix CreateParty route parms to fix this router-link-->
-        <!--      <router-link :to="{ name: 'CreateParty' }">Créer une partie</router-link>-->
+        <router-link :to="{ name: 'CreateParty' }">Créer une partie</router-link>
         <router-link :to="{ name: 'JoinPartyStep1' }">Rejoindre une partie</router-link>
       </aside>
     </div>
