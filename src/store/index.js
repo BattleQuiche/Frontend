@@ -35,13 +35,13 @@ export default new Vuex.Store({
     },
     setParty({commit}, party) {
       commit('setParty', party)
-    }
+    },
   },
   modules: {},
   getters: {
     tileSets: (state) => state.tileSets,
     user : (state) => state.user,
-    party : (state) => state.party
+    party : (state) => state.party,
   },
   plugins: [vuexLocalStorage.plugin],
 });
