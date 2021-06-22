@@ -24,6 +24,7 @@ import InventoryBarWidget from "./InventoryBar/InventoryBarWidget"
 import LayersManager from './Card/LayersManager'
 import DrawerWidget from "./Drawer/DrawerWidget";
 import {mapGetters} from "vuex";
+import { register } from 'register-service-worker'
 
 export default {
   name: 'Party',
@@ -67,7 +68,7 @@ export default {
     },
     async movePlayer(player, position) {
       try {
-        const URL = 'https://wars.quiches.ovh/api/party/action'
+        const URL = `${process.env.API_BASE_URL}/party/action`
         const result = await this.$http.put(URL, {
           partyId: this.partyId,
           userId: this.user._id,
