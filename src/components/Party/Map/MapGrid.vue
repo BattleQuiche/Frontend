@@ -1,7 +1,6 @@
 <template>
   <Grid
-      :number-of-horizontal-cases="numberOfHorizontalCases"
-      :number-of-vertical-cases="numberOfVerticalCases"
+      :layers-manager="layersManager"
       :init-grid-func="initMap"/>
 </template>
 
@@ -15,24 +14,16 @@ export default {
   components: {
     Grid,
   },
-  data() {
-    return {
-      horizontalCases: [ ...Array(this.layersManager.numberOfHorizontalCases).keys() ],
-      verticalCases: [ ...Array(this.layersManager.numberOfVerticalCases).keys() ],
-      numberOfHorizontalCases: this.layersManager.numberOfHorizontalCases,
-      numberOfVerticalCases: this.layersManager.numberOfVerticalCases
-    }
+  props: {
+    layersManager: { type: LayersManager, required: true },
   },
   computed: {
     ...mapGetters([ 'tileSets' ]),
   },
-  props: {
-    layersManager: { type: LayersManager, required: true },
-  },
   methods: {
     async initMap(canvasContext) {
-      this.verticalCases.forEach(verticalCaseId => {
-        this.horizontalCases.forEach(horizontalCasesId => {
+      this.layersManager.verticalCases.forEach(verticalCaseId => {
+        this.layersManager.horizontalCases.forEach(horizontalCasesId => {
           this.layersManager.findObjectForCase(verticalCaseId, horizontalCasesId).forEach(caseLayerId => {
             const casePositionX = verticalCaseId * 16;
             const casePositionY = horizontalCasesId * 16;

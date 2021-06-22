@@ -4,11 +4,13 @@
     <map-grid v-if="!!layersManager" :layers-manager="layersManager"/>
 <!--    <player-grid :players="players"-->
 <!--                 :layers-manager="layersManager"/>-->
-<!--    <action-grid :current-player="currentPlayer"-->
-<!--                 :players="players"-->
-<!--                 :action-type="actionType"-->
-<!--                 :layers-manager="layersManager"-->
-<!--                 @player-action="handlePlayerAction"/>-->
+    <action-grid v-if="!!layersManager"
+                 :current-player="user"
+                 :players="players"
+                 :action-type="actionType"
+                 :layers-manager="layersManager"
+                 @player-action="handlePlayerAction"/>
+
     <inventory-bar-widget :inventory="inventory" :selected-item="selectedItem" @select-item="handleSelectPlayerItem"/>
   </div>
 </template>
@@ -20,13 +22,13 @@ import InventoryBarWidget from "./InventoryBar/InventoryBarWidget"
 import LayersManager from './Map/LayersManager'
 import DrawerWidget from "./Drawer/DrawerWidget";
 import {mapGetters} from "vuex";
-import MapGrid from "@/components/Party/Map/MapGrid";
+import MapGrid from "./Map/MapGrid";
 
 export default {
   name: 'Party',
   components: {
     MapGrid,
-    // ActionGrid,
+    ActionGrid,
     // PlayerGrid,
     InventoryBarWidget,
     DrawerWidget

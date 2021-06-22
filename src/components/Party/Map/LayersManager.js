@@ -3,6 +3,9 @@ export default class LayersManager {
     this.layers = map.layers
     this.numberOfHorizontalCases = map.width
     this.numberOfVerticalCases = map.height
+
+    this.horizontalCases = [...Array(this.numberOfHorizontalCases).keys()]
+    this.verticalCases = [...Array(this.numberOfVerticalCases).keys()]
   }
 
   findObjectForCase = (x, y) => {

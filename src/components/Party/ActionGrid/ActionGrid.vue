@@ -1,15 +1,14 @@
 <template>
-  <grid v-if="gridIsShown" class="action-grid" :z-index="10"
-        :number-of-horizontal-cases="layersManager.numberOfHorizontalCases"
-        :number-of-vertical-cases="layersManager.numberOfVerticalCases">
-    <template v-slot:default="{ x, y }">
-      <action-case :key="`mode_${x}_${y}`" :caseData="getCaseType(x, y)" :x="x" :y="y" @player-action="handlePlayerAction"/>
-    </template>
-  </grid>
+  <div class="grid action-grid" :style="10">
+    <div class="grid__row" v-for="y in layersManager.verticalCases" :key="y">
+      <span class="grid__case" v-for="x in layersManager.horizontalCases" :key="x">
+        <action-case :key="`mode_${x}_${y}`" :caseData="getCaseType(x, y)" :x="x" :y="y" @player-action="handlePlayerAction"/>
+      </span>
+    </div>
+  </div>
 </template>
 
 <script>
-import Grid from '../../../reusables/Grid'
 import ActionCase from './ActionCase'
 import LayersManager from '../Map/LayersManager'
 
@@ -28,7 +27,6 @@ export default {
     }
   },
   components: {
-    Grid,
     ActionCase,
   },
   props: {
@@ -65,3 +63,36 @@ export default {
   }
 }
 </script>
+
+<style>
+.grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.grid__row {
+  display: flex;
+}
+
+.grid__case {
+  display: block;
+  height: 16px;
+  width: 16px;
+  /*margin: 1px;*/
+}
+
+.grid__case_content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.grid__case_content span {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+</style>
