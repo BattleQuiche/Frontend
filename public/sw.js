@@ -1,10 +1,16 @@
 self.addEventListener("install", () => {
-    self.skipWaiting();
+    self.skipWaiting(); // Update directly sw without delay
 });
 
 self.addEventListener("push", (event) => {
-    const data = event.data ? event.data.json() : {};
-    event.waitUntil(self.registration.showNotification(data.title, data));
+    const data = event.data && Object.keys(event.data).length > 0 ? event.data.json() : 'Empty notification received';
+
+    event.waitUntil(self.registration.showNotification(data.title, {
+        body: data.message,
+        data
+    }));
+
+    console.log({pushEventData: event, notificationObj: data});
 });
 
 self.addEventListener("notificationclick", (event) => {
