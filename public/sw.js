@@ -3,14 +3,21 @@ self.addEventListener("install", () => {
 });
 
 self.addEventListener("push", (event) => {
-    const data = event.data && Object.keys(event.data).length > 0 ? event.data.json() : 'Empty notification received';
+    let data = {
+        title: 'Empty notification',
+        message: 'new empty notification receive'
+    };
+
+    // eslint-disable-next-line no-prototype-builtins
+    if ( event.hasOwnProperty('data') && event.data && Object.keys(event.data).length > 0 ) { // notification has data
+        console.log('Notification data parsed !');
+        data = event.data.json();
+    }
 
     event.waitUntil(self.registration.showNotification(data.title, {
         body: data.message,
         data
     }));
-
-    console.log({pushEventData: event, notificationObj: data});
 });
 
 self.addEventListener("notificationclick", (event) => {
