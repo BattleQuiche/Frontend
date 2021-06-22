@@ -23,7 +23,7 @@ const routes = [
             import("../components/Menu/JoinPartyStep2.vue")
     },
     {
-        path: "/create-party/:partyId",
+        path: "/create-party/:partyId", //TODO: pass partyId to optional
         name: "CreateParty",
         component: () =>
             import("../components/Menu/CreateParty.vue")
