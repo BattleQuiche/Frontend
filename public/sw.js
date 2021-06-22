@@ -20,7 +20,6 @@ self.addEventListener("push", (event) => {
         data
     }));
 
-    console.log(event);
 });
 
 self.addEventListener("notificationclick", (event) => {
