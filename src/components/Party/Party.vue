@@ -1,12 +1,12 @@
 <template>
   <div class="party">
-    <drawer-widget :players="players"/>
+    <drawer-widget :players="party.users"/>
     <map-grid v-if="!!layersManager" :layers-manager="layersManager"/>
 <!--    <player-grid :players="players"-->
 <!--                 :layers-manager="layersManager"/>-->
     <action-grid v-if="!!layersManager"
                  :current-player="currentPlayer"
-                 :players="players"
+                 :players="party.users"
                  :action-type="actionType"
                  :layers-manager="layersManager"
                  @player-action="handlePlayerAction"/>
@@ -20,7 +20,7 @@ import ActionGrid from './ActionGrid/ActionGrid'
 import InventoryBarWidget from "./InventoryBar/InventoryBarWidget"
 import LayersManager from './Map/LayersManager'
 import DrawerWidget from "./Drawer/DrawerWidget";
-import {mapGetters} from "vuex";
+import {mapActions, mapGetters} from "vuex";
 import MapGrid from "./Map/MapGrid";
 
 export default {
@@ -35,12 +35,6 @@ export default {
     return {
       partyId : this.$route.params.partyId,
       // TODO: Add health to the players data
-      players: [
-        { username: 'Waen', x: 17, y: 12, movementPoint: 0, isCurrentPlayer: true, playerIcon: 'player_icon_1' },
-        { username: 'MrZyro', x: 14, y: 12, movementPoint: 3, isCurrentPlayer: false, playerIcon: 'player_icon_2' },
-        { username: 'Supmil', x: 24, y: 1, movementPoint: 5, isCurrentPlayer: false, playerIcon: 'player_icon_3' },
-        { username: 'MrLol', x: 4, y: 1, movementPoint: 2, isCurrentPlayer: false, playerIcon: 'player_icon_4' },
-      ],
       layersManager: null,
       inventory: [
         { id:"1234", title: "Objet 1", imageURL: "https://i.pinimg.com/236x/8b/99/48/8b9948f230b107327413d56e3d83b744--battle-axe-traffic-light.jpg"},
@@ -52,6 +46,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['setParty']),
     handlePlayerAction({ newPosition, player, actionType }) {
       switch (actionType) {
         case ActionGrid.ActionType.MOVE:
@@ -91,11 +86,11 @@ export default {
         console.log(err);
       }
     },
-    async getPlayers() {
-      const URL = `https://wars.quiches.ovh/api/party/${this.partyId}/players`
+    async getPartyDetails() {
+      const URL = `https://wars.quiches.ovh/api/party/${this.partyId}/details`
       try {
-        this.players = (await this.$http.get(URL)).data
-          .map(player => ({...player, isCurrentPlayer: (player._id === this.user._id) }))
+        const party = await this.$http.get(URL)
+        this.setParty(party.data)
       } catch (err) {
         console.log(err);
       }
@@ -104,12 +99,14 @@ export default {
   computed: {
     ...mapGetters(['party', 'user']),
     currentPlayer() {
-      return this.players.find((userItem) => this.user._id === userItem._id)
+      return this.party.users.find((userItem) => this.user._id === userItem._id)
     }
   },
   mounted() {
     this.getMap()
-    this.getPlayers()
+    setInterval(() => {
+      this.getPartyDetails()
+    }, 10000);
   }
 }
 </script>
