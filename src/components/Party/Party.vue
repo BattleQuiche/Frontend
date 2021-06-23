@@ -99,14 +99,14 @@ export default {
   computed: {
     ...mapGetters(['party', 'user']),
     currentPlayer() {
-      return this.party.users.find((userItem) => this.user._id === userItem._id)
+      return this.party.users.find((userItem) => this.user._id === userItem.userId)
     }
   },
   mounted() {
     this.getMap()
-    setInterval(() => {
-      this.getPartyDetails()
-    }, 10000);
+    // setInterval(() => {
+    //   this.getPartyDetails()
+    // }, 10000);
   }
 }
 </script>
