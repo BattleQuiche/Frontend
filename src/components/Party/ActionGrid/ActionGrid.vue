@@ -2,7 +2,8 @@
   <div class="grid action-grid" :style="10">
     <div class="grid__row" v-for="y in layersManager.verticalCases" :key="y">
       <span class="grid__case" v-for="x in layersManager.horizontalCases" :key="x">
-        <action-case :key="`mode_${x}_${y}`" :caseData="getCaseType(x, y)" :x="x" :y="y" @player-action="handlePlayerAction"/>
+        <action-case v-if="getCaseType(x, y) !== 'PLAYER_ICON'" :key="`mode_${x}_${y}`" :caseData="getCaseType(x, y)" :x="x" :y="y" @player-action="handlePlayerAction"/>
+        <img v-else class="grid__case_content" :src="`/players/${getPlayerWithSameCoords(x, y).icon}.png`" :alt="`${getPlayerWithSameCoords(x, y).icon}.png`">
       </span>
     </div>
   </div>
@@ -11,6 +12,7 @@
 <script>
 import ActionCase from './ActionCase'
 import LayersManager from '../Map/LayersManager'
+import {mapGetters} from 'vuex'
 
 class ActionType {
   static MOVE = 'MOVE';
@@ -21,34 +23,34 @@ class ActionType {
 export default {
   name: 'ActionGrid',
   ActionType,
-  data() {
-    return {
-      movableCase: [1, 2, 3, 4, 7, 8, 9, 36, 40, 48, 49, 50, 59, 201, 202, 203, 204, 205, 206, 207, 211, 212, 213, 214, 215, 221, 222, 223, 224, 225, 231, 232, 234, 235, 242, 243, 244, 250, 251, 252, 253, 254, 255, 267, 259, 291, 292, 293, 294, 301, 302, 303, 304, 314, 324]
-    }
-  },
   components: {
     ActionCase,
   },
   props: {
     players: {type: Array, required: true },
-    currentPlayer: {type: Object, required: true },
     actionType: {type: String, required: true },
     layersManager: { type: LayersManager, required: true },
   },
   methods: {
+    getPlayerWithSameCoords(x, y) {
+      return this.players.find((player) => (player.x === x && player.y === y))
+    },
     getCaseType(x, y) {
-      const playerWithSameCoords = this.players.find((player) => (player.x === x && player.y === y))
+      const playerWithSameCoords = this.getPlayerWithSameCoords(x, y)
       const currentCase = this.layersManager.findObjectForCase(x, y)
 
-      if (playerWithSameCoords !== null && playerWithSameCoords !== undefined) {
+      // eslint-disable-next-line no-extra-boolean-cast
+      if (!!playerWithSameCoords) {
+        console.log(playerWithSameCoords, x, y)
         return ActionCase.Type.PLAYER_ICON
       }
 
-      if (currentCase.every((item) => this.movableCase.includes(item))) {
+      if (currentCase.every((item) => this.movableTiles.includes(item))) {
         return ActionCase.Type.MOVE
       }
+      const distance = this.getCasesDistance({ xA: x, yA: y }, { xB: this.currentPlayer.x, yB: this.currentPlayer.y })
 
-      return ActionCase.Type.EMPTY
+      return (distance <= this.currentPlayer.movementPoint) ? ActionCase.Type.MOVE : ActionCase.Type.EMPTY
     },
     getCasesDistance({ xA, yA }, { xB, yB }) {
       const xDistance = Math.abs(xA - xB);
@@ -57,7 +59,13 @@ export default {
       return (xDistance + yDistance)
     },
     handlePlayerAction({ x, y }) {
-      this.$emit('player-action', { newPosition: { x, y }, player: this.currentPlayer, actionType: this.actionType })
+      this.$emit('player-action', { newPosition: { x, y }, actionType: this.actionType })
+    },
+  },
+  computed: {
+    ...mapGetters(['movableTiles', 'user']),
+    currentPlayer() {
+      return this.players.find((player) => player.userId === this.user._id)
     }
   },
 }
@@ -93,5 +101,10 @@ export default {
   display: block;
   height: 100%;
   width: 100%;
+}
+
+.grid__case_content img {
+  max-width: 100%;
+  max-height: 100%;
 }
 </style>

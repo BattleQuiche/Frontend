@@ -3,14 +3,11 @@
         <div id="leftDrawer" class="drawer">
             <input id="leftDrawerCheck" type="checkbox"/>
             <div id="leftDrawerContents" class="drawerContents">
-                    <div v-for="key in players" :key="'player_'+key.playerIcon" class="drawer_item">
+                    <div v-for="player in players" :key="`${player.icon}.png`" class="drawer_item">
                         <div class="stack">
                             <div class="playerLine">
-                                <player-case
-                                    class="playerAvatar"
-                                    :caseData='key.playerIcon'
-                                />
-                                <div class="playerName"><strong>{{ key.username }}</strong><label v-if="key.isCurrentPlayer"><small>(You)</small></label></div>
+                                <img class="playerAvatar" :src="`/players/${player.icon}.png`" :alt="`${player.icon}.png`">
+                                <div class="playerName"><strong>{{ player.username }}</strong><label v-if="player.userId === user._id"><small>(You)</small></label></div>
                             </div>
                             <statistic-bar :movementPoints='0'
                                            :type="'health'"
@@ -26,8 +23,8 @@
 </template>
 
 <script>
-import PlayerCase from '../PlayerGrid/PlayerCase.vue';
 import StatisticBar from './StatisticBar.vue';
+import {mapGetters} from 'vuex'
 
 export default {
   name: "DrawerWidget",
@@ -38,8 +35,10 @@ export default {
     }
   },
   components: {
-    PlayerCase,
     StatisticBar,
+  },
+  computed: {
+    ...mapGetters(['user']),
   }
 }
 </script>

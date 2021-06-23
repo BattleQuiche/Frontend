@@ -6,15 +6,19 @@ export default class LayersManager {
 
     this.horizontalCases = [...Array(this.numberOfHorizontalCases).keys()]
     this.verticalCases = [...Array(this.numberOfVerticalCases).keys()]
+
+    this.mapLayer = this.findLayerInMap('Map');
+    this.mapDecorationsLayer = this.findLayerInMap('Water');
+    this.objectsLayer = this.findLayerInMap('Objects');
   }
 
   findObjectForCase = (x, y) => {
     const caseNumber = (x + y * this.numberOfHorizontalCases)
 
     return [
-      this.findLayerInMap('Map')[caseNumber],
-      this.findLayerInMap('MapDecorations')[caseNumber],
-      this.findLayerInMap('Objects')[caseNumber],
+      this.mapLayer[caseNumber],
+      this.mapDecorationsLayer[caseNumber],
+      this.objectsLayer[caseNumber],
     ].filter((item) => (item !== 0))
   }
 

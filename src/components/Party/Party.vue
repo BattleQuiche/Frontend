@@ -2,10 +2,7 @@
   <div class="party">
     <drawer-widget :players="party.users"/>
     <map-grid v-if="!!layersManager" :layers-manager="layersManager"/>
-<!--    <player-grid :players="players"-->
-<!--                 :layers-manager="layersManager"/>-->
     <action-grid v-if="!!layersManager"
-                 :current-player="currentPlayer"
                  :players="party.users"
                  :action-type="actionType"
                  :layers-manager="layersManager"
@@ -46,18 +43,18 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['setParty']),
-    handlePlayerAction({ newPosition, player, actionType }) {
+    ...mapActions(['setParty', 'setMovableTiles']),
+    handlePlayerAction({ newPosition, actionType }) {
       switch (actionType) {
         case ActionGrid.ActionType.MOVE:
-          this.movePlayer(player, newPosition);
+          this.movePlayer(newPosition);
           break;
         case ActionGrid.ActionType.ATTACK:
           console.log('ATTACK !!!')
           break;
       }
     },
-    async movePlayer(player, position) {
+    async movePlayer(position) {
       try {
         const URL = `${process.env.VUE_APP_API_BASE_URL}/party/action`
         await this.$http.put(URL, {
@@ -65,8 +62,8 @@ export default {
           userId: this.user._id,
           actionType: "MOVE",
           date: Date.now(),
-          fromX: player.x,
-          fromY: player.y,
+          fromX: this.user.x,
+          fromY: this.user.y,
           toX: position.x,
           toY: position.y
         })
@@ -78,16 +75,19 @@ export default {
       this.selectedItem = item;
     },
     async getMap() {
-      const URL = 'https://wars.quiches.ovh/api/party/map'
+      const URL = `${process.env.VUE_APP_API_BASE_URL}/party/map`
+      const URL_TILES = `${process.env.VUE_APP_API_BASE_URL}/party/movable-tiles`
       try {
         const {data: map} = await this.$http.get(URL)
+        const {data: movableTiles} = await this.$http.get(URL_TILES)
         this.layersManager = new LayersManager(map)
+        this.setMovableTiles(movableTiles)
       } catch (err) {
         console.log(err);
       }
     },
     async getPartyDetails() {
-      const URL = `https://wars.quiches.ovh/api/party/${this.partyId}/details`
+      const URL = `${process.env.VUE_APP_API_BASE_URL}/party/${this.partyId}/details`
       try {
         const party = await this.$http.get(URL)
         this.setParty(party.data)
@@ -98,15 +98,12 @@ export default {
   },
   computed: {
     ...mapGetters(['party', 'user']),
-    currentPlayer() {
-      return this.party.users.find((userItem) => this.user._id === userItem.userId)
-    }
   },
   mounted() {
     this.getMap()
-    // setInterval(() => {
-    //   this.getPartyDetails()
-    // }, 10000);
+    setInterval(() => {
+      this.getPartyDetails()
+    }, 30000);
   }
 }
 </script>
