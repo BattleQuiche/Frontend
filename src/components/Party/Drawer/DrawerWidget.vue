@@ -12,18 +12,14 @@
                                 />
                                 <div class="playerName"><strong>{{ key.username }}</strong><label v-if="key.isCurrentPlayer"><small>(You)</small></label></div>
                             </div>
-                            <statistic-bar
-                            :movementPoints='key.movementPoint'
-                            :type="'health'"
-                            :maxPoints="5"
-                            />
-                            <statistic-bar
-                            :movementPoints='key.movementPoint'
-                            :type="'movement'"
-                            :maxPoints="5"
-                            />
+                            <statistic-bar :movementPoints='0'
+                                           :type="'health'"
+                                           :maxPoints="5"/>
+                            <statistic-bar :movementPoints='0'
+                                           :type="'movement'"
+                                           :maxPoints="5"/>
                             </div>
-                    </div>    
+                    </div>
             </div><label id="leftDrawerPull" class="drawerPull" for="leftDrawerCheck"></label>
         </div>
     </div>
@@ -56,7 +52,7 @@ export default {
 	top: 20%;
     z-index: 997;
 	left: 0;
-	overflow: hidden; 
+	overflow: hidden;
     pointer-events: none;
 }
 
@@ -148,7 +144,7 @@ export default {
     margin-top: 1px;
 }
 
-.stack { 
+.stack {
     display: flex;
     flex-direction: column;
 }
@@ -163,7 +159,7 @@ export default {
 	background-color: lightGray;
 	transition-property: left;
 	transition-duration: 0.5s;
-    transition-timing-function: linear;   
+    transition-timing-function: linear;
 }
 #leftDrawerPull {
 	left: 0px;

@@ -5,7 +5,7 @@
 <!--    <player-grid :players="players"-->
 <!--                 :layers-manager="layersManager"/>-->
     <action-grid v-if="!!layersManager"
-                 :current-player="user"
+                 :current-player="currentPlayer"
                  :players="players"
                  :action-type="actionType"
                  :layers-manager="layersManager"
@@ -17,7 +17,6 @@
 
 <script>
 import ActionGrid from './ActionGrid/ActionGrid'
-// import PlayerGrid from './PlayerGrid/PlayerGrid'
 import InventoryBarWidget from "./InventoryBar/InventoryBarWidget"
 import LayersManager from './Map/LayersManager'
 import DrawerWidget from "./Drawer/DrawerWidget";
@@ -29,7 +28,6 @@ export default {
   components: {
     MapGrid,
     ActionGrid,
-    // PlayerGrid,
     InventoryBarWidget,
     DrawerWidget
   },
@@ -105,6 +103,9 @@ export default {
   },
   computed: {
     ...mapGetters(['party', 'user']),
+    currentPlayer() {
+      return this.players.find((userItem) => this.user._id === userItem._id)
+    }
   },
   mounted() {
     this.getMap()

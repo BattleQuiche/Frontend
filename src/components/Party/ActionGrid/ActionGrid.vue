@@ -40,7 +40,11 @@ export default {
       const playerWithSameCoords = this.players.find((player) => (player.x === x && player.y === y))
       const currentCase = this.layersManager.findObjectForCase(x, y)
 
-      if (currentCase.every((item) => this.movableCase.includes(item)) && !playerWithSameCoords) {
+      if (playerWithSameCoords !== null && playerWithSameCoords !== undefined) {
+        return ActionCase.Type.PLAYER_ICON
+      }
+
+      if (currentCase.every((item) => this.movableCase.includes(item))) {
         return ActionCase.Type.MOVE
       }
 
@@ -56,11 +60,6 @@ export default {
       this.$emit('player-action', { newPosition: { x, y }, player: this.currentPlayer, actionType: this.actionType })
     }
   },
-  computed: {
-    gridIsShown() {
-      return this.actionType !== ActionType.NO_ACTION
-    }
-  }
 }
 </script>
 

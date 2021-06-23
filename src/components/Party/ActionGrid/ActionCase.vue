@@ -6,6 +6,7 @@
 class Type {
   static MOVE = 'movable';
   static EMPTY = 'empty';
+  static PLAYER_ICON = 'PLAYER_ICON';
 }
 
 export default {
