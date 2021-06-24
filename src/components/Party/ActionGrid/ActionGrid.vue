@@ -1,6 +1,5 @@
 <template>
   <div class="grid action-grid" :style="style">
-<!--        <action-case v-if="getCaseType(x, y) !== 'PLAYER_ICON'" :key="`mode_${x}_${y}`" :caseData="getCaseType(x, y)" :x="x" :y="y" @player-action="handlePlayerAction"/>-->
       <span class="grid__case" v-for="player in players" :key="player._id" :style="{ gridColumnStart: player.x + 1, gridRowStart: player.y + 1 }">
         <img class="grid__case_content" :src="`/players/${player.icon}.png`" :alt="`${player.icon}.png`">
       </span>
