@@ -9,6 +9,7 @@ export default class LayersManager {
 
     this.mapLayer = this.findLayerInMap('Map');
     this.mapDecorationsLayer = this.findLayerInMap('Water');
+    this.surObjectsLayer = this.findLayerInMap('SurObjects');
     this.objectsLayer = this.findLayerInMap('Objects');
   }
 
@@ -18,6 +19,7 @@ export default class LayersManager {
     return [
       this.mapLayer[caseNumber],
       this.mapDecorationsLayer[caseNumber],
+      this.surObjectsLayer[caseNumber],
       this.objectsLayer[caseNumber],
     ].filter((item) => (item !== 0))
   }

@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+      - feature/canvas-map-grid-rebased
     paths-ignore:
       - '**.md'
 jobs:
