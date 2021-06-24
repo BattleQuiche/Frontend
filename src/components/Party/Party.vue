@@ -4,6 +4,7 @@
     <map-grid v-if="!!layersManager" :layers-manager="layersManager"/>
     <action-grid v-if="!!layersManager"
                  :players="party.users"
+                 :player="player"
                  :action-type="actionType"
                  :layers-manager="layersManager"
                  @player-action="handlePlayerAction"/>
@@ -62,8 +63,8 @@ export default {
           userId: this.user._id,
           actionType: "MOVE",
           date: Date.now(),
-          fromX: this.user.x,
-          fromY: this.user.y,
+          fromX: this.player.x,
+          fromY: this.player.y,
           toX: position.x,
           toY: position.y
         })
@@ -98,12 +99,16 @@ export default {
   },
   computed: {
     ...mapGetters(['party', 'user']),
+    player() {
+      return this.party.users.find((player) => player.userId === this.user._id)
+    }
   },
   mounted() {
     this.getMap()
+    this.getPartyDetails()
     setInterval(() => {
       this.getPartyDetails()
-    }, 30000);
+    }, 5000);
   }
 }
 </script>
