@@ -37,7 +37,7 @@ export default {
     players: {type: Array, required: true },
     actionType: {type: String, required: true },
     layersManager: { type: LayersManager, required: true },
-    player: { type: Object }
+    player: { type: Object, required: true }
   },
   methods: {
     getPlayerWithSameCoords(x, y) {
