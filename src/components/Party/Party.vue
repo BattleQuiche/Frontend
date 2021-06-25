@@ -10,12 +10,14 @@
                  @player-action="handlePlayerAction"/>
 
     <inventory-bar-widget :inventory="inventory" :selected-item="selectedItem" @select-item="handleSelectPlayerItem"/>
+    <next-round-button></next-round-button>
   </div>
 </template>
 
 <script>
 import ActionGrid from './ActionGrid/ActionGrid'
 import InventoryBarWidget from "./InventoryBar/InventoryBarWidget"
+import NextRoundButton from "./NextRoundButton";
 import LayersManager from './Map/LayersManager'
 import DrawerWidget from "./Drawer/DrawerWidget";
 import {mapActions, mapGetters} from "vuex";
@@ -27,7 +29,8 @@ export default {
     MapGrid,
     ActionGrid,
     InventoryBarWidget,
-    DrawerWidget
+    DrawerWidget,
+    NextRoundButton
   },
   data() {
     return {
