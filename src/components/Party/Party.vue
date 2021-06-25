@@ -1,6 +1,7 @@
 <template>
   <div class="party">
-    <drawer-widget :players="party.users"/>
+    <stat-drawer-widget :players="party.users"/>
+    <activity-drawer-widget :actions="party.actions"/>
     <map-grid v-if="!!layersManager" :layers-manager="layersManager"/>
     <action-grid v-if="!!layersManager"
                  :players="party.users"
@@ -21,7 +22,8 @@ import ActionGrid from './ActionGrid/ActionGrid'
 import InventoryBarWidget from "./InventoryBar/InventoryBarWidget"
 import NextRoundButton from "./NextRoundButton";
 import LayersManager from './Map/LayersManager'
-import DrawerWidget from "./Drawer/DrawerWidget";
+import ActivityDrawerWidget from "./Drawer/ActivityDrawerWidget";
+import StatDrawerWidget from "./Drawer/StatDrawerWidget";
 import {mapActions, mapGetters} from "vuex";
 import MapGrid from "./Map/MapGrid";
 
@@ -31,7 +33,8 @@ export default {
     MapGrid,
     ActionGrid,
     InventoryBarWidget,
-    DrawerWidget,
+    StatDrawerWidget,
+    ActivityDrawerWidget,
     NextRoundButton
   },
   data() {
