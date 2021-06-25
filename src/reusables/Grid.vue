@@ -1,59 +1,30 @@
 <template>
-  <div class="grid" :style="{ zIndex }">
-    <div class="grid__row" v-for="y in verticalCases" :key="y">
-      <span class="grid__case" v-for="x in horizontalCases" :key="x">
-        <slot v-bind="{ x, y }"/>
-      </span>
-    </div>
-  </div>
+  <canvas
+      :width="layersManager.numberOfHorizontalCases * 16"
+      :height="layersManager.numberOfVerticalCases * 16"></canvas>
 </template>
 
 <script>
+import LayersManager from '../components/Party/Map/LayersManager'
+
 export default {
   name: 'Grid',
   data() {
     return {
-      horizontalCases: [...Array(this.numberOfHorizontalCases).keys()],
-      verticalCases: [...Array(this.numberOfVerticalCases).keys()],
+      canvasContext: null,
     }
   },
   props: {
-    numberOfHorizontalCases: { type: Number, require: true },
-    numberOfVerticalCases: { type: Number, require: true },
-    zIndex: { type: Number, default: 1 },
+    layersManager: { type: LayersManager, required: true },
+    initGridFunc: { type: Function, require: true }
+  },
+  mounted () {
+    let cardGrid = this.$el;
+
+    // noinspection JSUnresolvedFunction
+    this.canvasContext = cardGrid.getContext('2d');
+
+    this.initGridFunc(this.canvasContext);
   },
 }
 </script>
-
-<style scoped>
-  .grid {
-    position: absolute;
-  }
-
-  .grid__row {
-    display: flex;
-  }
-
-  .grid__case {
-    display: block;
-    height: 16px;
-    width: 16px;
-    /*margin: 1px;*/
-  }
-</style>
-
-<style>
-.grid__case_content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  width: 100%;
-}
-
-.grid__case_content span {
-  display: block;
-  height: 100%;
-  width: 100%;
-}
-</style>
