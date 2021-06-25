@@ -35,7 +35,7 @@ const cutTileset = (image, firstGid) => {
   return tileData
 }
 
-const setTileSets = () => {
+const setTileSets = async () => {
   const overWorldImage = new Image()
   overWorldImage.src = overWorldTileset
 

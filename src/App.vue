@@ -7,7 +7,7 @@
 
 <script>
 import ForceLandscape from './components/ForceLandscape'
-import TileSets from './components/Party/Card/TileSets'
+import TileSets from './components/Party/Map/TileSets'
 
 export default {
   name: 'App',
