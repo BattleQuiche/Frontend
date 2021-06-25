@@ -101,6 +101,10 @@ export default {
       try {
         const party = await this.$http.get(URL)
         this.setParty(party.data)
+      } catch (err) {
+        console.log(err);
+      }
+    },
     async getPartyActions() {
       const URL = `${process.env.VUE_APP_API_BASE_URL}/party/${this.partyId}/actions`
         try {
