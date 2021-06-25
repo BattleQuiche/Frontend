@@ -1,6 +1,6 @@
 <template>
   <div class="grid action-grid" :style="style">
-      <span class="grid__case" v-for="player in players" :key="player._id" :style="{ gridColumnStart: player.x + 1, gridRowStart: player.y + 1 }">
+      <span class="grid__case player-icon" v-for="player in players" :key="player._id" :style="{ gridColumnStart: player.x + 1, gridRowStart: player.y + 1 }">
         <img class="grid__case_content" :src="`/players/${player.icon}.png`" :alt="`${player.icon}.png`">
       </span>
 
@@ -131,6 +131,15 @@ export default {
 .grid__case_content img {
   max-width: 100%;
   max-height: 100%;
+}
+
+.player-icon img {
+  max-width: none;
+  max-height: none;
+  height: 32px;
+  width: 16px;
+  transform: translateY(-50%);
+  pointer-events: none;
 }
 </style>
 
