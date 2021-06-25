@@ -133,18 +133,13 @@ export default {
   max-height: 100%;
 }
 
-.player-icon {
-  position: relative;
-}
-
 .player-icon img {
   max-width: none;
   max-height: none;
   height: 32px;
   width: 16px;
-  position: absolute;
-  top: -100%;
-  bottom: 0;
+  transform: translateY(-50%);
+  pointer-events: none;
 }
 </style>
 
