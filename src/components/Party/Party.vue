@@ -11,6 +11,8 @@
 
     <inventory-bar-widget :inventory="inventory" :selected-item="selectedItem" @select-item="handleSelectPlayerItem"/>
     <next-round-button></next-round-button>
+
+    <audio src="/background.mp3" autoplay loop/>
   </div>
 </template>
 
@@ -44,6 +46,7 @@ export default {
       ],
       selectedItem: null,
       actionType: ActionGrid.ActionType.MOVE,
+      audioElement: document.querySelector('audio')
     }
   },
   methods: {
