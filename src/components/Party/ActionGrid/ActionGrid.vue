@@ -1,7 +1,7 @@
 <template>
   <div class="grid action-grid" :style="style">
       <span class="grid__case player-icon" v-for="player in players" :key="player._id" :style="{ gridColumnStart: player.x + 1, gridRowStart: player.y + 1 }">
-        <img class="grid__case_content " :src="`/players/${player.icon}.png`" :alt="`${player.icon}.png`">
+        <img class="grid__case_content" :src="`/players/${player.icon}.png`" :alt="`${player.icon}.png`">
       </span>
 
     <span v-for="aroundCase in movableCases" :key="JSON.stringify(aroundCase)"
