@@ -63,6 +63,10 @@ export default {
   computed: {
     ...mapGetters(['movableTiles']),
     movableCases() {
+      if (!this.player) {
+        return 
+      }
+
       const movementPoints = 6,
             minX = 0, maxX = (this.layersManager.numberOfHorizontalCases - 1),
             minY = 0, maxY = (this.layersManager.numberOfVerticalCases - 1)
