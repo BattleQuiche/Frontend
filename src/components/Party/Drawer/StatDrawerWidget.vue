@@ -6,7 +6,7 @@
                     <div v-for="player in players" :key="`${player.icon}.png`" class="drawer_item">
                         <div class="stack">
                             <div class="playerLine">
-                                <img class="playerAvatar" :src="`/players/${player.icon}.png`" :alt="`${player.icon}.png`">
+                                <div class="avatarContainer"><img :src="`/players/${player.icon}.png`" :alt="`${player.icon}.png`"></div>
                                 <div class="playerName"><strong>{{ player.username }}</strong><label v-if="player.userId === user._id"><small>(You)</small></label></div>
                             </div>
                             <statistic-bar :movementPoints='0'
@@ -137,10 +137,15 @@ export default {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-.playerAvatar {
+.avatarContainer {
     width: 26px;
     height: 26px;
     margin-top: 1px;
+}
+
+.avatarContainer img {
+    width: 40%;
+    height: auto;
 }
 
 .stack {
