@@ -27,7 +27,7 @@ import StatisticBar from './StatisticBar.vue';
 import {mapGetters} from 'vuex'
 
 export default {
-  name: "DrawerWidget",
+  name: "StatDrawerWidget",
   props: {
     players: {
       type: Array,
