@@ -8,7 +8,7 @@
                             <div class="actionLine">
                                 <!-- <img class="playerAvatar" :src="`/players/${player.icon}.png`" :alt="`${player.icon}.png`"> -->
                                 <!-- v-if="action.userId === user._id"    <label ><small>(You)</small></label> -->
-                                <div class="actionType"><strong>{{ action.actionType }}</strong><br/>
+                                <div class="actionType"><strong>{{ actionSentence(action.actionType) }}</strong><br/>
                                 <label ><small>il y a {{ timeSince(action.date) }}</small></label></div>
                             </div>
                         </div>
@@ -70,6 +70,20 @@ export default {
 
         return interval + ' ' + intervalType;
     },
+    actionSentence(actionType) {
+        switch (actionType) {
+            case "MOVE":
+                return "Déplacement"
+            case "POP":
+                return "Apparition"
+            case "NEXT_ROUND":
+                return "Round enregistré"
+            case "ATTACK":
+                return "Attaque"
+            default:
+                break;
+        }
+        return actionType;
     }
   },
   computed: {
