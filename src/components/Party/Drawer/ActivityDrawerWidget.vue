@@ -6,6 +6,7 @@
                     <div v-for="action in actions" :key="action._id" class="drawer_item">
                         <div class="stack">
                             <div class="actionLine">
+                                <!-- TODO: Add origin player avatar here when added to API -->
                                 <!-- <img class="playerAvatar" :src="`/players/${player.icon}.png`" :alt="`${player.icon}.png`"> -->
                                 <!-- v-if="action.userId === user._id"    <label ><small>(You)</small></label> -->
                                 <div class="actionType"><strong>{{ actionSentence(action.actionType) }}</strong><br/>
