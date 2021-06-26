@@ -94,42 +94,42 @@ export default {
 
 <style scoped>
 #drawersContainer {
-	width: 50%;
-	height: 50%;
-	position: absolute;
-	top: 20%;
+    width: 50%;
+    height: 50%;
+    position: absolute;
+    top: 20%;
     z-index: 997;
-	right: 0;
-	overflow: hidden;
+    right: 0;
+    overflow: hidden;
     pointer-events: none;
 }
 
 .drawer {
-	width: 100%;
-	height: 100%;
-	position: absolute;
-	top: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
     pointer-events: none;
 }
 
 .drawer * {
-  pointer-events: auto;
+    pointer-events: auto;
 }
 
 .drawer > input[type=checkbox] {
-	display: none;
+    display: none;
 }
 
 .drawerPull {
-	display: inline-block;
+    display: inline-block;
     position: fixed;
-	width: 40px;
+    width: 40px;
     height: 60px;
-	background: DarkGray;
-	text-align: center;
-	font-weight: bold;
-	font-size: 1.2em;
-	vertical-align: top;
+    background: DarkGray;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2em;
+    vertical-align: top;
     margin-top: 100px;
     box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.25);
     display: flex;
@@ -139,26 +139,25 @@ export default {
 }
 
 .drawerContents {
-	position: fixed;
+    position: fixed;
     display: flex;
     overflow: auto;
     padding: 10px;
     flex-direction: column-reverse;
     justify-content: flex-end;
-	top: 0;
-	height: 100%;
+    top: 0;
+    height: 100%;
     border-radius: 20px 0% 0% 20px;
 }
 
 .drawerPull {
-	position: fixed;
-	top: 50%;
+    position: fixed;
+    top: 50%;
     right: 0;
-
 }
 
 .drawerPull:after {
-	content: "";
+    content: "";
 }
 
 .drawer_item {
@@ -171,7 +170,6 @@ export default {
     max-height: 100px;
     margin-left: 9px;
     margin-bottom: 15px;
-    /* margin-top: 17px; */
     background-color: gray;
     box-shadow: 2px 0px 4px 2px darkgray;
     padding: 2px;
@@ -198,34 +196,34 @@ export default {
 }
 
 #rightDrawer {
-	right: -200px;
+    right: -200px;
 }
 #rightDrawerContents {
     margin-top: 10%;
-	right: -200px;
-	width: 200px;
-	background-color: lightGray;
-	transition-property: right;
-	transition-duration: 0.5s;
+    right: -200px;
+    width: 200px;
+    background-color: lightGray;
+    transition-property: right;
+    transition-duration: 0.5s;
     transition-timing-function: linear;
 }
 #rightDrawerPull {
-	right: 0px;
-	transition-property: right;
-	transition-duration: 0.5s;
+    right: 0px;
+    transition-property: right;
+    transition-duration: 0.5s;
     transition-timing-function: linear;
 }
 #rightDrawerPull:after {
-	content: "\2039";
+    content: "\2039";
     color: white;
 }
 #rightDrawerCheck:checked + #rightDrawerContents {
-	right: 0px;
+    right: 0px;
 }
 #rightDrawerCheck:checked + #rightDrawerContents + #rightDrawerPull {
-	right: 200px;
+    right: 200px;
 }
 #rightDrawerCheck:checked + #rightDrawerContents + #rightDrawerPull:after {
-	content: "\2039";
+    content: "\2039";
 }
 </style>
