@@ -10,7 +10,7 @@
       </main>
       <aside>
         <players-list/>
-          <router-link :to="{ name: 'Party', params: { partyId } }">Lancer la partie</router-link>
+          <button @click="createParty">Lancer la partie !</button>
       </aside>
     </div>
   </div>
@@ -34,22 +34,22 @@ export default {
   },
   methods: {
     ...mapActions(['setParty']),
+    async createParty() {
+      const URL_PLAYER = `${this.$env.VUE_APP_API_BASE_URL}/party/${this.partyId}/add-player`
+      const URL_PARTY = `${this.$env.VUE_APP_API_BASE_URL}/party/${this.partyId}/details`
+      try {
+        await this.$http.post(URL_PLAYER, {userId: this.user._id})
+
+        const party = await this.$http.get(URL_PARTY)
+        this.setParty(party.data)
+        await this.$router.push({name: 'Party', params: {partyId: this.partyId}})
+      } catch (err) {
+        console.log(err)
+      }
+    }
   },
   computed: {
     ...mapGetters(['user']),
   },
-  async mounted() {
-    const URL_PLAYER = `https://wars.quiches.ovh/api/party/${this.partyId}/add-player`
-    const URL_PARTY = `https://wars.quiches.ovh/api/party/${this.partyId}/details`
-    try {
-      await this.$http.post(URL_PLAYER, {userId: this.user._id})
-
-      const party = await this.$http.get(URL_PARTY)
-      this.setParty(party.data)
-      await this.$router.push({name: 'Party', params: {partyId: this.partyId}})
-    } catch (err) {
-      console.log(err)
-    }
-  }
 }
 </script>
