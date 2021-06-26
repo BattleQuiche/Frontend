@@ -9,7 +9,7 @@
                                 <!-- <img class="playerAvatar" :src="`/players/${player.icon}.png`" :alt="`${player.icon}.png`"> -->
                                 <!-- v-if="action.userId === user._id"    <label ><small>(You)</small></label> -->
                                 <div class="actionType"><strong>{{ action.actionType }}</strong><br/>
-                                <label ><small>{{ timeSince(action.date) }} ago</small></label></div>
+                                <label ><small>il y a {{ timeSince(action.date) }}</small></label></div>
                             </div>
                         </div>
                     </div>
@@ -28,29 +28,48 @@ export default {
   },
   methods: {
     timeSince(date) {
-        var seconds = Math.floor((new Date() - date) / 1000);
+        if (typeof date !== 'object') {
+            date = new Date(date);
+        }
 
-        var interval = seconds / 31536000;
-        if (interval > 1) {
-            return Math.floor(interval) + " years";
+        var seconds = Math.floor((new Date() - date) / 1000);
+        var intervalType;
+
+        var interval = Math.floor(seconds / 31536000);
+        if (interval >= 1) {
+            intervalType = 'an';
+        } else {
+            interval = Math.floor(seconds / 2592000);
+            if (interval >= 1) {
+                intervalType = 'mois';
+                return interval = ' ' + intervalType
+            } else {
+                interval = Math.floor(seconds / 86400);
+                if (interval >= 1) {
+                    intervalType = 'jour';
+                } else {
+                    interval = Math.floor(seconds / 3600);
+                    if (interval >= 1) {
+                        intervalType = "heure";
+                    } else {
+                        interval = Math.floor(seconds / 60);
+                        if (interval >= 1) {
+                            intervalType = "minute";
+                        } else {
+                            interval = seconds;
+                            intervalType = "seconde";
+                        }
+                    }
+                }
+            }
         }
-        interval = seconds / 2592000;
-        if (interval > 1) {
-            return Math.floor(interval) + " months";
+
+        if (interval > 1 || interval === 0) {
+            intervalType += 's';
         }
-        interval = seconds / 86400;
-        if (interval > 1) {
-            return Math.floor(interval) + " days";
-        }
-        interval = seconds / 3600;
-        if (interval > 1) {
-            return Math.floor(interval) + " hours";
-        }
-        interval = seconds / 60;
-        if (interval > 1) {
-            return Math.floor(interval) + " minutes";
-        }
-        return Math.floor(seconds) + " seconds";
+
+        return interval + ' ' + intervalType;
+    },
     }
   },
   computed: {
@@ -108,7 +127,7 @@ export default {
 .drawerContents {
 	position: fixed;
     display: flex;
-    overflow-y: scroll;
+    overflow: auto;
     padding: 10px;
     flex-direction: column-reverse;
     justify-content: flex-end;
@@ -133,8 +152,8 @@ export default {
     display: flex;
     text-align: center;
     border-radius: 7px;
-    width: 17vw;
-    max-width: 130px;
+    width: 200px;
+    max-width: 150px;
     max-height: 100px;
     margin-left: 9px;
     margin-bottom: 15px;
