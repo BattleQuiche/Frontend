@@ -16,6 +16,7 @@ export default new Vuex.Store({
     movableTiles: null,
     user: null,
     party: null,
+    actions: null,
   },
   mutations: {
     setTileSets(state, tileSets) {
@@ -29,6 +30,9 @@ export default new Vuex.Store({
     },
     setParty(state, party) {
       state.party = party
+    },
+    setActions(state, actions) {
+      state.actions = actions
     },
   },
   actions: {
@@ -44,6 +48,9 @@ export default new Vuex.Store({
     setParty({commit}, party) {
       commit('setParty', party)
     },
+    setActions({commit}, actions) {
+      commit('setActions', actions)
+    },
   },
   modules: {},
   getters: {
@@ -51,6 +58,7 @@ export default new Vuex.Store({
     movableTiles: (state) => state.movableTiles,
     user : (state) => state.user,
     party : (state) => state.party,
+    actions : (state) => state.actions,
   },
   plugins: [vuexLocalStorage.plugin],
 });

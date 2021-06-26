@@ -3,12 +3,13 @@
         <div id="rightDrawer" class="drawer">
             <input id="rightDrawerCheck" type="checkbox"/>
             <div id="rightDrawerContents" class="drawerContents">
-                    <div v-for="action in actions" :key="action.id" class="drawer_item">
+                    <div v-for="action in actions" :key="action._id" class="drawer_item">
                         <div class="stack">
-                            <div class="playerLine">
+                            <div class="actionLine">
                                 <!-- <img class="playerAvatar" :src="`/players/${player.icon}.png`" :alt="`${player.icon}.png`"> -->
                                 <!-- v-if="action.userId === user._id"    <label ><small>(You)</small></label> -->
-                                <div class="playerName"><strong>{{ action.type }}</strong></div>
+                                <div class="actionType"><strong>{{ action.actionType }}</strong><br/>
+                                <label ><small>{{ timeSince(action.date) }} ago</small></label></div>
                             </div>
                         </div>
                     </div>
@@ -23,9 +24,33 @@ import {mapGetters} from 'vuex'
 export default {
   name: "StatDrawerWidget",
   props: {
-    actions: {
-      type: Array,
-      required: true
+    actions: { type: Array },
+  },
+  methods: {
+    timeSince(date) {
+        var seconds = Math.floor((new Date() - date) / 1000);
+
+        var interval = seconds / 31536000;
+        if (interval > 1) {
+            return Math.floor(interval) + " years";
+        }
+        interval = seconds / 2592000;
+        if (interval > 1) {
+            return Math.floor(interval) + " months";
+        }
+        interval = seconds / 86400;
+        if (interval > 1) {
+            return Math.floor(interval) + " days";
+        }
+        interval = seconds / 3600;
+        if (interval > 1) {
+            return Math.floor(interval) + " hours";
+        }
+        interval = seconds / 60;
+        if (interval > 1) {
+            return Math.floor(interval) + " minutes";
+        }
+        return Math.floor(seconds) + " seconds";
     }
   },
   computed: {
@@ -40,7 +65,7 @@ export default {
 	height: 50%;
 	position: absolute;
 	top: 20%;
-    z-index: 998;
+    z-index: 997;
 	right: 0;
 	overflow: hidden;
     pointer-events: none;
@@ -82,6 +107,11 @@ export default {
 
 .drawerContents {
 	position: fixed;
+    display: flex;
+    overflow-y: scroll;
+    padding: 10px;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
 	top: 0;
 	height: 100%;
     border-radius: 20px 0% 0% 20px;
@@ -100,38 +130,33 @@ export default {
 
 .drawer_item {
     position: relative;
+    display: flex;
     text-align: center;
     border-radius: 7px;
-    width: 14vw;
-    height: 10vw;
+    width: 17vw;
     max-width: 130px;
-    max-height: 30px;
-    margin-right: 60px;
-    margin-bottom: 55px;
-    margin-top: 23px;
+    max-height: 100px;
+    margin-left: 9px;
+    margin-bottom: 15px;
+    /* margin-top: 17px; */
     background-color: gray;
-    cursor: pointer;
     box-shadow: 2px 0px 4px 2px darkgray;
-    padding: 1px;
+    padding: 2px;
 }
 
-.playerLine {
+.actionLine {
     display: flex;
     flex-direction: row;
-    margin-right: 5px;
+    margin-right: 10px;
 }
 
-.playerName {
+.actionType {
     color: white;
     margin-top:4px;
-    margin-right: 10px;
+    padding: 2px;
+    text-align: left;
+    margin-left: 10px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
-.playerAvatar {
-    width: 26px;
-    height: 26px;
-    margin-top: 1px;
 }
 
 .stack {

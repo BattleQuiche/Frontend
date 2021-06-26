@@ -1,7 +1,7 @@
 <template>
   <div class="party">
     <stat-drawer-widget :players="party.users"/>
-    <activity-drawer-widget :actions="party.actions"/>
+    <activity-drawer-widget :actions="actions"/>
     <map-grid v-if="!!layersManager" :layers-manager="layersManager"/>
     <action-grid v-if="!!layersManager"
                  :players="party.users"
@@ -53,7 +53,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['setParty', 'setMovableTiles']),
+    ...mapActions(['setParty', 'setMovableTiles', 'setActions']),
     handlePlayerAction({ newPosition, actionType }) {
       switch (actionType) {
         case ActionGrid.ActionType.MOVE:
@@ -63,6 +63,7 @@ export default {
           console.log('ATTACK !!!')
           break;
       }
+      this.getPartyActions()
     },
     async movePlayer(position) {
       try {
@@ -109,14 +110,14 @@ export default {
       const URL = `${process.env.VUE_APP_API_BASE_URL}/party/${this.partyId}/actions`
         try {
           const actions = await this.$http.get(URL)
-          this.party.actions = actions.data
+          this.setActions(actions.data)
         } catch (err) {
           console.log(err);
         }
     }
   },
   computed: {
-    ...mapGetters(['party', 'user']),
+    ...mapGetters(['party', 'user', 'actions']),
     player() {
       return this.party.users.find((player) => player.userId === this.user._id)
     }
