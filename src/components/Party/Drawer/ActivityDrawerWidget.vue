@@ -16,7 +16,14 @@
                 ><small>(You)</small></label
               > -->
               <div class="actionType">
-                <strong>{{ actionSentence(action.actionType) }}</strong
+                <strong>
+                  <div v-if="action.actionType === 'ATTACK'">
+                    {{ actionSentence(action.actionType, "MrLoL", "Nicolas") }}
+                  </div>
+                  <div v-else>
+                    {{ actionSentence(action.actionType, "MrLoL") }}
+                  </div>
+                </strong
                 ><br />
                 <label
                   ><small>il y a {{ timeSince(action.date) }}</small></label
@@ -42,6 +49,10 @@ export default {
   name: 'StatDrawerWidget',
   props: {
     actions: { type: Array },
+    players: {
+      type: Array,
+      required: true,
+    },
   },
   methods: {
     /* eslint-disable */
@@ -90,16 +101,16 @@ export default {
       return `${interval} ${intervalType}`;
     },
     /* eslint-enable */
-    actionSentence(actionType) {
+    actionSentence(actionType, userName, targetUserName = null) {
       switch (actionType) {
         case 'MOVE':
-          return 'Déplacement';
+          return `${userName} s'est déplacé`;
         case 'POP':
-          return 'Apparition';
+          return `${userName} a rejoint la partie`;
         case 'NEXT_ROUND':
-          return 'Round enregistré';
+          return `${userName} a terminé son round`;
         case 'ATTACK':
-          return 'Attaque';
+          return `${userName} a attaqué ${targetUserName}`;
         default:
           break;
       }

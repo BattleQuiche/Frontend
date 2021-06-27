@@ -88,7 +88,8 @@ export default {
       }
       return (
         playerWithSameCoords
-        && this.player.userId !== this.targetUserId
+        // && this.player.userId !== this.targetUserId
+        // Player can attack himself without this line
         // there is player on these coords & it's not yourself
       ); // All tiles on position are movables
     },
