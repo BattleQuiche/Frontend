@@ -37,7 +37,7 @@ async function installHandler() {
   const hasRequestCache = await caches.has(cacheRequestName);
 
   if (!hasRequestCache) {
-    throw new Error('Impossible to use ', cacheRequestName, ' cache !');
+    throw new Error(`Impossible to use ${cacheRequestName} cache !`);
   }
 
   // Add static files to its cache
@@ -81,7 +81,7 @@ async function installHandler() {
   await Promise.all(cachePromises);
 }
 
-async function fecthHandler(req) {
+async function fetchHandler(req) {
   caches.open(cacheRequestName).then(async (cache) => {
     const cachedRes = await cache.match(req);
 
@@ -105,13 +105,7 @@ async function fecthHandler(req) {
 async function activateHandler() {
   caches.keys().then((cacheNames) => Promise.all(
     cacheNames
-      .filter((cacheName) => {
-        if (!cacheNamesToDeleteOnUpdate.includes(cacheName)) {
-          return false;
-        }
-
-        return true;
-      })
+      .filter((cacheName) => cacheNamesToDeleteOnUpdate.includes(cacheName))
       .map((cacheName) => caches.delete(cacheName)),
   ));
 }
@@ -121,7 +115,7 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-  event.respondWith(fecthHandler(event.request));
+  event.respondWith(fetchHandler(event.request));
 });
 
 self.addEventListener('activate', (event) => {

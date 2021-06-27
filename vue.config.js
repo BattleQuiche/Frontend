@@ -138,8 +138,11 @@ module.exports = {
       .plugin('html')
       /* eslint-disable no-param-reassign */
       .tap((args) => {
-        args[0].title = 'MyApp title';
-        args[0].meta = { viewport: 'width=device-width, height=device-height, initial-scale=1.0,user-scalable=no, viewport-fit=cover' };
+        args[0].title = 'Quiches Wars';
+        args[0].meta = {
+          description: 'Quiches Wars',
+          viewport: 'width=device-width, height=device-height, initial-scale=1.0,user-scalable=no, viewport-fit=cover',
+        };
 
         return args;
       });
