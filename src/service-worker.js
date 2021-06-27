@@ -82,24 +82,24 @@ async function installHandler() {
 }
 
 async function fetchHandler(req) {
-  caches.open(cacheRequestName).then(async (cache) => {
-    const cachedRes = await cache.match(req);
+  caches.open(cacheRequestName).then(
+    (cache) => cache.match(req).then((cachedRes) => {
+      if (navigator.onLine && !cachedRes) {
+        return fetch(req).then((networkRes) => {
+          cache.put(req, networkRes.clone());
+          return networkRes;
+        });
+      }
 
-    if (navigator.onLine && !cachedRes) {
-      return fetch(req).then((res) => {
-        cache.put(req, res.clone());
-        return res;
-      });
-    }
+      if (navigator.onLine) {
+        fetch(req).then((networkRes) => {
+          cache.put(req, networkRes.clone());
+        });
+      }
 
-    if (navigator.onLine) {
-      fetch(req).then((res) => {
-        cache.put(req, res.clone());
-      });
-    }
-
-    return cachedRes;
-  });
+      return cachedRes;
+    }),
+  );
 }
 
 async function activateHandler() {
