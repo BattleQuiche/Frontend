@@ -21,7 +21,17 @@
         gridRowStart: aroundCase.y + 1,
       }"
       class="grid__case_content movable"
-      @click="handlePlayerAction(aroundCase)"
+      @click="handlePlayerAction(aroundCase, 'MOVE')"
+    />
+    <span
+      v-for="aroundCase in attackCases"
+      :key="JSON.stringify(aroundCase)"
+      :style="{
+        gridColumnStart: aroundCase.x + 1,
+        gridRowStart: aroundCase.y + 1,
+      }"
+      class="grid__case_content attackable"
+      @click="handlePlayerAction(aroundCase, 'ATTACK', targetUserId)"
     />
   </div>
 </template>
@@ -43,6 +53,7 @@ export default {
   ActionType,
   data() {
     return {
+      targetUserId: null,
       style: {
         width: `${this.layersManager.numberOfHorizontalCases * 16}px`,
         height: `${this.layersManager.numberOfVerticalCases * 16}px`,
@@ -70,16 +81,30 @@ export default {
         && currentCase.every((item) => this.movableTiles.includes(item))
       ); // All tiles on position are movables
     },
+    canAttackOn({ x, y }) {
+      const playerWithSameCoords = this.getPlayerWithSameCoords(x, y);
+      if (playerWithSameCoords) {
+        this.targetUserId = playerWithSameCoords.userId;
+      }
+      return (
+        playerWithSameCoords
+        && this.player.userId !== this.targetUserId // there is player on these coords
+      ); // All tiles on position are movables
+    },
     getCasesDistance({ xA, yA }, { xB, yB }) {
       const xDistance = Math.abs(xA - xB);
       const yDistance = Math.abs(yA - yB);
 
       return xDistance + yDistance;
     },
-    handlePlayerAction({ x, y }) {
+    handlePlayerAction({ x, y }, type, userId = null) {
+      if (userId) {
+        console.log(userId);
+      }
       this.$emit('player-action', {
         newPosition: { x, y },
-        actionType: this.actionType,
+        actionType: type,
+        targetUserId: userId,
       });
     },
   },
@@ -149,6 +174,68 @@ export default {
       /* eslint-disable consistent-return */
       return finalCases;
     },
+    attackCases() {
+      if (!this.player) {
+        return;
+      }
+
+      const attackDistance = 1;
+      const minX = 0;
+      const maxX = this.layersManager.numberOfHorizontalCases - 1;
+      const minY = 0;
+      const maxY = this.layersManager.numberOfVerticalCases - 1;
+      const finalCases = [];
+      let lastCases = [{ x: this.player.x, y: this.player.y }];
+
+      while (lastCases.length > 0) {
+        const saveLastCases = Array.from(lastCases);
+
+        lastCases = [];
+
+        saveLastCases.forEach((mapCase) => {
+          const aroundCases = [
+            { x: mapCase.x, y: mapCase.y - 1 },
+            { x: mapCase.x + 1, y: mapCase.y },
+            { x: mapCase.x, y: mapCase.y + 1 },
+            { x: mapCase.x - 1, y: mapCase.y },
+          ]
+            .filter(
+              (aroundCase) => !(
+                aroundCase.x < minX
+                  || aroundCase.x > maxX
+                  || aroundCase.x < minY
+                  || aroundCase.y > maxY
+              ),
+            ) // filter boxes outside the map
+            .filter(
+              (aroundCase) => this.getCasesDistance(
+                {
+                  xA: this.player.x,
+                  yA: this.player.y,
+                },
+                {
+                  xB: aroundCase.x,
+                  yB: aroundCase.y,
+                },
+              ) <= attackDistance,
+            ) // filter cases that are too far from the player
+            .filter((aroundCase) => this.canAttackOn(aroundCase)); // filter movable cases
+
+          aroundCases.forEach((aroundCase) => {
+            if (
+              !finalCases.find(
+                (item) => item.x === aroundCase.x && item.y === aroundCase.y,
+              )
+            ) {
+              finalCases.push(aroundCase);
+              lastCases.push(aroundCase);
+            }
+          });
+        });
+      }
+      /* eslint-disable consistent-return */
+      return finalCases;
+    },
   },
 };
 </script>
@@ -207,6 +294,19 @@ export default {
 
 .movable:hover {
   background-color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+
+.attackable {
+  z-index: 1;
+  border-radius: 5px;
+  content: "X";
+  color: white;
+  background-color: rgba(255, 0, 0, 0.6);
+}
+
+.attackable:hover {
+  background-color: rgba(255, 0, 0, 0.5);
   cursor: pointer;
 }
 </style>
