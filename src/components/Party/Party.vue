@@ -1,7 +1,10 @@
 <template>
   <div class="party">
     <stat-drawer-widget :players="party.users" />
-    <activity-drawer-widget :actions="actions" />
+    <activity-drawer-widget
+      :actions="actions"
+      :players="party.users"
+    />
     <map-grid v-if="!!layersManager" :layers-manager="layersManager" />
     <action-grid
       v-if="!!layersManager"
