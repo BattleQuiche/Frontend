@@ -14,6 +14,7 @@ export default new Vuex.Store({
   state: {
     tileSets: null,
     movableTiles: null,
+    attackTiles: null,
     user: null,
     party: null,
     actions: null,
@@ -56,6 +57,7 @@ export default new Vuex.Store({
   getters: {
     tileSets: (state) => state.tileSets,
     movableTiles: (state) => state.movableTiles,
+    attackTiles: (state) => state.attackTiles,
     user: (state) => state.user,
     party: (state) => state.party,
     actions: (state) => state.actions,
