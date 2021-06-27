@@ -1,5 +1,5 @@
 <template>
-  <Grid :init-grid-func="initMap" :layers-manager="layersManager"/>
+  <Grid :init-grid-func="initMap" :layers-manager="layersManager" />
 </template>
 
 <script>
@@ -23,10 +23,10 @@ export default {
       this.layersManager.verticalCases.forEach((verticalCaseId) => {
         this.layersManager.horizontalCases.forEach((horizontalCasesId) => {
           this.layersManager
-            .findObjectForCase(horizontalCasesId, verticalCaseId)
+            .findObjectForCase(verticalCaseId, horizontalCasesId)
             .forEach((caseLayerId) => {
-              const casePositionX = horizontalCasesId * 16;
-              const casePositionY = verticalCaseId * 16;
+              const casePositionX = verticalCaseId * 16;
+              const casePositionY = horizontalCasesId * 16;
               const image = new Image();
               image.onload = () => {
                 canvasContext.drawImage(image, casePositionX, casePositionY);
