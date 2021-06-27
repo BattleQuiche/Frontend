@@ -99,9 +99,6 @@ export default {
       return xDistance + yDistance;
     },
     handlePlayerAction({ x, y }, type, userId = null) {
-      if (userId) {
-        console.log(userId);
-      }
       this.$emit('player-action', {
         newPosition: { x, y },
         actionType: type,
