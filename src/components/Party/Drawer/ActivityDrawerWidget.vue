@@ -21,7 +21,7 @@
                     {{ actionSentence(action.actionType, "MrLoL", "Nicolas") }}
                   </div>
                   <div v-else>
-                    {{ actionSentence(action.actionType, "MrLoL") }}
+                    {{ actionSentence(action.actionType, action.userName) }}
                   </div>
                 </strong
                 ><br />
