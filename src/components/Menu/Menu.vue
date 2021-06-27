@@ -72,7 +72,7 @@ export default {
           username: this.username,
         });
         this.setUser(result.data);
-        await this.askPermission();
+        // await this.askPermission();
       } catch (err) {
         console.log(err);
       }
