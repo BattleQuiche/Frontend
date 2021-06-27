@@ -88,7 +88,8 @@ export default {
       }
       return (
         playerWithSameCoords
-        && this.player.userId !== this.targetUserId // there is player on these coords
+        && this.player.userId !== this.targetUserId
+        // there is player on these coords & it's not yourself
       ); // All tiles on position are movables
     },
     getCasesDistance({ xA, yA }, { xB, yB }) {
@@ -219,7 +220,7 @@ export default {
                 },
               ) <= attackDistance,
             ) // filter cases that are too far from the player
-            .filter((aroundCase) => this.canAttackOn(aroundCase)); // filter movable cases
+            .filter((aroundCase) => this.canAttackOn(aroundCase)); // filter attackable cases
 
           aroundCases.forEach((aroundCase) => {
             if (
@@ -300,8 +301,6 @@ export default {
 .attackable {
   z-index: 1;
   border-radius: 5px;
-  content: "X";
-  color: white;
   background-color: rgba(255, 0, 0, 0.6);
 }
 
