@@ -133,4 +133,15 @@ module.exports = {
       msTileImage: './img/icons/mstile-150x150.png',
     },
   },
+  chainWebpack: (config) => {
+    config
+      .plugin('html')
+      /* eslint-disable no-param-reassign */
+      .tap((args) => {
+        args[0].title = 'MyApp title';
+        args[0].meta = { viewport: 'width=device-width, height=device-height, initial-scale=1.0,user-scalable=no, viewport-fix=cover' };
+
+        return args;
+      });
+  },
 };
