@@ -15,7 +15,7 @@ module.exports = {
     themeColor: '#fbdd01',
     msTileColor: '#000',
     appleMobileWebAppCapable: 'yes',
-    appleMobileWebAppStatusBarStyle: 'translucent',
+    appleMobileWebAppStatusBarStyle: 'black-translucent',
     manifestOptions: {
       name: 'Quiches Wars',
       short_name: 'Quiches Wars',
