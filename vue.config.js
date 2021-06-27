@@ -139,7 +139,7 @@ module.exports = {
       /* eslint-disable no-param-reassign */
       .tap((args) => {
         args[0].title = 'MyApp title';
-        args[0].meta = { viewport: 'width=device-width, height=device-height, initial-scale=1.0,user-scalable=no, viewport-fix=cover' };
+        args[0].meta = { viewport: 'width=device-width, height=device-height, initial-scale=1.0,user-scalable=no, viewport-fit=cover' };
 
         return args;
       });
