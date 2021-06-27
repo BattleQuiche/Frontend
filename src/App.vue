@@ -1,38 +1,38 @@
 <template>
   <div id="app">
-      <router-view/>
+    <router-view />
     <force-landscape />
   </div>
 </template>
 
 <script>
-import ForceLandscape from './components/ForceLandscape'
-import TileSets from './components/Party/Map/TileSets'
+import ForceLandscape from '@/components/ForceLandscape.vue';
+import TileSets from '@/components/Party/Map/TileSets';
 
 export default {
   name: 'App',
   components: {
-    ForceLandscape
+    ForceLandscape,
   },
-  mounted () {
-    TileSets.setTileSets()
-  }
-}
+  mounted() {
+    TileSets.setTileSets();
+  },
+};
 </script>
 
 <style>
-  body {
-    padding: 0;
-    margin: 0;
-  }
+body {
+  padding: 0;
+  margin: 0;
+}
 
-  * {
-    box-sizing: border-box;
-  }
+* {
+  box-sizing: border-box;
+}
 
-  .wrapper {
-    height: 100vh;
-    width: 100vw;
-    overflow: hidden;
-  }
+.wrapper {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
 </style>

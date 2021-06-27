@@ -1,12 +1,23 @@
 <template>
   <div class="menu wrapper">
-    <div id="setUsername" class="modal" v-bind:class="{'modal--shown' : modalIsOpen}">
+    <div
+      id="setUsername"
+      class="modal"
+      v-bind:class="{ 'modal--shown': modalIsOpen }"
+    >
       <div class="modal-content">
         <p class="modal__title">Indiquer votre nom de joueur</p>
-        <hr>
+        <hr />
         <form class="modal__formToInvite">
-          <input v-model="username" class="modal__username--input" placeholder="Saisissez votre pseudo :" type="text">
-          <button class="modal__submit" type="submit" @click="setupUsername">C'est parti !</button>
+          <input
+            v-model="username"
+            class="modal__username--input"
+            placeholder="Saisissez votre pseudo :"
+            type="text"
+          />
+          <button class="modal__submit" type="submit" @click="setupUsername">
+            C'est parti !
+          </button>
         </form>
       </div>
     </div>
@@ -24,14 +35,16 @@
       </main>
       <aside>
         <button @click="createParty">Créer une partie</button>
-        <router-link :to="{ name: 'JoinPartyStep1' }">Rejoindre une partie</router-link>
+        <router-link :to="{ name: 'JoinPartyStep1' }"
+          >Rejoindre une partie</router-link
+        >
       </aside>
     </div>
   </div>
 </template>
 
 <script>
-import {mapActions, mapGetters} from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'Menu',
@@ -40,7 +53,7 @@ export default {
       modalIsOpen: false,
       username: '',
       notificationAlertMsg: undefined,
-    }
+    };
   },
   mounted() {
     this.modalIsOpen = !this.user;
@@ -54,12 +67,14 @@ export default {
       e.preventDefault();
 
       try {
-        const URL_USR = `${this.$env.VUE_APP_API_BASE_URL}/user`
-        const result = await this.$http.put(URL_USR, {username: this.username})
-        this.setUser(result.data)
+        const URL_USR = `${this.$env.VUE_APP_API_BASE_URL}/user`;
+        const result = await this.$http.put(URL_USR, {
+          username: this.username,
+        });
+        this.setUser(result.data);
         await this.askPermission();
       } catch (err) {
-        console.log(err)
+        console.log(err);
       }
     },
     async askPermission() {
@@ -69,7 +84,7 @@ export default {
 
       const permission = await Notification.requestPermission();
       if (permission !== 'granted') {
-        this.notificationAlertMsg = "Attention vous ne receverez pas les notfications !";
+        this.notificationAlertMsg = 'Attention vous ne receverez pas les notfications !';
 
         return;
       }
@@ -94,49 +109,55 @@ export default {
       await this.saveSubscription(subscription);
     },
     async getPublicKey() {
-      const URL_PUBLIC_KEY = `${this.$env.VUE_APP_API_BASE_URL}/notification/public-key`
+      const URL_PUBLIC_KEY = `${this.$env.VUE_APP_API_BASE_URL}/notification/public-key`;
       try {
-        const {data: key} = await this.$http.get(URL_PUBLIC_KEY);
+        const { data: key } = await this.$http.get(URL_PUBLIC_KEY);
         return this.urlBase64ToUint8Array(key);
       } catch (e) {
         console.log(e);
+        return e;
       }
     },
     async saveSubscription(subs) {
-      let body = {
+      const body = {
         ...subs.toJSON(),
         userId: this.user._id,
         title: 'Backend notification subscribe',
-        body: 'Ceci est un test de notification retournée pour signaler que l\'utilisateur est bien enregistré au stream des notifs'
-      }
-      const URL_SAVE_SUBS = `${this.$env.VUE_APP_API_BASE_URL}/notification/save`
+        body: "Ceci est un test de notification retournée pour signaler que l'utilisateur est bien enregistré au stream des notifs",
+      };
+      const URL_SAVE_SUBS = `${this.$env.VUE_APP_API_BASE_URL}/notification/save`;
       try {
-        await this.$http.post(URL_SAVE_SUBS, body)
+        await this.$http.post(URL_SAVE_SUBS, body);
       } catch (e) {
         console.log(e);
       }
     },
-    async sendTestNotif( e ) {
+    async sendTestNotif(e) {
       e.preventDefault();
 
-      const { data: result } = await this.$http.post(`${ this.$env.VUE_APP_API_BASE_URL }/notification/test-notif`, {
-        userId: this.user._id,
-        title: 'Backend notification test',
-        body: "Ceci est un test de notification retournée pour signaler que l'utilisateur est bien enregistré au stream des notifs",
-      });
+      const { data: result } = await this.$http.post(
+        `${this.$env.VUE_APP_API_BASE_URL}/notification/test-notif`,
+        {
+          userId: this.user._id,
+          title: 'Backend notification test',
+          body: "Ceci est un test de notification retournée pour signaler que l'utilisateur est bien enregistré au stream des notifs",
+        },
+      );
 
-      console.log(`Test notif route for userId ${ this.user._id } return: ${ result }`);
+      console.log(
+        `Test notif route for userId ${this.user._id} return: ${result}`,
+      );
     },
     urlBase64ToUint8Array(base64String) {
-      const padding = '='.repeat((4 - base64String.length % 4) % 4);
+      const padding = '='.repeat((4 - (base64String.length % 4)) % 4);
       const base64 = (base64String + padding)
-          .replace(/-/g, '+')
-          .replace(/_/g, '/');
+        .replace(/-/g, '+')
+        .replace(/_/g, '/');
 
       const rawData = window.atob(base64);
       const outputArray = new Uint8Array(rawData.length);
 
-      for (let i = 0; i < rawData.length; ++i) {
+      for (let i = 0; i < rawData.length; i += 1) {
         outputArray[i] = rawData.charCodeAt(i);
       }
       return outputArray;
@@ -147,21 +168,24 @@ export default {
       try {
         const URL_PARTY = `${this.$env.VUE_APP_API_BASE_URL}/party`;
         const result = await this.$http.put(URL_PARTY);
-        await this.$router.push({name: 'CreateParty', params: {partyId: result.data.partyId}});
+        await this.$router.push({
+          name: 'CreateParty',
+          params: { partyId: result.data.partyId },
+        });
       } catch (err) {
         console.log(err);
       }
-    }
+    },
   },
   computed: {
-    ...mapGetters(['user'])
+    ...mapGetters(['user']),
   },
   watch: {
     user(newUser) {
-      this.modalIsOpen = (newUser === null)
-    }
-  }
-}
+      this.modalIsOpen = newUser === null;
+    },
+  },
+};
 </script>
 
 <style>
@@ -193,7 +217,6 @@ export default {
   margin: 20px 0;
   cursor: pointer;
 }
-
 
 .modal {
   display: block;

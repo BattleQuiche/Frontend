@@ -1,6 +1,6 @@
 <template>
   <div class="menu wrapper">
-    <i-o-s-back-button/>
+    <i-o-s-back-button />
 
     <div class="menu__container">
       <main>
@@ -8,7 +8,7 @@
         <h2>Rejoindre une partie</h2>
       </main>
       <aside>
-        <input v-model="partyId" type="text" placeholder="code partie">
+        <input v-model="partyId" placeholder="code partie" type="text" />
         <button @click="joinParty">Entrer dans la partie</button>
       </aside>
     </div>
@@ -16,8 +16,8 @@
 </template>
 
 <script>
-import iOSBackButton from '../../reusables/iOSBackButton'
-import {mapGetters} from "vuex";
+import { mapGetters } from 'vuex';
+import iOSBackButton from '../../reusables/iOSBackButton.vue';
 
 export default {
   name: 'JoinPartyStep1',
@@ -26,28 +26,29 @@ export default {
   },
   data() {
     return {
-      partyId : ''
-    }
+      partyId: '',
+    };
   },
   methods: {
     async joinParty() {
-      const URL = `https://wars.quiches.ovh/api/party/${this.partyId}/add-player`
+      const URL = `https://wars.quiches.ovh/api/party/${this.partyId}/add-player`;
       try {
-        await this.$http.post(URL, {userId: this.user._id})
-        await this.$router.push({ name: 'JoinPartyStep2', params: { partyId: this.partyId}})
-
+        await this.$http.post(URL, { userId: this.user._id });
+        await this.$router.push({
+          name: 'JoinPartyStep2',
+          params: { partyId: this.partyId },
+        });
       } catch (err) {
-        console.log(err)
-        this.partyId = ''
+        console.log(err);
+        this.partyId = '';
       }
-    }
+    },
   },
   computed: {
-    ...mapGetters(['user'])
+    ...mapGetters(['user']),
   },
-}
+};
 </script>
 
 <style scoped>
-
 </style>

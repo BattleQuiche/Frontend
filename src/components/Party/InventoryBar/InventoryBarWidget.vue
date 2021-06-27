@@ -1,37 +1,47 @@
 <template>
   <div class="inventory">
-    <div v-for="key in Array(5).keys()" :key="'item_'+key" class="inventory__item"
-         :class="{ active: (selectedItem === inventory[key]) }" @click="clickOnItem(inventory[key])">
-      <img :data="key" v-if="!!inventory[key]" :src="inventory[key].imageURL" alt="urlForImage" :title="inventory[key].title" />
+    <div
+      v-for="key in Array(5).keys()"
+      :key="'item_' + key"
+      :class="{ active: selectedItem === inventory[key] }"
+      class="inventory__item"
+      @click="clickOnItem(inventory[key])"
+    >
+      <img
+        v-if="!!inventory[key]"
+        :data="key"
+        :src="inventory[key].imageURL"
+        :title="inventory[key].title"
+        alt="urlForImage"
+      />
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "InventoryBarWidget",
+  name: 'InventoryBarWidget',
   props: {
     inventory: {
       type: Array,
       required: true,
     },
     selectedItem: {
-      type: Object
-    }
+      type: Object,
+    },
   },
   methods: {
     clickOnItem(item) {
       if (!item) {
-        return
+        return;
       }
-      this.$emit('select-item', item)
-    }
-  }
-}
+      this.$emit('select-item', item);
+    },
+  },
+};
 </script>
 
 <style scoped>
-
 .inventory {
   position: fixed;
   bottom: 0;
@@ -59,7 +69,7 @@ export default {
 .inventory__item::before {
   z-index: 1;
   display: block;
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: 50%;
