@@ -184,6 +184,7 @@ export default {
   left: -200px;
   width: 200px;
   background-color: lightGray;
+  overflow: auto;
   transition-property: left;
   transition-duration: 0.5s;
   transition-timing-function: linear;

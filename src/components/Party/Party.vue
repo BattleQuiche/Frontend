@@ -78,13 +78,13 @@ export default {
   },
   methods: {
     ...mapActions(['setParty', 'setMovableTiles', 'setActions']),
-    handlePlayerAction({ newPosition, actionType }) {
+    handlePlayerAction({ newPosition, actionType, targetUserId = null }) {
       switch (actionType) {
         case ActionGrid.ActionType.MOVE:
           this.movePlayer(newPosition);
           break;
         case ActionGrid.ActionType.ATTACK:
-          console.log('ATTACK !!!');
+          this.attackPlayer(targetUserId);
           break;
 
         default:
@@ -104,6 +104,24 @@ export default {
           fromY: this.player.y,
           toX: position.x,
           toY: position.y,
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async attackPlayer(userId) {
+      try {
+        const URL = `${process.env.VUE_APP_API_BASE_URL}/party/action`;
+        await this.$http.put(URL, {
+          partyId: this.partyId,
+          userId: this.user._id,
+          actionType: 'ATTACK',
+          date: Date.now(),
+          targetUserId: userId,
+          // fromX: this.player.x,
+          // fromY: this.player.y,
+          // toX: position.x,
+          // toY: position.y,
         });
       } catch (err) {
         console.log(err);

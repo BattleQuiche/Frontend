@@ -3,8 +3,7 @@
 import { register } from 'register-service-worker';
 
 async function registerSW() {
-  // if (!('serviceWorker' in navigator)) {
-  if (true) {
+  if (!('serviceWorker' in navigator)) {
     return;
   }
 

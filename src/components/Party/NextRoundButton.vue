@@ -17,8 +17,6 @@ export default {
             userId: this.user._id,
           },
         );
-
-        console.log('gfhjdik');
       } catch (e) {
         console.log(e);
       }
