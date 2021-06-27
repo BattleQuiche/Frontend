@@ -1,11 +1,11 @@
 export default class LayersManager {
-  constructor (map) {
-    this.layers = map.layers
-    this.numberOfHorizontalCases = map.width
-    this.numberOfVerticalCases = map.height
+  constructor(map) {
+    this.layers = map.layers;
+    this.numberOfHorizontalCases = map.width;
+    this.numberOfVerticalCases = map.height;
 
-    this.horizontalCases = [...Array(this.numberOfHorizontalCases).keys()]
-    this.verticalCases = [...Array(this.numberOfVerticalCases).keys()]
+    this.horizontalCases = [...Array(this.numberOfHorizontalCases).keys()];
+    this.verticalCases = [...Array(this.numberOfVerticalCases).keys()];
 
     this.mapLayer = this.findLayerInMap('Map');
     this.mapDecorationsLayer = this.findLayerInMap('Water');
@@ -14,17 +14,15 @@ export default class LayersManager {
   }
 
   findObjectForCase = (x, y) => {
-    const caseNumber = (x + y * this.numberOfHorizontalCases)
+    const caseNumber = (x + y * this.numberOfHorizontalCases);
 
     return [
       this.mapLayer[caseNumber],
       this.mapDecorationsLayer[caseNumber],
       this.surObjectsLayer[caseNumber],
       this.objectsLayer[caseNumber],
-    ].filter((item) => (item !== 0))
+    ].filter((item) => (item !== 0));
   }
 
-  findLayerInMap = (layerName) => {
-    return this.layers.find((layer) => (layer.name === layerName))?.data
-  }
+  findLayerInMap = (layerName) => this.layers.find((layer) => (layer.name === layerName))?.data
 }

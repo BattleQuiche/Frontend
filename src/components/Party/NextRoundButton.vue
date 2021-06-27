@@ -1,30 +1,33 @@
 <template>
-  <button @click="endRound" class="buttonEndTurn" >Terminer le tour.</button>
+  <button class="buttonEndTurn" @click="endRound">Terminer le tour.</button>
 </template>
 
 <script>
-import {mapGetters} from "vuex";
+import { mapGetters } from 'vuex';
 
 export default {
-  name: "NextRoundButton",
+  name: 'NextRoundButton',
   methods: {
-    async endRound () {
+    async endRound() {
       try {
-        await this.$http.post(`${this.$env.VUE_APP_API_BASE_URL}/party/next-round`, {
-          partyId: this.party.partyId,
-          userId: this.user._id
-        })
+        await this.$http.post(
+          `${this.$env.VUE_APP_API_BASE_URL}/party/next-round`,
+          {
+            partyId: this.party.partyId,
+            userId: this.user._id,
+          },
+        );
 
-        console.log("gfhjdik")
+        console.log('gfhjdik');
       } catch (e) {
-        console.log(e)
+        console.log(e);
       }
-    }
+    },
   },
   computed: {
     ...mapGetters(['party', 'user']),
-  }
-}
+  },
+};
 </script>
 
 <style scoped>

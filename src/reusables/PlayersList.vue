@@ -8,21 +8,38 @@
     <div class="players__list">
       <p>Joueur 3</p>
       <p v-if="players.length === 4">Joueur 4</p>
-      <button v-else @click="showModal"  @keydown.esc="hideModal">+</button>
+      <button v-else @click="showModal" @keydown.esc="hideModal">+</button>
     </div>
-    <div id="addPlayerModal" v-bind:class="{'modal--shown' : modalIsOpen}" class="modal" >
+    <div
+      id="addPlayerModal"
+      class="modal"
+      v-bind:class="{ 'modal--shown': modalIsOpen }"
+    >
       <div class="modal-content">
-        <span @click="hideModal" class="close">&times;</span>
+        <span class="close" @click="hideModal">&times;</span>
         <p class="modal__title">Inviter un nouveau joueur</p>
-        <hr>
+        <hr />
         <form class="modal__formToInvite">
-          <input class="modal__mail--input" type="text" placeholder="Nom ou adresse mail">
-          <input class="modal__mail--input" type="text" placeholder="Nom ou adresse mail">
-          <input class="modal__mail--input" type="text" placeholder="Nom ou adresse mail">
-          <button class="modal__submit" type="submit">Envoyer les invitations</button>
+          <input
+            class="modal__mail--input"
+            placeholder="Nom ou adresse mail"
+            type="text"
+          />
+          <input
+            class="modal__mail--input"
+            placeholder="Nom ou adresse mail"
+            type="text"
+          />
+          <input
+            class="modal__mail--input"
+            placeholder="Nom ou adresse mail"
+            type="text"
+          />
+          <button class="modal__submit" type="submit">
+            Envoyer les invitations
+          </button>
         </form>
       </div>
-
     </div>
   </div>
 </template>
@@ -34,25 +51,25 @@ export default {
     return {
       modalIsOpen: false,
       players: [],
-    }
+    };
   },
   methods: {
-    showModal () {
-     this.modalIsOpen = true;
+    showModal() {
+      this.modalIsOpen = true;
     },
-    hideModal () {
-      this.modalIsOpen = false
+    hideModal() {
+      this.modalIsOpen = false;
     },
   },
   mounted() {
-    window.addEventListener("click", (event) => {
-      const modal = document.getElementById("addPlayerModal");
+    window.addEventListener('click', (event) => {
+      const modal = document.getElementById('addPlayerModal');
       if (event.target === modal) {
-        this.hideModal()
+        this.hideModal();
       }
     });
-  }
-}
+  },
+};
 </script>
 
 <style scoped>
@@ -99,7 +116,7 @@ export default {
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgba(0,0,0,0);
+  background-color: rgba(0, 0, 0, 0);
   pointer-events: none;
   cursor: none;
   transition: background-color 1s;
@@ -108,7 +125,7 @@ export default {
 .modal--shown {
   pointer-events: auto;
   cursor: pointer;
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .modal-content {

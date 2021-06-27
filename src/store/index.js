@@ -7,7 +7,7 @@ Vue.use(Vuex);
 const vuexLocalStorage = new VuexPersist({
   key: 'vuex',
   storage: window.localStorage,
-  reducer: ({ user, party }) => ({ user, party })
+  reducer: ({ user, party }) => ({ user, party }),
 });
 
 export default new Vuex.Store({
@@ -20,19 +20,19 @@ export default new Vuex.Store({
   },
   mutations: {
     setTileSets(state, tileSets) {
-      state.tileSets = tileSets
+      state.tileSets = tileSets;
     },
     setMovableTiles(state, movableTiles) {
-      state.movableTiles = movableTiles
+      state.movableTiles = movableTiles;
     },
     setUser(state, user) {
-      state.user = user
+      state.user = user;
     },
     setParty(state, party) {
-      state.party = party
+      state.party = party;
     },
     setActions(state, actions) {
-      state.actions = actions
+      state.actions = actions;
     },
   },
   actions: {
@@ -42,23 +42,23 @@ export default new Vuex.Store({
     setMovableTiles({ commit }, movableTiles) {
       commit('setMovableTiles', movableTiles);
     },
-    setUser({commit}, user) {
-      commit('setUser', user)
+    setUser({ commit }, user) {
+      commit('setUser', user);
     },
-    setParty({commit}, party) {
-      commit('setParty', party)
+    setParty({ commit }, party) {
+      commit('setParty', party);
     },
-    setActions({commit}, actions) {
-      commit('setActions', actions)
+    setActions({ commit }, actions) {
+      commit('setActions', actions);
     },
   },
   modules: {},
   getters: {
     tileSets: (state) => state.tileSets,
     movableTiles: (state) => state.movableTiles,
-    user : (state) => state.user,
-    party : (state) => state.party,
-    actions : (state) => state.actions,
+    user: (state) => state.user,
+    party: (state) => state.party,
+    actions: (state) => state.actions,
   },
   plugins: [vuexLocalStorage.plugin],
 });
