@@ -160,7 +160,6 @@ export default {
 
 .drawerContents {
   position: fixed;
-  display: flex;
   overflow: auto;
   padding: 10px;
   flex-direction: column-reverse;
